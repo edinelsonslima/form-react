@@ -13,7 +13,7 @@ function App() {
       <Form.Root<FormValues>
         id="user-form"
         layout="vertical"
-        onSubmit={(_, e) => console.log(e)}
+        onSubmit={console.log}
       >
         <Form.Input
           type="text"

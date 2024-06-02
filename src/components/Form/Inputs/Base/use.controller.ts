@@ -10,7 +10,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { IControllerProps } from './types';
+import { IControllerProps, ICustomInput } from './types';
 
 function useController(
   {
@@ -25,7 +25,7 @@ function useController(
 ) {
   const debouce = useDebounce();
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<ICustomInput>(null);
   const [currentError, setCurrentError] = useState('');
 
   const errorId = `${rest.id}-error`;
@@ -85,21 +85,18 @@ function useController(
   };
 
   const handleApplyMask = useCallback(() => {
-    const target = inputRef.current;
-    if (!masksProp || !target) return;
+    const target = inputRef.current!;
+    target.valueUnmasked = target.value || '';
 
     if (typeof masksProp === 'object') {
-      const unmaskedValue = masksProp.clear(target.value);
-      const maskedValue = masksProp.set(unmaskedValue);
-
-      target.value = maskedValue;
-      return;
+      target.valueUnmasked = masksProp.clear(target.value);
+      target.value = masksProp.set(target.valueUnmasked);
     }
 
-    const unmaskedValue = mask.clear(masksProp, target.value);
-    const maskedValue = mask.set(masksProp, unmaskedValue);
-
-    target.value = maskedValue;
+    if (typeof masksProp === 'string') {
+      target.valueUnmasked = mask.clear(masksProp, target.value);
+      target.value = mask.set(masksProp, target.valueUnmasked);
+    }
   }, [masksProp]);
 
   useEffect(handleApplyMask, [handleApplyMask]);

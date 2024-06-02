@@ -1,4 +1,5 @@
 import { FormEvent } from 'react';
+import { ICustomInput } from '../Inputs/Base/types';
 import { IControllerProps } from './types';
 
 function useController<T extends object>({
@@ -7,10 +8,16 @@ function useController<T extends object>({
 }: IControllerProps<T>) {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const target = e.currentTarget;
 
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-    handleSubmit(e, data as T);
+    const dataMasked = Object.fromEntries(new FormData(target).entries());
+
+    const data = Object.keys(dataMasked).reduce((acc, inputName) => {
+      const input = target.elements.namedItem(inputName) as ICustomInput;
+      return { ...acc, [inputName]: input.valueUnmasked };
+    }, {});
+
+    return handleSubmit(e, data as T, dataMasked as T);
   };
 
   return { ...rest, onSubmit };

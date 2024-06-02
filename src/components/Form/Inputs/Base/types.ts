@@ -1,5 +1,7 @@
 import { ChangeEvent, ComponentProps, ReactNode } from 'react';
 
+type ICustomInput = HTMLInputElement & { valueUnmasked: string };
+
 type IBaseProps = Omit<ComponentProps<'input'>, 'pattern' | 'onChange'>;
 
 type IControllerProps = IBaseProps & {
@@ -50,4 +52,4 @@ type IProps = IControllerProps & {
   labelInfo?: ReactNode;
 };
 
-export type { IControllerProps, IProps };
+export type { IControllerProps, ICustomInput, IProps };

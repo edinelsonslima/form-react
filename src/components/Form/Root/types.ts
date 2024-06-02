@@ -3,7 +3,7 @@ import { ComponentProps, FormEvent } from 'react';
 type IBaseProps = Omit<ComponentProps<'form'>, 'onSubmit'>;
 
 type IControllerProps<T extends object> = IBaseProps & {
-  onSubmit: (e: FormEvent<HTMLFormElement>, data: T) => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>, data: T, masked: T) => void;
 };
 
 type IProps<T extends object> = IControllerProps<T> & {
