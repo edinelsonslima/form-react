@@ -1,6 +1,7 @@
 import mask from '@/helpers/mask';
 import useDebounce from '@/hooks/use.debounce';
 import {
+  ChangeEvent,
   FormEvent,
   ForwardedRef,
   useCallback,
@@ -15,6 +16,7 @@ function useController(
   {
     onInput: handleOnInput,
     onInvalid: handleOnInvalid,
+    onChange: handleOnChange,
     mask: masksProp,
     pattern,
     ...rest
@@ -68,6 +70,20 @@ function useController(
     dispatch('');
   };
 
+  const onChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    const value = evt.currentTarget.value;
+
+    if (typeof masksProp === 'object') {
+      return handleOnChange?.(evt, masksProp.clear(value), value);
+    }
+
+    if (typeof masksProp === 'string') {
+      return handleOnChange?.(evt, mask.clear(masksProp, value), value);
+    }
+
+    return handleOnChange?.(evt, value, value);
+  };
+
   const handleApplyMask = useCallback(() => {
     const target = inputRef.current;
     if (!masksProp || !target) return;
@@ -98,6 +114,7 @@ function useController(
     ref: inputRef,
     onInput,
     onInvalid,
+    onChange,
   };
 }
 
