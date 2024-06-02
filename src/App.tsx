@@ -69,6 +69,7 @@ function App() {
           label="Telephone"
           labelInfo={<small>Enter your phone</small>}
           placeholder="+00 (00) 0 0000-0000"
+          onChange={(_, value, masked) => console.log({ value, masked })}
           mask="(00) 0000-0000, (00) 0 0000-0000, +00 (00) 0 0000-0000"
         />
 
