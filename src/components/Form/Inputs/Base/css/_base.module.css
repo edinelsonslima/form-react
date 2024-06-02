@@ -1,0 +1,42 @@
+.input {
+  padding: var(--spacing-3) var(--spacing-2);
+  border: 1px solid var(--border-color-base);
+  border-radius: var(--border-radius-base);
+
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px #0d47a141;
+}
+
+.input:active {
+  box-shadow: 0 0 0 4px #0d47a141;
+}
+
+/* Input Error */
+.input[aria-invalid="true"] {
+  border-color: var(--error-color);
+  box-shadow: none;
+}
+
+.input[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 2px #f4433641;
+}
+
+.input[aria-invalid="true"]:active {
+  box-shadow: 0 0 0 4px #f4433641;
+}
+
+/* Input disabled */
+.input:disabled {
+  background-color: var(--inactive-color);
+  color: var(--border-color-base);
+}
+
+.input:disabled:is(:hover, :focus, :active) {
+  border-color: var(--border-color-base);
+  box-shadow: none;
+  cursor: not-allowed;
+}

@@ -1,0 +1,15 @@
+.root {
+  display: flex;
+  gap: var(--spacing-5);
+
+  width: 100%;
+  height: 100%;
+}
+
+.root[data-layout="horizontal"] {
+  flex-direction: row;
+}
+
+.root[data-layout="vertical"] {
+  flex-direction: column;
+}

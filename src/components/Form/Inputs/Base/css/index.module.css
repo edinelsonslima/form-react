@@ -1,0 +1,12 @@
+@import url('./_submit.module.css');
+@import url('./_error.module.css');
+@import url('./_label.module.css');
+@import url('./_base.module.css');
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+
+  position: relative;
+}

@@ -1,0 +1,11 @@
+.input-label-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-label {
+  margin-bottom: var(--spacing-2);
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--heading-color);
+}
