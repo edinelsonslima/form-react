@@ -4,8 +4,6 @@ import {
   ChangeEvent,
   FormEvent,
   ForwardedRef,
-  useCallback,
-  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -17,6 +15,8 @@ function useController(
     onInput: handleOnInput,
     onInvalid: handleOnInvalid,
     onChange: handleOnChange,
+    value: handleValue,
+    defaultValue: handleDefaultValue,
     mask: masksProp,
     pattern,
     ...rest
@@ -33,16 +33,27 @@ function useController(
 
   const onInvalid = (evt: FormEvent<HTMLInputElement>) => {
     handleOnInvalid?.(evt);
-
     evt.preventDefault();
+
     setCurrentError(evt.currentTarget.validationMessage);
   };
 
-  const onInput = (evt: FormEvent<HTMLInputElement>) => {
+  const onInput = (evt: FormEvent<ICustomInput>) => {
     handleOnInput?.(evt);
-    handleApplyMask();
 
     const target = evt.currentTarget;
+
+    target.valueUnmasked = target.value || '';
+
+    if (typeof masksProp === 'object') {
+      target.valueUnmasked = masksProp.clear(target.value);
+      target.value = masksProp.set(target.valueUnmasked);
+    }
+
+    if (typeof masksProp === 'string') {
+      target.valueUnmasked = mask.clear(masksProp, target.value);
+      target.value = mask.set(masksProp, target.valueUnmasked);
+    }
 
     const dispatch = (message: string) => {
       if (!message) setCurrentError('');
@@ -50,17 +61,18 @@ function useController(
       target.reportValidity();
     };
 
-    if (!target.value) {
+    if (!target.valueUnmasked) {
       return dispatch('');
     }
 
     if (pattern instanceof Function) {
-      return dispatch(pattern(target.value) ?? '');
+      return dispatch(pattern(target.valueUnmasked) ?? '');
     }
 
     if (pattern?.regexp) {
       const regexp = new RegExp(pattern.regexp);
-      return dispatch(!regexp.test(target.value) ? pattern.message : '');
+      const result = !regexp.test(target.valueUnmasked) ? pattern.message : '';
+      return dispatch(result);
     }
 
     if (target.validationMessage) {
@@ -84,22 +96,33 @@ function useController(
     return handleOnChange?.(evt, value, value);
   };
 
-  const handleApplyMask = useCallback(() => {
-    const target = inputRef.current!;
-    target.valueUnmasked = target.value || '';
+  const onValue = () => {
+    if (handleValue === undefined) return handleValue;
 
     if (typeof masksProp === 'object') {
-      target.valueUnmasked = masksProp.clear(target.value);
-      target.value = masksProp.set(target.valueUnmasked);
+      return masksProp.set(String(handleValue));
     }
 
     if (typeof masksProp === 'string') {
-      target.valueUnmasked = mask.clear(masksProp, target.value);
-      target.value = mask.set(masksProp, target.valueUnmasked);
+      return mask.set(masksProp, String(handleValue));
     }
-  }, [masksProp]);
 
-  useEffect(handleApplyMask, [handleApplyMask]);
+    return handleValue;
+  };
+
+  const onDefaultValue = () => {
+    if (handleDefaultValue === undefined) return handleDefaultValue;
+
+    if (typeof masksProp === 'object') {
+      return masksProp.set(String(handleDefaultValue));
+    }
+
+    if (typeof masksProp === 'string') {
+      return mask.set(masksProp, String(handleDefaultValue));
+    }
+
+    return handleDefaultValue;
+  };
 
   useImperativeHandle(ref, () => inputRef.current!, []);
 
@@ -109,6 +132,8 @@ function useController(
     popoverId,
     currentError,
     ref: inputRef,
+    value: onValue(),
+    defaultValue: onDefaultValue(),
     onInput,
     onInvalid,
     onChange,
