@@ -1,5 +1,6 @@
 import { forwardRef, memo } from 'react';
 import Input, { IProps } from '../Base';
+import InputEmail from '../Email';
 
 const Component = forwardRef<HTMLInputElement, IProps>(
   ({ type, ...props }, ref) => {
@@ -20,7 +21,7 @@ const Component = forwardRef<HTMLInputElement, IProps>(
         return <Input {...props} type="datetime-local" ref={ref} />;
 
       case 'email':
-        return <Input {...props} type="email" ref={ref} />;
+        return <InputEmail {...props} type="email" ref={ref} />;
 
       case 'file':
         return <Input {...props} type="file" ref={ref} />;
