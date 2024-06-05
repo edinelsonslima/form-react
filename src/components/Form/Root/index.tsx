@@ -8,7 +8,5 @@ function Root<T extends object>({ layout = 'vertical', ...props }: IProps<T>) {
   return <form className={s.root} data-layout={layout} {...rest} />;
 }
 
-type IRoot = typeof Root;
-
-export type { IProps, IRoot };
+export type { IProps };
 export default Root;
