@@ -14,6 +14,7 @@ module.exports = {
       'error',
       {
         singleQuote: true,
+        printWidth: 100,
       }
     ],
     'react-refresh/only-export-components': [
