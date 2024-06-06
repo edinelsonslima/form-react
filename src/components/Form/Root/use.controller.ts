@@ -2,10 +2,7 @@ import { FormEvent } from 'react';
 import { ICustomInput } from '../Inputs/Base/types';
 import { IControllerProps } from './types';
 
-function useController<T extends object>({
-  onSubmit: handleSubmit,
-  ...rest
-}: IControllerProps<T>) {
+function useController<T extends object>({ onSubmit: handleSubmit, ...rest }: IControllerProps<T>) {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const target = e.currentTarget;

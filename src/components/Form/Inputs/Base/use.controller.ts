@@ -1,13 +1,6 @@
 import mask from '@/helpers/mask';
 import useDebounce from '@/hooks/use.debounce';
-import {
-  ChangeEvent,
-  FormEvent,
-  ForwardedRef,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from 'react';
+import { ChangeEvent, FormEvent, ForwardedRef, useImperativeHandle, useRef, useState } from 'react';
 import { IControllerProps, ICustomInput } from './types';
 
 function useController(

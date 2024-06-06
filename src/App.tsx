@@ -10,11 +10,7 @@ type FormValues = {
 function App() {
   return (
     <section style={{ padding: '1rem' }}>
-      <Form.Root<FormValues>
-        id="user-form"
-        layout="vertical"
-        onSubmit={console.log}
-      >
+      <Form.Root<FormValues> id="user-form" layout="vertical" onSubmit={console.log}>
         <Form.Input
           type="text"
           id="username"
@@ -23,17 +19,14 @@ function App() {
           placeholder='e.g. "john_doe123"'
           labelInfo={<small>Enter your username</small>}
           pattern={(value) => {
-            if (value.length < 8)
-              return 'Username must be at least 8 characters long';
+            if (value.length < 8) return 'Username must be at least 8 characters long';
 
-            if (value.length > 16)
-              return 'Username must be at most 16 characters long';
+            if (value.length > 16) return 'Username must be at most 16 characters long';
 
             if (!/^[a-zA-Z0-9]*$/.test(value))
               return 'Username must contain only letters and numbers';
 
-            if (value.startsWith('admin'))
-              return 'Username cannot start with "admin"';
+            if (value.startsWith('admin')) return 'Username cannot start with "admin"';
 
             return '';
           }}
@@ -118,12 +111,7 @@ function App() {
         />
       </Form.Root>
 
-      <Form.Input
-        label="outside"
-        id="outside"
-        name="outside"
-        form="user-form"
-      />
+      <Form.Input label="outside" id="outside" name="outside" form="user-form" />
     </section>
   );
 }

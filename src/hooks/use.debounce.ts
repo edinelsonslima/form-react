@@ -3,24 +3,21 @@ import { useCallback, useEffect, useRef } from 'react';
 function useDebounce() {
   const timeoutId = useRef<NodeJS.Timeout | null>(null);
 
-  const debounce = useCallback(
-    <T extends (...args: unknown[]) => void>(fn: T, ms: number) => {
-      if (timeoutId.current) {
-        clearTimeout(timeoutId.current);
-      }
+  const debounce = useCallback(<T extends (...args: unknown[]) => void>(fn: T, ms: number) => {
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current);
+    }
 
-      const execute = () => {
-        fn();
+    const execute = () => {
+      fn();
 
-        if (!timeoutId.current) return;
-        clearTimeout(timeoutId.current);
-        timeoutId.current = null;
-      };
+      if (!timeoutId.current) return;
+      clearTimeout(timeoutId.current);
+      timeoutId.current = null;
+    };
 
-      timeoutId.current = setTimeout(execute, ms);
-    },
-    [],
-  );
+    timeoutId.current = setTimeout(execute, ms);
+  }, []);
 
   useEffect(() => {
     return () => {

@@ -12,14 +12,7 @@ import Input, { IProps } from '../Base';
 
 import s from './index.module.css';
 
-const providers = [
-  'gmail.com',
-  'hotmail.com',
-  'outlook.com',
-  'yahoo.com',
-  'msn.com',
-  'bol.com.br',
-];
+const providers = ['gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'msn.com', 'bol.com.br'];
 
 const Component = forwardRef<HTMLInputElement, IProps>(({ ...props }, ref) => {
   const [observable, setObservable] = useState('');
@@ -69,11 +62,7 @@ const Component = forwardRef<HTMLInputElement, IProps>(({ ...props }, ref) => {
   useImperativeHandle(ref, () => inputRef.current!, [inputRef]);
 
   return (
-    <div
-      className={s['email-container']}
-      onBlur={handleClose}
-      onFocus={handleOpen}
-    >
+    <div className={s['email-container']} onBlur={handleClose} onFocus={handleOpen}>
       <Input {...props} onChange={handleSearch} ref={inputRef} />
       <dialog open={open}>
         {result.map((email) => (
