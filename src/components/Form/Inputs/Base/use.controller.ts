@@ -24,11 +24,16 @@ function useController(
   const errorId = `${rest.id}-error`;
   const popoverId = `${rest.id}-popover`;
 
+  const handleSetCurrentError = (message: string) => {
+    if (message === currentError) return;
+    setCurrentError(message);
+  };
+
   const onInvalid = (evt: FormEvent<HTMLInputElement>) => {
     handleOnInvalid?.(evt);
     evt.preventDefault();
 
-    setCurrentError(evt.currentTarget.validationMessage);
+    handleSetCurrentError(evt.currentTarget.validationMessage);
   };
 
   const onInput = (evt: FormEvent<ICustomInput>) => {
@@ -69,7 +74,7 @@ function useController(
     }
 
     if (target.validationMessage) {
-      return debouce(() => setCurrentError(target.validationMessage), 300);
+      return debouce(() => handleSetCurrentError(target.validationMessage), 300);
     }
 
     dispatch('');
