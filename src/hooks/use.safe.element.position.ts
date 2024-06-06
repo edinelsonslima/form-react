@@ -1,16 +1,28 @@
 import { useEffect, useRef } from 'react';
 
-const padding = 2;
+type Padding = number | { top?: number; right?: number; bottom?: number; left?: number };
 
-function useSafeElementPosition<TContent extends HTMLElement>() {
+type IPositionPreference = 'corners' | 'horizontal' | 'vertical';
+
+type IProps = {
+  padding?: Padding;
+  positionPreference?: IPositionPreference;
+};
+
+function useSafeElementPosition<
+  TContainer extends HTMLElement = HTMLElement,
+  TContent extends HTMLElement = HTMLElement,
+>({ positionPreference = 'corners', padding }: IProps = {}) {
+  const containerRef = useRef<TContainer>(null);
   const contentRef = useRef<TContent>(null);
 
   useEffect(() => {
+    const container = containerRef.current;
     const content = contentRef.current;
-    if (!content) return;
+    if (!container || !content) return;
 
-    const siblingWidth = content.previousElementSibling?.clientWidth || 0;
-    const siblingHeight = content.previousElementSibling?.clientHeight || 0;
+    const containerWidth = container?.clientWidth || 0;
+    const containerHeight = container?.clientHeight || 0;
 
     const rect = content.getBoundingClientRect();
     const largestSideTop = rect.top > window.innerHeight - rect.bottom;
@@ -18,38 +30,81 @@ function useSafeElementPosition<TContent extends HTMLElement>() {
     const largestSideBottom = window.innerHeight - rect.bottom > rect.top;
     const largestSideLeft = rect.left > window.innerWidth - rect.right;
 
-    let top = 'inherit';
-    let left = 'inherit';
-    let right = 'inherit';
-    let bottom = 'inherit';
+    const paddingTop = Number(padding) || Object(padding)?.top || 2;
+    const paddingRight = Number(padding) || Object(padding)?.right || 2;
+    const paddingBottom = Number(padding) || Object(padding)?.bottom || 2;
+    const paddingLeft = Number(padding) || Object(padding)?.bottom || 2;
 
-    if (largestSideTop && largestSideLeft) {
-      right = `${siblingWidth + padding}px`;
-      bottom = `${siblingHeight + padding}px`;
-    }
+    const corners = (): Partial<CSSStyleDeclaration> => {
+      const topReposition: Partial<CSSStyleDeclaration> = {
+        bottom: `${containerHeight + paddingBottom}px`,
+      };
 
-    if (largestSideTop && largestSideRight) {
-      left = `${siblingWidth + padding}px`;
-      bottom = `${siblingHeight + padding}px`;
-    }
+      const rightReposition: Partial<CSSStyleDeclaration> = {
+        left: `${containerWidth + paddingLeft}px`,
+      };
 
-    if (largestSideBottom && largestSideRight) {
-      left = `${siblingWidth + padding}px`;
-      top = `${siblingHeight - padding}px`;
-    }
+      const bottomReposition: Partial<CSSStyleDeclaration> = {
+        top: `${containerHeight + paddingTop}px`,
+      };
 
-    if (largestSideBottom && largestSideLeft) {
-      right = `${siblingWidth + padding}px`;
-      top = `${siblingHeight - padding}px`;
-    }
+      const leftReposition: Partial<CSSStyleDeclaration> = {
+        right: `${containerWidth + paddingRight}px`,
+      };
 
-    content.style.top = top;
-    content.style.left = left;
-    content.style.right = right;
-    content.style.bottom = bottom;
-  });
+      return {
+        ...(largestSideTop && topReposition),
+        ...(largestSideRight && rightReposition),
+        ...(largestSideBottom && bottomReposition),
+        ...(largestSideLeft && leftReposition),
+      };
+    };
 
-  return [contentRef] as const;
+    const horizontal = () => {
+      const topReposition: Partial<CSSStyleDeclaration> = {
+        bottom: `${containerHeight + paddingBottom}px`,
+        right: '50%',
+        transform: 'translateX(50%)',
+      };
+
+      const bottomReposition: Partial<CSSStyleDeclaration> = {
+        top: `${containerHeight + paddingTop}px`,
+        right: '50%',
+        transform: 'translateX(50%)',
+      };
+
+      return {
+        ...(largestSideTop && topReposition),
+        ...(largestSideBottom && bottomReposition),
+      };
+    };
+
+    const vertical = () => {
+      const rightReposition: Partial<CSSStyleDeclaration> = {
+        left: `${containerWidth + paddingLeft}px`,
+        bottom: '50%',
+        transform: 'translateY(50%)',
+      };
+
+      const leftReposition: Partial<CSSStyleDeclaration> = {
+        right: `${containerWidth + paddingRight}px`,
+        bottom: '50%',
+        transform: 'translateY(50%)',
+      };
+
+      return {
+        ...(largestSideRight && rightReposition),
+        ...(largestSideLeft && leftReposition),
+      };
+    };
+
+    const newStyles = Object.entries({ corners, horizontal, vertical }[positionPreference]());
+
+    ['top', 'right', 'left', 'bottom'].forEach((key) => content.attributeStyleMap.delete(key));
+    newStyles.forEach(([key, value]) => content.attributeStyleMap.set(key, value as string));
+  }, [padding, positionPreference]);
+
+  return [containerRef, contentRef] as const;
 }
 
 export default useSafeElementPosition;
