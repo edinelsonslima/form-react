@@ -1,8 +1,6 @@
-.popover-button-container {
+.popover-container {
   position: relative;
-}
 
-.popover-button-container>button {
   display: grid;
   place-items: center;
   background: var(--primary-color);
@@ -16,14 +14,15 @@
   font-size: small
 }
 
-.popover-button-container>button:hover {
+.popover-container:hover {
   opacity: 0.9;
 }
 
-.popover-button-container>span {
+.popover-container>span {
   position: absolute;
   width: max-content;
   background-color: white;
+  color: black;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
   border-radius: var(--border-radius-base);
   padding: var(--spacing-1) var(--spacing-2);
