@@ -38,7 +38,7 @@ function useController(props: IProps, ref: ForwardedRef<HTMLInputElement>) {
   const handleUpdateEmail = (value: string) => {
     inputRef.current!.value = value;
     inputRef.current?.dispatchEvent(new Event('input', { bubbles: true }));
-
+    inputRef.current?.focus();
     updateEmailSuggestions([]);
   };
 
@@ -78,6 +78,7 @@ function useController(props: IProps, ref: ForwardedRef<HTMLInputElement>) {
 
   const handleSelectEmailSuggestion = (evt: KeyboardEvent<HTMLOptionElement>) => {
     if (evt.key !== 'Enter' && evt.key !== ' ') return;
+    evt.preventDefault();
     handleUpdateEmail(evt.currentTarget.value);
   };
 
