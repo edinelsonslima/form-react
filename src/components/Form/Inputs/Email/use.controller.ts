@@ -1,4 +1,11 @@
-import { FocusEvent, ForwardedRef, useImperativeHandle, useRef, useState } from 'react';
+import {
+  FocusEvent,
+  ForwardedRef,
+  KeyboardEvent,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import { IProps } from './types';
 
 const providers = ['gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'msn.com', 'bol.com.br'];
@@ -7,6 +14,7 @@ function useController(props: IProps, ref: ForwardedRef<HTMLInputElement>) {
   const [emailSuggestions, setEmailSuggestions] = useState<string[]>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   const updateEmailSuggestions = (emails: string[]) => {
     const isEmpty = !emails.length && !emailSuggestions.length;
@@ -15,8 +23,8 @@ function useController(props: IProps, ref: ForwardedRef<HTMLInputElement>) {
     setEmailSuggestions(emails);
   };
 
-  const handleAddEmailSuggestions = (value: string) => {
-    const [email] = value.split('@');
+  const handleAddEmailSuggestions = (value?: string) => {
+    const [email] = value?.split('@') ?? [];
 
     if (!value?.includes('@')) return updateEmailSuggestions([]);
 
@@ -35,24 +43,56 @@ function useController(props: IProps, ref: ForwardedRef<HTMLInputElement>) {
   };
 
   const handleOpenSuggestions = (evt: FocusEvent) => {
-    if (evt.relatedTarget?.id === 'email') return;
-    handleAddEmailSuggestions(inputRef.current?.value ?? '');
+    const relatedTargetId = evt.relatedTarget?.id ?? '';
+    const safeElementIds = ['email', 'suggestion-'];
+    if (safeElementIds.some((id) => relatedTargetId.startsWith(id))) return;
+    handleAddEmailSuggestions(inputRef.current?.value);
   };
 
   const handleCloseSuggestions = (evt: FocusEvent) => {
-    if (evt.relatedTarget?.id === 'suggestions-container') return;
+    const relatedTargetId = evt.relatedTarget?.id ?? '';
+    const safeElementIds = ['suggestions-container', 'suggestion-'];
+    if (safeElementIds.some((id) => relatedTargetId.startsWith(id))) return;
     updateEmailSuggestions([]);
+  };
+
+  const handleNavigateEmailSuggestions = (evt: KeyboardEvent<HTMLDivElement>) => {
+    if (evt.key !== 'ArrowDown' && evt.key !== 'ArrowUp') return;
+
+    if (evt.key === 'ArrowDown' && !emailSuggestions.length) {
+      handleAddEmailSuggestions(inputRef.current?.value);
+    }
+
+    const suggestions = Array.from(dialogRef.current?.children ?? []) as HTMLLIElement[];
+    const currentIndex = suggestions.findIndex((li) => li === document.activeElement);
+
+    const nextIndex = evt.key === 'ArrowDown' ? currentIndex + 1 : currentIndex - 1;
+    const nextElement = suggestions[nextIndex];
+
+    if (nextIndex < 0) return inputRef.current?.focus();
+    if (nextIndex >= suggestions.length) return; // focar no proximo elemento na lista do tab
+    if (!nextElement) return dialogRef.current?.blur();
+
+    nextElement.focus();
+  };
+
+  const handleSelectEmailSuggestion = (evt: KeyboardEvent<HTMLOptionElement>) => {
+    if (evt.key !== 'Enter' && evt.key !== ' ') return;
+    handleUpdateEmail(evt.currentTarget.value);
   };
 
   useImperativeHandle(ref, () => inputRef.current!, [inputRef]);
 
   return {
     inputRef,
+    dialogRef,
     emailSuggestions,
     handleUpdateEmail,
     handleAddEmailSuggestions,
     handleOpenSuggestions,
     handleCloseSuggestions,
+    handleSelectEmailSuggestion,
+    handleNavigateEmailSuggestions,
     ...props,
   };
 }

@@ -10,23 +10,33 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
     handleOpenSuggestions,
     handleAddEmailSuggestions,
     handleUpdateEmail,
+    handleNavigateEmailSuggestions,
+    handleSelectEmailSuggestion,
     emailSuggestions,
     inputRef,
+    dialogRef,
     ...rest
   } = useController(props, ref);
 
-  console.count('render');
   return (
     <div
       className={s['email-container']}
       onBlur={handleCloseSuggestions}
       onFocus={handleOpenSuggestions}
+      onKeyDown={handleNavigateEmailSuggestions}
     >
       <Input {...rest} onChange={(_, value) => handleAddEmailSuggestions(value)} ref={inputRef} />
 
-      <dialog open={!!emailSuggestions.length} id="suggestions-container">
-        {emailSuggestions.map((email) => (
-          <option key={email} onClick={() => handleUpdateEmail(email)}>
+      <dialog open={!!emailSuggestions.length} id="suggestions-container" ref={dialogRef}>
+        {emailSuggestions.map((email, i) => (
+          <option
+            key={email}
+            value={email}
+            tabIndex={0}
+            id={`suggestion-${i}`}
+            onClick={() => handleUpdateEmail(email)}
+            onKeyDown={handleSelectEmailSuggestion}
+          >
             {email}
           </option>
         ))}
