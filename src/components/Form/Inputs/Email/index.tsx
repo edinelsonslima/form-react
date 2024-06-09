@@ -12,6 +12,8 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
     handleUpdateEmail,
     handleNavigateEmailSuggestions,
     handleInputEnterKeyPress,
+    handleMouseEnterSuggestion,
+    handleMouseLeaveSuggestion,
     emailSuggestions,
     inputRef,
     dialogRef,
@@ -25,7 +27,6 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
       onFocus={handleOpenSuggestions}
       onKeyDown={handleNavigateEmailSuggestions}
     >
-      {/* Ta com bug no TAB, não passa pro proximo elemento */}
       <Input
         {...rest}
         ref={inputRef}
@@ -45,13 +46,14 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
         id="suggestions-container"
       >
         {emailSuggestions.map((email, i) => (
-          // ajustar estilo do hover
           <option
             key={email}
             value={email}
             id={`suggestion-${i}`}
             aria-selected={!i ? 'true' : 'false'}
             onClick={() => handleUpdateEmail(email)}
+            onMouseEnter={handleMouseEnterSuggestion}
+            onMouseLeave={handleMouseLeaveSuggestion}
             children={email}
           />
         ))}

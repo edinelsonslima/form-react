@@ -2,6 +2,7 @@ import {
   FocusEvent,
   ForwardedRef,
   KeyboardEvent,
+  MouseEvent,
   useImperativeHandle,
   useRef,
   useState,
@@ -48,6 +49,7 @@ function useController(props: IProps, ref: ForwardedRef<HTMLInputElement>) {
       if (safeElementIds.some((id) => relatedTargetId.startsWith(id))) return;
     }
 
+    inputRef.current?.setAttribute('aria-activedescendant', 'suggestion-0');
     handleAddEmailSuggestions(inputRef.current?.value);
   };
 
@@ -58,8 +60,11 @@ function useController(props: IProps, ref: ForwardedRef<HTMLInputElement>) {
       if (safeElementIds.some((id) => relatedTargetId.startsWith(id))) return;
     }
 
+    if (!evt) {
+      inputRef.current?.focus();
+    }
+
     inputRef.current?.removeAttribute('aria-activedescendant');
-    inputRef.current?.focus();
     updateEmailSuggestions([]);
   };
 
@@ -103,6 +108,19 @@ function useController(props: IProps, ref: ForwardedRef<HTMLInputElement>) {
     handleUpdateEmail(selected?.value ?? '');
   };
 
+  const handleMouseEnterSuggestion = (evt: MouseEvent<HTMLOptionElement>) => {
+    const suggestions = Array.from(dialogRef.current?.children ?? []) as HTMLOptionElement[];
+    suggestions.forEach((li) => li.setAttribute('aria-selected', 'false'));
+
+    evt.currentTarget.setAttribute('aria-selected', 'true');
+    inputRef.current?.setAttribute('aria-activedescendant', evt.currentTarget.id);
+  };
+
+  const handleMouseLeaveSuggestion = (evt: MouseEvent<HTMLOptionElement>) => {
+    evt.currentTarget.setAttribute('aria-selected', 'false');
+    inputRef.current?.removeAttribute('aria-activedescendant');
+  };
+
   useImperativeHandle(ref, () => inputRef.current!, [inputRef]);
 
   return {
@@ -115,6 +133,8 @@ function useController(props: IProps, ref: ForwardedRef<HTMLInputElement>) {
     handleCloseSuggestions,
     handleNavigateEmailSuggestions,
     handleInputEnterKeyPress,
+    handleMouseEnterSuggestion,
+    handleMouseLeaveSuggestion,
     ...props,
   };
 }
