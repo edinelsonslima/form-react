@@ -38,48 +38,69 @@ function useController(props: IProps, ref: ForwardedRef<HTMLInputElement>) {
   const handleUpdateEmail = (value: string) => {
     inputRef.current!.value = value;
     inputRef.current?.dispatchEvent(new Event('input', { bubbles: true }));
+    handleCloseSuggestions();
+  };
+
+  const handleOpenSuggestions = (evt?: FocusEvent) => {
+    if (evt) {
+      const relatedTargetId = evt.relatedTarget?.id ?? '';
+      const safeElementIds = ['email', 'suggestion-'];
+      if (safeElementIds.some((id) => relatedTargetId.startsWith(id))) return;
+    }
+
+    handleAddEmailSuggestions(inputRef.current?.value);
+  };
+
+  const handleCloseSuggestions = (evt?: FocusEvent) => {
+    if (evt) {
+      const relatedTargetId = evt.relatedTarget?.id ?? '';
+      const safeElementIds = ['suggestions-container', 'suggestion-'];
+      if (safeElementIds.some((id) => relatedTargetId.startsWith(id))) return;
+    }
+
+    inputRef.current?.removeAttribute('aria-activedescendant');
     inputRef.current?.focus();
     updateEmailSuggestions([]);
   };
 
-  const handleOpenSuggestions = (evt: FocusEvent) => {
-    const relatedTargetId = evt.relatedTarget?.id ?? '';
-    const safeElementIds = ['email', 'suggestion-'];
-    if (safeElementIds.some((id) => relatedTargetId.startsWith(id))) return;
-    handleAddEmailSuggestions(inputRef.current?.value);
-  };
-
-  const handleCloseSuggestions = (evt: FocusEvent) => {
-    const relatedTargetId = evt.relatedTarget?.id ?? '';
-    const safeElementIds = ['suggestions-container', 'suggestion-'];
-    if (safeElementIds.some((id) => relatedTargetId.startsWith(id))) return;
-    updateEmailSuggestions([]);
-  };
-
   const handleNavigateEmailSuggestions = (evt: KeyboardEvent<HTMLDivElement>) => {
+    if (evt.key === 'Escape') return handleCloseSuggestions();
     if (evt.key !== 'ArrowDown' && evt.key !== 'ArrowUp') return;
+    if (evt.key === 'ArrowDown' && !emailSuggestions.length) handleOpenSuggestions();
 
-    if (evt.key === 'ArrowDown' && !emailSuggestions.length) {
-      handleAddEmailSuggestions(inputRef.current?.value);
-    }
+    evt.preventDefault();
 
-    const suggestions = Array.from(dialogRef.current?.children ?? []) as HTMLLIElement[];
-    const currentIndex = suggestions.findIndex((li) => li === document.activeElement);
+    const suggestions = Array.from(dialogRef.current?.children ?? []) as HTMLOptionElement[];
+    const currentIndex = suggestions.findIndex((li) => li.getAttribute('aria-selected') === 'true');
 
     const nextIndex = evt.key === 'ArrowDown' ? currentIndex + 1 : currentIndex - 1;
-    const nextElement = suggestions[nextIndex];
+    const setAttribute = (i: number) =>
+      inputRef.current?.setAttribute('aria-activedescendant', `suggestion-${i}`);
 
-    if (nextIndex < 0) return inputRef.current?.focus();
-    if (nextIndex >= suggestions.length) return; // focar no proximo elemento na lista do tab
-    if (!nextElement) return dialogRef.current?.blur();
+    if (nextIndex < 0) {
+      suggestions.at(0)?.setAttribute('aria-selected', 'false');
+      suggestions.at(-1)?.setAttribute('aria-selected', 'true');
+      return setAttribute(suggestions.length - 1);
+    }
 
-    nextElement.focus();
+    if (nextIndex >= suggestions.length) {
+      suggestions.at(-1)?.setAttribute('aria-selected', 'false');
+      suggestions.at(0)?.setAttribute('aria-selected', 'true');
+      return setAttribute(0);
+    }
+
+    suggestions.at(currentIndex)?.setAttribute('aria-selected', 'false');
+    suggestions.at(nextIndex)?.setAttribute('aria-selected', 'true');
+    setAttribute(nextIndex);
   };
 
-  const handleSelectEmailSuggestion = (evt: KeyboardEvent<HTMLOptionElement>) => {
-    if (evt.key !== 'Enter' && evt.key !== ' ') return;
+  const handleInputEnterKeyPress = (evt: KeyboardEvent<HTMLInputElement>) => {
+    if (evt.key !== 'Enter' || !emailSuggestions.length) return;
     evt.preventDefault();
-    handleUpdateEmail(evt.currentTarget.value);
+
+    const suggestions = Array.from(dialogRef.current?.children ?? []) as HTMLOptionElement[];
+    const selected = suggestions.find((li) => li.getAttribute('aria-selected') === 'true');
+    handleUpdateEmail(selected?.value ?? '');
   };
 
   useImperativeHandle(ref, () => inputRef.current!, [inputRef]);
@@ -92,8 +113,8 @@ function useController(props: IProps, ref: ForwardedRef<HTMLInputElement>) {
     handleAddEmailSuggestions,
     handleOpenSuggestions,
     handleCloseSuggestions,
-    handleSelectEmailSuggestion,
     handleNavigateEmailSuggestions,
+    handleInputEnterKeyPress,
     ...props,
   };
 }

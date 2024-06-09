@@ -11,7 +11,7 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
     handleAddEmailSuggestions,
     handleUpdateEmail,
     handleNavigateEmailSuggestions,
-    handleSelectEmailSuggestion,
+    handleInputEnterKeyPress,
     emailSuggestions,
     inputRef,
     dialogRef,
@@ -25,20 +25,35 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
       onFocus={handleOpenSuggestions}
       onKeyDown={handleNavigateEmailSuggestions}
     >
-      <Input {...rest} onChange={(_, value) => handleAddEmailSuggestions(value)} ref={inputRef} />
+      {/* Ta com bug no TAB, não passa pro proximo elemento */}
+      <Input
+        {...rest}
+        ref={inputRef}
+        onKeyDown={handleInputEnterKeyPress}
+        onChange={(_, value) => handleAddEmailSuggestions(value)}
+        aria-expanded={!!emailSuggestions.length}
+        aria-autocomplete="list"
+        aria-haspopup="listbox"
+        aria-owns="suggestions-container"
+      />
 
-      <dialog open={!!emailSuggestions.length} id="suggestions-container" ref={dialogRef}>
+      <dialog
+        ref={dialogRef}
+        open={!!emailSuggestions.length}
+        aria-labelledby={props.id}
+        role="listbox"
+        id="suggestions-container"
+      >
         {emailSuggestions.map((email, i) => (
+          // ajustar estilo do hover
           <option
             key={email}
             value={email}
-            tabIndex={0}
             id={`suggestion-${i}`}
+            aria-selected={!i ? 'true' : 'false'}
             onClick={() => handleUpdateEmail(email)}
-            onKeyDown={handleSelectEmailSuggestion}
-          >
-            {email}
-          </option>
+            children={email}
+          />
         ))}
       </dialog>
     </div>
