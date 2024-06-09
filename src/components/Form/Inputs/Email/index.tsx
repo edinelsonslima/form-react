@@ -8,15 +8,15 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
   const {
     handleCloseSuggestions,
     handleOpenSuggestions,
-    handleAddEmailSuggestions,
-    handleUpdateEmail,
-    handleNavigateEmailSuggestions,
+    handleUpdateSuggestions,
+    handleKeyDownContainer,
     handleInputEnterKeyPress,
     handleMouseEnterSuggestion,
     handleMouseLeaveSuggestion,
-    emailSuggestions,
+    handleMouseDownSuggestion,
+    optionSuggestionsInState,
     inputRef,
-    dialogRef,
+    ulRef,
     ...rest
   } = useController(props, ref);
 
@@ -25,39 +25,41 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
       className={s['email-container']}
       onBlur={handleCloseSuggestions}
       onFocus={handleOpenSuggestions}
-      onKeyDown={handleNavigateEmailSuggestions}
+      onKeyDown={handleKeyDownContainer}
     >
       <Input
         {...rest}
         ref={inputRef}
         onKeyDown={handleInputEnterKeyPress}
-        onChange={(_, value) => handleAddEmailSuggestions(value)}
-        aria-expanded={!!emailSuggestions.length}
+        onChange={(_, value) => handleUpdateSuggestions(value)}
+        autoComplete="off"
+        aria-expanded={!!optionSuggestionsInState.length}
         aria-autocomplete="list"
         aria-haspopup="listbox"
         aria-owns="suggestions-container"
       />
 
-      <dialog
-        ref={dialogRef}
-        open={!!emailSuggestions.length}
+      <ul
+        ref={ulRef}
+        hidden={!optionSuggestionsInState.length}
         aria-labelledby={props.id}
         role="listbox"
         id="suggestions-container"
       >
-        {emailSuggestions.map((email, i) => (
-          <option
+        {optionSuggestionsInState.map((email, i) => (
+          <li
             key={email}
-            value={email}
             id={`suggestion-${i}`}
-            aria-selected={!i ? 'true' : 'false'}
-            onClick={() => handleUpdateEmail(email)}
+            onMouseDown={handleMouseDownSuggestion}
             onMouseEnter={handleMouseEnterSuggestion}
             onMouseLeave={handleMouseLeaveSuggestion}
             children={email}
+            aria-label={email}
+            aria-selected={!i ? 'true' : 'false'}
+            role="option"
           />
         ))}
-      </dialog>
+      </ul>
     </div>
   );
 });
