@@ -20,18 +20,6 @@
   cursor: pointer;
 }
 
-.email-container>dialog>option:hover {
-  background-color: #f5f5f5;
-}
-
-.email-container>dialog>option:focus {
-  background-color: #f5f5f5;
-}
-
-.email-container>dialog>option.active {
-  background-color: var(--color-primary-light);
-}
-
 .email-container>dialog>option[aria-selected="true"] {
   background-color: #f5f5f5;
 }
