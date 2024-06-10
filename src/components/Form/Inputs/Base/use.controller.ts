@@ -22,7 +22,6 @@ function useController(
   const [currentError, setCurrentError] = useState('');
 
   const errorId = `${rest.id}-error`;
-  const popoverId = `${rest.id}-popover`;
 
   const handleSetCurrentError = (message: string) => {
     if (message === currentError) return;
@@ -127,7 +126,6 @@ function useController(
   return {
     ...rest,
     errorId,
-    popoverId,
     currentError,
     ref: inputRef,
     value: onValue(),

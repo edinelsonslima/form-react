@@ -37,8 +37,12 @@ type IControllerProps = IBaseProps & {
 type IProps = IControllerProps & {
   id: ComponentProps<'input'>['id'];
   name: ComponentProps<'input'>['name'];
-  label?: ReactNode;
-  labelInfo?: ReactNode;
+  label?: ReactNode | { message: ReactNode; info?: ReactNode };
+  props?: {
+    container?: ComponentProps<'div'>;
+    error?: ComponentProps<'small'>;
+    label?: { container?: ComponentProps<'div'>; label?: ComponentProps<'label'> };
+  };
 };
 
 export type { IControllerProps, ICustomInput, IProps };
