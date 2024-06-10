@@ -1,4 +1,5 @@
 import Form from './components/Form';
+import Popover from './components/Popover';
 
 type FormValues = {
   username: string;
@@ -15,9 +16,15 @@ function App() {
           type="text"
           id="username"
           name="username"
-          label="Username"
+          label={{
+            message: 'Username',
+            info: (
+              <Popover id="popover-username">
+                <small>Enter your username</small>
+              </Popover>
+            ),
+          }}
           placeholder='e.g. "john_doe123"'
-          labelInfo={<small>Enter your username</small>}
           pattern={(value) => {
             if (value.length < 8) return 'Username must be at least 8 characters long';
 
@@ -39,7 +46,6 @@ function App() {
           name="password"
           label="Password"
           placeholder="********"
-          labelInfo={<small>Enter your password</small>}
           pattern={{
             message: 'Password must be at least 8 digits long',
             regexp: '^[0-9]{8,}$',
@@ -52,7 +58,6 @@ function App() {
           name="email"
           placeholder="e.g.  example@domain.com"
           label="Email"
-          labelInfo={<small>Enter your email</small>}
         />
 
         <Form.Input
@@ -60,7 +65,6 @@ function App() {
           id="phone"
           name="phone"
           label="Telephone"
-          labelInfo={<small>Enter your phone</small>}
           placeholder="+00 (00) 0 0000-0000"
           onChange={(_, value, masked) => console.log({ value, masked })}
           mask="(00) 0000-0000, (00) 0 0000-0000, +00 (00) 0 0000-0000"
@@ -71,7 +75,6 @@ function App() {
           id="document"
           name="document"
           label="CPF ou CNPJ"
-          labelInfo={<small>Enter your document</small>}
           placeholder="000.000.000-00 ou 00.000.000/0000-00"
           mask={{
             set(value) {
