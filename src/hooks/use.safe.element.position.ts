@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 
 type Padding = number | { top?: number; right?: number; bottom?: number; left?: number };
 
-type IPositionPreference = 'corners' | 'horizontal' | 'vertical';
+export type IPositionPreference = 'corners' | 'horizontal' | 'vertical';
 
 type IProps = {
   padding?: Padding;
