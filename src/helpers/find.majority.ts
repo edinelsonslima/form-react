@@ -4,8 +4,10 @@ type IMajority = {
   values: { [key: string]: number };
 };
 
-function findMajority(array: string[]) {
+function findMajority(array: string[], candidates: string[]) {
   const fn = (acc: IMajority, char: string) => {
+    if (!candidates.includes(char)) return acc;
+
     acc.values[char] ? acc.values[char]++ : (acc.values[char] = 1);
 
     const currentMaxQty = Math.max(...Object.values(acc.values));

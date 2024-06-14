@@ -1,4 +1,4 @@
-import findMajority from './find.majority';
+import findMajorityInCandidates from './find.majority';
 
 type IMaskConfigValue = { clean: RegExp; match: RegExp };
 type IMaskConfig = { [char: string]: IMaskConfigValue };
@@ -9,6 +9,10 @@ const maskConfig: IMaskConfig = {
   /* numeric */ '0': { clean: /[^0-9]/g, match: /[0-9]/g },
   /* alphanumeric */ '#': { clean: /[^A-Za-z0-9]/g, match: /[A-Za-z0-9]/g },
 };
+
+function findMajority(array: string[]) {
+  return findMajorityInCandidates(array, Object.keys(maskConfig));
+}
 
 function findSuitableMask(masks: string, input: string) {
   const suitable = (mask: string, index: number, array: string[]) => {
