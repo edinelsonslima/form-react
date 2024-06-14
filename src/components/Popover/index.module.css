@@ -14,10 +14,6 @@
   font-size: small
 }
 
-.popover-container:hover {
-  opacity: 0.9;
-}
-
 .popover-container>span {
   position: absolute;
   width: max-content;

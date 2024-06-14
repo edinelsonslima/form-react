@@ -1,11 +1,11 @@
 import { ComponentProps, memo, useEffect, useState } from 'react';
 
-import useSafeElementPosition from '@/hooks/use.safe.element.position';
+import useSafeElementPosition, { IPositionPreference } from '@/hooks/use.safe.element.position';
 import s from './index.module.css';
 
 type IPopoverProps = ComponentProps<'button'> & {
   timer?: number;
-  positionPreference?: 'horizontal' | 'vertical';
+  positionPreference?: IPositionPreference;
 };
 
 function Component({ timer = 2_000, positionPreference, children, ...props }: IPopoverProps) {
