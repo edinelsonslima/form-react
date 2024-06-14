@@ -1,7 +1,10 @@
 .input {
-  padding: var(--spacing-3) var(--spacing-2);
+  width: 100%;
+
+  padding: var(--spacing-2) var(--spacing-3);
   border: 1px solid var(--border-color-base);
   border-radius: var(--border-radius-base);
+  height: 40px;
 
   transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
@@ -13,6 +16,25 @@
 
 .input:active {
   box-shadow: 0 0 0 4px #0d47a141;
+}
+
+.input:placeholder-shown {
+  text-overflow: ellipsis;
+}
+
+.input::-webkit-input-placeholder {
+  color: #b9b9b9;
+  font-weight: 500;
+}
+
+.input:-moz-placeholder {
+  color: #b9b9b9;
+  font-weight: 500;
+}
+
+.input:-ms-input-placeholder {
+  color: #b9b9b9;
+  font-weight: 500;
 }
 
 /* Input Error */
