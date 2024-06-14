@@ -10,21 +10,8 @@ const maskConfig: IMaskConfig = {
   /* alphanumeric */ '#': { clean: /[^A-Za-z0-9]/g, match: /[A-Za-z0-9]/g },
 };
 
-const splitMasks = (masks: string) => masks.split(',');
-
-function setMask(mask: string[], input: string, symbolChar: string) {
-  const chars = [...input.replace(maskConfig[symbolChar].clean, '')];
-
-  return mask.reduce((result, symbol) => {
-    const inputValue = symbolChar === symbol ? chars.shift() : '';
-    const maskValue = chars.length ? symbol : '';
-
-    return result.concat(inputValue || maskValue);
-  }, '');
-}
-
-function handleSetMasks(masks: string, input: string) {
-  const suitableMask = splitMasks(masks).find((mask, index, array) => {
+function findSuitableMask(masks: string, input: string) {
+  const suitable = (mask: string, index: number, array: string[]) => {
     const { value: symbolChar } = findMajority([...mask]);
 
     if (!maskConfig[symbolChar]) return false;
@@ -36,33 +23,37 @@ function handleSetMasks(masks: string, input: string) {
     const isLastMask = index === array.length - 1;
 
     return !inputIsGreaterThanMask || isLastMask;
-  });
+  };
 
-  if (!suitableMask) return input;
-
-  const majority = findMajority([...suitableMask]);
-  return setMask([...suitableMask.trim()], input, majority.value);
+  return masks.split(',').find(suitable)?.trim();
 }
 
-function clearMask(mask: string[], input: string, symbolChar: string) {
-  const maskWithoutSymbolChar = mask.filter((char) => char !== symbolChar);
+function setMask(masks: string, input: string) {
+  const mask = findSuitableMask(masks, input);
+  if (!mask) return input;
 
-  return [...input].reduce((result, char) => {
-    const isMaskChar = maskWithoutSymbolChar.includes(char);
-    return isMaskChar ? result : result.concat(char);
+  const majority = findMajority([...mask]);
+  const chars = [...input.replace(maskConfig[majority.value].clean, '')];
+
+  return [...mask].reduce((result, symbol) => {
+    const inputValue = majority.value === symbol ? chars.shift() : '';
+    const maskValue = chars.length ? symbol : '';
+
+    return result.concat(inputValue || maskValue);
   }, '');
 }
 
-function handleClearMasks(masks: string, value: string) {
-  return splitMasks(masks).reduce((result, mask) => {
-    const { value: symbolChar } = findMajority([...mask]);
+function clearMask(masks: string, input: string) {
+  const mask = findSuitableMask(masks, input);
+  if (!mask) return input;
 
-    if (!mask.includes(symbolChar)) return result;
-    return clearMask([...mask.trim()], result, symbolChar);
-  }, value);
+  const majority = findMajority([...mask]);
+  const symbols = [...mask.replace(maskConfig[majority.value].match, '')];
+
+  return [...input].reduce((result, char) => {
+    if (result.length >= majority.qty) return result.slice(0, majority.qty);
+    return symbols.includes(char) ? result : result.concat(char);
+  }, '');
 }
 
-export default {
-  set: handleSetMasks,
-  clear: handleClearMasks,
-};
+export default { set: setMask, clear: clearMask };
