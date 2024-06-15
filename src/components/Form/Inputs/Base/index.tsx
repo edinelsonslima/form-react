@@ -33,6 +33,7 @@ const Component = forwardRef<HTMLInputElement, IProps>(
         <input
           {...props}
           className={cn(s, 'input', rest?.className)}
+          title={currentError}
           aria-invalid={!!currentError}
           aria-disabled={rest.disabled}
           aria-errormessage={currentError ? errorId : undefined}
