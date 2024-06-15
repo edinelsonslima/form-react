@@ -1,0 +1,6 @@
+.checkout {
+  margin: 1rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--border-radius-base);
+}
