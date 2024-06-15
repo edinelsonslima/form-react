@@ -23,6 +23,21 @@ const masks = {
       },
     };
   },
+
+  noSpace: {
+    set: (input: string) => input.replace(/\s+/, ''),
+    clear: (input: string) => input.replace(/\s+/, ''),
+  },
+
+  noSpecialCharacter: {
+    set: (input: string) => input.replace(/[^A-Za-zÀ-úÜüÖöäÄëï'0-9-. ]/g, ''),
+    clear: (input: string) => input.replace(/[^A-Za-zÀ-úÜüÖöäÄëï'0-9-. ]/g, ''),
+  },
+
+  noSpecialCharacterAndNumbers: {
+    set: (input: string) => input.replace(/[^A-Za-zÀ-úÜüÖöäÄëï .-]/g, ''),
+    clear: (input: string) => input.replace(/[^A-Za-zÀ-úÜüÖöäÄëï .-]/g, ''),
+  },
 };
 
 export default masks;
