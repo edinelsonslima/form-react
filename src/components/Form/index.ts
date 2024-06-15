@@ -2,9 +2,11 @@ import masks from '@/helpers/masks';
 import Input from './Inputs/Proxy';
 import Root from './Root';
 
+type ICustomInput = typeof Input & { masks: typeof masks };
+
 const Form = {
-  Root,
-  Input: Input as typeof Input & { masks: typeof masks },
+  Root: Root,
+  Input: Input as ICustomInput,
 };
 
 Form.Input.masks = masks;
