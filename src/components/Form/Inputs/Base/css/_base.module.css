@@ -32,6 +32,16 @@
   font-weight: 500;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .input:-ms-input-placeholder {
   color: #b9b9b9;
   font-weight: 500;
