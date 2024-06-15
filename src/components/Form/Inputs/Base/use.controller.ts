@@ -3,8 +3,6 @@ import useDebounce from '@/hooks/use.debounce';
 import { ChangeEvent, FormEvent, ForwardedRef, useImperativeHandle, useRef, useState } from 'react';
 import { IControllerProps, ICustomInput } from './types';
 
-const MS_SHOW_ERROR = 300;
-
 function useController(
   {
     onInput: handleOnInput,
@@ -27,8 +25,7 @@ function useController(
   const errorId = `${rest.id}-error`;
 
   const handleSetCurrentError = (message: string) => {
-    if (message === currentError) return;
-    _internal_error_(message);
+    debouce(() => _internal_error_(message), 300);
   };
 
   const onInvalid = (evt: FormEvent<ICustomInput>) => {
@@ -44,13 +41,11 @@ function useController(
         : defaultErrorMessages;
 
     if (target.validity.customError || !dictionary) {
-      return debouce(() => handleSetCurrentError(target.validationMessage), MS_SHOW_ERROR);
+      return handleSetCurrentError(target.validationMessage);
     }
 
     const error = Object.keys(dictionary).find((key) => Object(target.validity)[key]);
-    const message = error ? dictionary[error] : target.validationMessage;
-
-    debouce(() => handleSetCurrentError(message), MS_SHOW_ERROR);
+    handleSetCurrentError(error ? dictionary[error] : target.validationMessage);
   };
 
   const onInput = (evt: FormEvent<ICustomInput>) => {
