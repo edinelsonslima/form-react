@@ -2,6 +2,8 @@ import { ChangeEvent, ComponentProps, ReactNode } from 'react';
 
 type ICustomInput = HTMLInputElement & { valueUnmasked: string };
 
+type IValidityError = Omit<Record<keyof ValidityState, string>, 'valid' | 'customError'>;
+
 type IBaseProps = Omit<ComponentProps<'input'>, 'pattern' | 'onChange'>;
 
 type IControllerProps = IBaseProps & {
@@ -21,7 +23,7 @@ type IControllerProps = IBaseProps & {
    * - - `clear` - Function that receives the input value and returns the unmasked value
    * @example mask={{ set: (value) => value.toUpperCase(), clear: (value) => value.toLowerCase() }}
    */
-  mask?: string | { set: (value: string) => string; clear: (value: string) => string };
+  mask?: string | { set: (input: string) => string; clear: (input: string) => string };
   /**
    * Pattern to be applied to the input
    * - The pattern can be a function that receives the input value and returns a message if the value is invalid
@@ -29,9 +31,13 @@ type IControllerProps = IBaseProps & {
    * - - `regexp` - Regular expression to be applied to the input value
    * - - `message` - Message to be displayed if the value is invalid
    */
-  pattern?: ((value: string) => string | undefined) | { regexp: RegExp | string; message: string };
+  pattern?: ((input: string) => string | undefined) | { regexp: RegExp | string; message: string };
 
-  onChange?: (event: ChangeEvent<HTMLInputElement>, value: string, masked: string) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>, input: string, inputMasked: string) => void;
+
+  defaultErrorMessages?:
+    | ((input: string, inputMasked: string) => Partial<IValidityError>)
+    | Partial<IValidityError>;
 };
 
 type IProps = IControllerProps & {

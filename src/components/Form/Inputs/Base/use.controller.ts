@@ -3,6 +3,8 @@ import useDebounce from '@/hooks/use.debounce';
 import { ChangeEvent, FormEvent, ForwardedRef, useImperativeHandle, useRef, useState } from 'react';
 import { IControllerProps, ICustomInput } from './types';
 
+const MS_SHOW_ERROR = 300;
+
 function useController(
   {
     onInput: handleOnInput,
@@ -12,6 +14,7 @@ function useController(
     defaultValue: handleDefaultValue,
     mask: masksProp,
     pattern,
+    defaultErrorMessages,
     ...rest
   }: IControllerProps,
   ref: ForwardedRef<HTMLInputElement>,
@@ -19,20 +22,35 @@ function useController(
   const debouce = useDebounce();
 
   const inputRef = useRef<ICustomInput>(null);
-  const [currentError, setCurrentError] = useState('');
+  const [currentError, _internal_error_] = useState('');
 
   const errorId = `${rest.id}-error`;
 
   const handleSetCurrentError = (message: string) => {
     if (message === currentError) return;
-    setCurrentError(message);
+    _internal_error_(message);
   };
 
-  const onInvalid = (evt: FormEvent<HTMLInputElement>) => {
-    handleOnInvalid?.(evt);
+  const onInvalid = (evt: FormEvent<ICustomInput>) => {
     evt.preventDefault();
+    handleOnInvalid?.(evt);
+    const target = evt.currentTarget;
 
-    handleSetCurrentError(evt.currentTarget.validationMessage);
+    if (target.validity.valid) return handleSetCurrentError('');
+
+    const dictionary: Record<string, string> | undefined =
+      defaultErrorMessages instanceof Function
+        ? defaultErrorMessages(target.value, target.valueUnmasked)
+        : defaultErrorMessages;
+
+    if (target.validity.customError || !dictionary) {
+      return debouce(() => handleSetCurrentError(target.validationMessage), MS_SHOW_ERROR);
+    }
+
+    const error = Object.keys(dictionary).find((key) => Object(target.validity)[key]);
+    const message = error ? dictionary[error] : target.validationMessage;
+
+    debouce(() => handleSetCurrentError(message), MS_SHOW_ERROR);
   };
 
   const onInput = (evt: FormEvent<ICustomInput>) => {
@@ -53,8 +71,9 @@ function useController(
     }
 
     const dispatch = (message: string) => {
-      if (!message) setCurrentError('');
       target.setCustomValidity(message);
+      if (!message) return onInvalid(evt);
+
       target.reportValidity();
     };
 
@@ -70,10 +89,6 @@ function useController(
       const regexp = new RegExp(pattern.regexp);
       const result = !regexp.test(target.valueUnmasked) ? pattern.message : '';
       return dispatch(result);
-    }
-
-    if (target.validationMessage) {
-      return debouce(() => handleSetCurrentError(target.validationMessage), 300);
     }
 
     dispatch('');
