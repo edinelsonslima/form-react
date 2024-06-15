@@ -1,8 +1,15 @@
-import { FormEvent } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 import { ICustomInput } from '../Inputs/Base/types';
 import { IControllerProps } from './types';
 
-function useController<T extends object>({ onSubmit: handleSubmit, ...rest }: IControllerProps<T>) {
+function useController<T extends object>({
+  onSubmit: handleSubmit,
+  initialValues,
+  ...rest
+}: IControllerProps<T>) {
+  const formRef = useRef<HTMLFormElement>(null);
+  const firstRender = useRef(true);
+
   const handleFormatGroupData = (groups: HTMLFieldSetElement[]) => {
     const initialValues = [{} as T, {} as T];
 
@@ -49,7 +56,35 @@ function useController<T extends object>({ onSubmit: handleSubmit, ...rest }: IC
     return handleSubmit(unmasked, masked, e);
   };
 
-  return { ...rest, onSubmit };
+  useEffect(() => {
+    const target = formRef.current;
+    if (!initialValues || !target || !firstRender.current) return;
+    firstRender.current = false;
+
+    const children = Array.from(target.elements) as ICustomInput[] | HTMLFieldSetElement[];
+
+    Object.entries(initialValues).forEach(([name, values]) => {
+      const child = children.find((el) => el.name === name);
+
+      if (child instanceof HTMLFieldSetElement) {
+        const group = child as HTMLFieldSetElement;
+        const inputs = Array.from(group.getElementsByTagName('input')) as ICustomInput[];
+
+        inputs.forEach((input) => {
+          input.value = Object(values)[input.name];
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+        });
+      }
+
+      if (child instanceof HTMLInputElement) {
+        const input = child as ICustomInput;
+        input.value = values as string;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+      }
+    });
+  }, [initialValues]);
+
+  return { ...rest, ref: formRef, onSubmit };
 }
 
 export type { IControllerProps };
