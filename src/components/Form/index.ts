@@ -1,13 +1,11 @@
-import masks from '@/helpers/masks';
-import Input from './Inputs/Proxy';
+import Input from './Inputs';
 import Root from './Root';
-
-type ICustomInput = typeof Input & { masks: typeof masks };
+import Select from './Inputs/Select';
 
 const Form = {
   Root: Root,
-  Input: Input as ICustomInput,
+  Input: Input,
+  Select: Select,
 };
 
-Form.Input.masks = masks;
 export default Form;
