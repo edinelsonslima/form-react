@@ -1,0 +1,1479 @@
+[
+  {
+    "name": "Brazil",
+    "nativeName": "Brasil",
+    "isoAlpha2": "BR",
+    "DDI": "+55",
+    "lang": "ptbr"
+  },
+  {
+    "name": "Portugal",
+    "nativeName": "Portugal",
+    "isoAlpha2": "PT",
+    "DDI": "+351",
+    "lang": "ptpt"
+  },
+  {
+    "name": "United States",
+    "nativeName": "United States",
+    "isoAlpha2": "US",
+    "DDI": "+1",
+    "lang": "enus"
+  },
+  {
+    "name": "United Kingdom",
+    "nativeName": "United Kingdom",
+    "isoAlpha2": "GB",
+    "DDI": "+44",
+    "lang": "engb"
+  },
+  {
+    "name": "Japan",
+    "nativeName": "日本 (Nippon/Nihon)",
+    "isoAlpha2": "JP",
+    "DDI": "+81",
+    "lang": "jajp"
+  },
+  {
+    "name": "Italy",
+    "nativeName": "Italia",
+    "isoAlpha2": "IT",
+    "DDI": "+39",
+    "lang": "itit"
+  },
+  {
+    "name": "Spain",
+    "nativeName": "España",
+    "isoAlpha2": "ES",
+    "DDI": "+34",
+    "lang": "eses"
+  },
+  {
+    "name": "France",
+    "nativeName": "France",
+    "isoAlpha2": "FR",
+    "DDI": "+33",
+    "lang": "frfr"
+  },
+  {
+    "name": "Afghanistan",
+    "nativeName": "Afġānistān",
+    "isoAlpha2": "AF",
+    "DDI": "+93",
+    "lang": "psaf"
+  },
+  {
+    "name": "Albania",
+    "nativeName": "Shqipëri",
+    "isoAlpha2": "AL",
+    "DDI": "+355",
+    "lang": "sqal"
+  },
+  {
+    "name": "Algeria",
+    "nativeName": "الجزائر (Dzayer)",
+    "isoAlpha2": "DZ",
+    "DDI": "+213",
+    "lang": "ardz"
+  },
+  {
+    "name": "Andorra",
+    "nativeName": "Andorra",
+    "isoAlpha2": "AD",
+    "DDI": "+376",
+    "lang": "caad"
+  },
+  {
+    "name": "Angola",
+    "nativeName": "Angola",
+    "isoAlpha2": "AO",
+    "DDI": "+244",
+    "lang": "ptao"
+  },
+  {
+    "name": "Anguilla",
+    "nativeName": "Anguilla",
+    "isoAlpha2": "AI",
+    "DDI": "+263",
+    "lang": "enai"
+  },
+  {
+    "name": "Antigua and Barbuda",
+    "nativeName": "Antigua and Barbuda",
+    "isoAlpha2": "AG",
+    "DDI": "+267",
+    "lang": "enag"
+  },
+  {
+    "name": "Argentina",
+    "nativeName": "Argentina",
+    "isoAlpha2": "AR",
+    "DDI": "+54",
+    "lang": "esar"
+  },
+  {
+    "name": "Armenia",
+    "nativeName": "Հայաստան (Hayastan)",
+    "isoAlpha2": "AM",
+    "DDI": "+374",
+    "lang": "hyam"
+  },
+  {
+    "name": "Aruba",
+    "nativeName": "Aruba",
+    "isoAlpha2": "AW",
+    "DDI": "+297",
+    "lang": "nlaw"
+  },
+  {
+    "name": "Australia",
+    "nativeName": "Australia",
+    "isoAlpha2": "AU",
+    "DDI": "+61",
+    "lang": "enau"
+  },
+  {
+    "name": "Austria",
+    "nativeName": "Österreich",
+    "isoAlpha2": "AT",
+    "DDI": "+43",
+    "lang": "deat"
+  },
+  {
+    "name": "Azerbaijan",
+    "nativeName": "Azərbaycan",
+    "isoAlpha2": "AZ",
+    "DDI": "+994",
+    "lang": "azaz"
+  },
+  {
+    "name": "Bahamas",
+    "nativeName": "Bahamas",
+    "isoAlpha2": "BS",
+    "DDI": "+241",
+    "lang": "enbs"
+  },
+  {
+    "name": "Bahrain",
+    "nativeName": "البحرين",
+    "isoAlpha2": "BH",
+    "DDI": "+973",
+    "lang": "arbh"
+  },
+  {
+    "name": "Bangladesh",
+    "nativeName": "বাংলাদেশ (Bangladesh)",
+    "isoAlpha2": "BD",
+    "DDI": "+880",
+    "lang": "bnbd"
+  },
+  {
+    "name": "Barbados",
+    "nativeName": "Barbados",
+    "isoAlpha2": "BB",
+    "DDI": "+245",
+    "lang": "enbb"
+  },
+  {
+    "name": "Belarus",
+    "nativeName": "Беларусь",
+    "isoAlpha2": "BY",
+    "DDI": "+375",
+    "lang": "beby"
+  },
+  {
+    "name": "Belgium",
+    "nativeName": "België/Belgique",
+    "isoAlpha2": "BE",
+    "DDI": "+32",
+    "lang": "nlbe"
+  },
+  {
+    "name": "Belize",
+    "nativeName": "Belize",
+    "isoAlpha2": "BZ",
+    "DDI": "+501",
+    "lang": "enbz"
+  },
+  {
+    "name": "Benin",
+    "nativeName": "Bénin",
+    "isoAlpha2": "BJ",
+    "DDI": "+229",
+    "lang": "frbj"
+  },
+  {
+    "name": "Bermuda",
+    "nativeName": "Bermuda",
+    "isoAlpha2": "BM",
+    "DDI": "+440",
+    "lang": "enbm"
+  },
+  {
+    "name": "Bhutan",
+    "nativeName": "Butão",
+    "isoAlpha2": "BT",
+    "DDI": "+975",
+    "lang": "dzbt"
+  },
+  {
+    "name": "Bolivia",
+    "nativeName": "Bolivia",
+    "isoAlpha2": "BO",
+    "DDI": "+591",
+    "lang": "esbo"
+  },
+  {
+    "name": "Bosnia and Herzegovina",
+    "nativeName": "Bosna i Hercegovina",
+    "isoAlpha2": "BA",
+    "DDI": "+387",
+    "lang": "bsba"
+  },
+  {
+    "name": "Botswana",
+    "nativeName": "Botswana",
+    "isoAlpha2": "BW",
+    "DDI": "+267",
+    "lang": "enbw"
+  },
+  {
+    "name": "British Indian Ocean Territory",
+    "nativeName": "British Indian Ocean Territory",
+    "isoAlpha2": "IO",
+    "DDI": "+246",
+    "lang": "enio"
+  },
+  {
+    "name": "British Virgin Islands",
+    "nativeName": "British Virgin Islands",
+    "isoAlpha2": "VG",
+    "DDI": "+1284",
+    "lang": "envg"
+  },
+  {
+    "name": "Brunei",
+    "nativeName": "Brunei Darussalam",
+    "isoAlpha2": "BN",
+    "DDI": "+673",
+    "lang": "msbn"
+  },
+  {
+    "name": "Bulgaria",
+    "nativeName": "България",
+    "isoAlpha2": "BG",
+    "DDI": "+359",
+    "lang": "bgbg"
+  },
+  {
+    "name": "Burkina Faso",
+    "nativeName": "Burkina Faso",
+    "isoAlpha2": "BF",
+    "DDI": "+226",
+    "lang": "frbf"
+  },
+  {
+    "name": "Burundi",
+    "nativeName": "Burundi",
+    "isoAlpha2": "BI",
+    "DDI": "+257",
+    "lang": "frbi"
+  },
+  {
+    "name": "Cambodia",
+    "nativeName": "កម្ពុជា",
+    "isoAlpha2": "KH",
+    "DDI": "+8551",
+    "lang": "kmkh"
+  },
+  {
+    "name": "Cameroon",
+    "nativeName": "Cameroun",
+    "isoAlpha2": "CM",
+    "DDI": "+237",
+    "lang": "encm"
+  },
+  {
+    "name": "Canada",
+    "nativeName": "Canada",
+    "isoAlpha2": "CA",
+    "DDI": "+1",
+    "lang": "enca"
+  },
+  {
+    "name": "Cape Verde",
+    "nativeName": "Cabo Verde",
+    "isoAlpha2": "CV",
+    "DDI": "+238",
+    "lang": "ptcv"
+  },
+  {
+    "name": "Cayman Islands",
+    "nativeName": "Cayman Islands",
+    "isoAlpha2": "KY",
+    "DDI": "+344",
+    "lang": "enky"
+  },
+  {
+    "name": "Central African Republic",
+    "nativeName": "Ködörösêse tî Bêafrîka",
+    "isoAlpha2": "CF",
+    "DDI": "+236",
+    "lang": "frcf"
+  },
+  {
+    "name": "Chad",
+    "nativeName": "Tchad",
+    "isoAlpha2": "TD",
+    "DDI": "+235",
+    "lang": "frtd"
+  },
+  {
+    "name": "Chile",
+    "nativeName": "Chile",
+    "isoAlpha2": "CL",
+    "DDI": "+56",
+    "lang": "escl"
+  },
+  {
+    "name": "China",
+    "nativeName": "中国",
+    "isoAlpha2": "CN",
+    "DDI": "+86",
+    "lang": "zhcn"
+  },
+  {
+    "name": "Colombia",
+    "nativeName": "Colombia",
+    "isoAlpha2": "CO",
+    "DDI": "+57",
+    "lang": "esco"
+  },
+  {
+    "name": "Comoros",
+    "nativeName": "Komori",
+    "isoAlpha2": "KM",
+    "DDI": "+269",
+    "lang": "frkm"
+  },
+  {
+    "name": "Congo, Democratic Republic of",
+    "nativeName": "République démocratique du Congo",
+    "isoAlpha2": "CD",
+    "DDI": "+243",
+    "lang": "frcd"
+  },
+  {
+    "name": "Cook Islands",
+    "nativeName": "Cocos (Keeling) Islands",
+    "isoAlpha2": "CK",
+    "DDI": "+682",
+    "lang": "enck"
+  },
+  {
+    "name": "Costa Rica",
+    "nativeName": "Costa Rica",
+    "isoAlpha2": "CR",
+    "DDI": "+506",
+    "lang": "escr"
+  },
+  {
+    "name": "Croatia",
+    "nativeName": "Hrvatska",
+    "isoAlpha2": "HR",
+    "DDI": "+385",
+    "lang": "hrhr"
+  },
+  {
+    "name": "Cuba",
+    "nativeName": "Cuba",
+    "isoAlpha2": "CU",
+    "DDI": "+53",
+    "lang": "escu"
+  },
+  {
+    "name": "Curaçao",
+    "nativeName": "Curaçao",
+    "isoAlpha2": "CW",
+    "DDI": "+599",
+    "lang": "nlcw"
+  },
+  {
+    "name": "Cyprus",
+    "nativeName": "Κύπρος",
+    "isoAlpha2": "CY",
+    "DDI": "+357",
+    "lang": "elcy"
+  },
+  {
+    "name": "Czech Republic",
+    "nativeName": "Česká republika",
+    "isoAlpha2": "CZ",
+    "DDI": "+420",
+    "lang": "cscz"
+  },
+  {
+    "name": "Denmark",
+    "nativeName": "Danmark",
+    "isoAlpha2": "DK",
+    "DDI": "+45",
+    "lang": "dadk"
+  },
+  {
+    "name": "Djibouti",
+    "nativeName": "جيبوتي(Jībūtī)",
+    "isoAlpha2": "DJ",
+    "DDI": "+253",
+    "lang": "frdj"
+  },
+  {
+    "name": "Dominica",
+    "nativeName": "Dominica",
+    "isoAlpha2": "DM",
+    "DDI": "+1809",
+    "lang": "endm"
+  },
+  {
+    "name": "Dominica",
+    "nativeName": "Dominica",
+    "isoAlpha2": "DM",
+    "DDI": "+1829",
+    "lang": "endm"
+  },
+  {
+    "name": "Dominican Republic",
+    "nativeName": "República Dominicana",
+    "isoAlpha2": "DO",
+    "DDI": "+1849",
+    "lang": "esdo"
+  },
+  {
+    "name": "Ecuador",
+    "nativeName": "Ecuador",
+    "isoAlpha2": "EC",
+    "DDI": "+593",
+    "lang": "esec"
+  },
+  {
+    "name": "Egypt",
+    "nativeName": "مصر‎",
+    "isoAlpha2": "EG",
+    "DDI": "+20",
+    "lang": "areg"
+  },
+  {
+    "name": "El Salvador",
+    "nativeName": "El Salvador",
+    "isoAlpha2": "SV",
+    "DDI": "+503",
+    "lang": "essv"
+  },
+  {
+    "name": "Equatorial Guinea",
+    "nativeName": "Guinea Ecuatorial",
+    "isoAlpha2": "GQ",
+    "DDI": "+240",
+    "lang": "esgq"
+  },
+  {
+    "name": "Eritrea",
+    "nativeName": "ኤርትራ",
+    "isoAlpha2": "ER",
+    "DDI": "+291",
+    "lang": "ener"
+  },
+  {
+    "name": "Estonia",
+    "nativeName": "Eesti",
+    "isoAlpha2": "EE",
+    "DDI": "+372",
+    "lang": "etee"
+  },
+  {
+    "name": "Eswatini (formerly Swaziland)",
+    "nativeName": "eSwatini",
+    "isoAlpha2": "SZ",
+    "DDI": "+268",
+    "lang": "ensz"
+  },
+  {
+    "name": "Ethiopia",
+    "nativeName": "ኢትዮጵያ",
+    "isoAlpha2": "ET",
+    "DDI": "+251",
+    "lang": "amet"
+  },
+  {
+    "name": "Falkland Islands",
+    "nativeName": "Falkland Islands",
+    "isoAlpha2": "FK",
+    "DDI": "+500",
+    "lang": "enfk"
+  },
+  {
+    "name": "Faroe Islands",
+    "nativeName": "Føroyar",
+    "isoAlpha2": "FO",
+    "DDI": "+298",
+    "lang": "fofo"
+  },
+  {
+    "name": "Fiji",
+    "nativeName": "Viti",
+    "isoAlpha2": "FJ",
+    "DDI": "+679",
+    "lang": "fjfj"
+  },
+  {
+    "name": "Finland",
+    "nativeName": "Suomi",
+    "isoAlpha2": "FI",
+    "DDI": "+358",
+    "lang": "fifi"
+  },
+  {
+    "name": "French Polynesia",
+    "nativeName": "Polynésie française",
+    "isoAlpha2": "PF",
+    "DDI": "+689",
+    "lang": "frpf"
+  },
+  {
+    "name": "Gabon",
+    "nativeName": "Gabon",
+    "isoAlpha2": "GA",
+    "DDI": "+241",
+    "lang": "frga"
+  },
+  {
+    "name": "Gambia",
+    "nativeName": "The Gambia",
+    "isoAlpha2": "GM",
+    "DDI": "+220",
+    "lang": "engm"
+  },
+  {
+    "name": "Georgia",
+    "nativeName": "Sakartvelo",
+    "isoAlpha2": "GE",
+    "DDI": "+995",
+    "lang": "kage"
+  },
+  {
+    "name": "Germany",
+    "nativeName": "Deutschland",
+    "isoAlpha2": "DE",
+    "DDI": "+49",
+    "lang": "dede"
+  },
+  {
+    "name": "Ghana",
+    "nativeName": "Ghana",
+    "isoAlpha2": "GH",
+    "DDI": "+233",
+    "lang": "engh"
+  },
+  {
+    "name": "Gibraltar",
+    "nativeName": "Gibraltar",
+    "isoAlpha2": "GI",
+    "DDI": "+350",
+    "lang": "engi"
+  },
+  {
+    "name": "Greece",
+    "nativeName": "Ελλάδα (Elláda)",
+    "isoAlpha2": "GR",
+    "DDI": "+30",
+    "lang": "elgr"
+  },
+  {
+    "name": "Grenada",
+    "nativeName": "Grenada",
+    "isoAlpha2": "GD",
+    "DDI": "+1473",
+    "lang": "engd"
+  },
+  {
+    "name": "Guatemala",
+    "nativeName": "Guatemala",
+    "isoAlpha2": "GT",
+    "DDI": "+502",
+    "lang": "esgt"
+  },
+  {
+    "name": "Guinea",
+    "nativeName": "Guinée",
+    "isoAlpha2": "GN",
+    "DDI": "+224",
+    "lang": "ptgn"
+  },
+  {
+    "name": "Guinea-Bissau",
+    "nativeName": "Guiné-Bissau",
+    "isoAlpha2": "GW",
+    "DDI": "+245",
+    "lang": "ptgw"
+  },
+  {
+    "name": "Guyana",
+    "nativeName": "Guyana",
+    "isoAlpha2": "GY",
+    "DDI": "+592",
+    "lang": "engy"
+  },
+  {
+    "name": "Haiti",
+    "nativeName": "Haïti",
+    "isoAlpha2": "HT",
+    "DDI": "+509",
+    "lang": "htht"
+  },
+  {
+    "name": "Honduras",
+    "nativeName": "Honduras",
+    "isoAlpha2": "HN",
+    "DDI": "+504",
+    "lang": "eshn"
+  },
+  {
+    "name": "Hong Kong",
+    "nativeName": "香港 (Xianggang)",
+    "isoAlpha2": "HK",
+    "DDI": "+852",
+    "lang": "zhhk"
+  },
+  {
+    "name": "Hungary",
+    "nativeName": "Magyarország",
+    "isoAlpha2": "HU",
+    "DDI": "+36",
+    "lang": "huhu"
+  },
+  {
+    "name": "Iceland",
+    "nativeName": "Ísland",
+    "isoAlpha2": "IS",
+    "DDI": "+354",
+    "lang": "isis"
+  },
+  {
+    "name": "India",
+    "nativeName": "भारत (Bhārat)",
+    "isoAlpha2": "IN",
+    "DDI": "+91",
+    "lang": "hiin"
+  },
+  {
+    "name": "Indonesia",
+    "nativeName": "Indonesia",
+    "isoAlpha2": "ID",
+    "DDI": "+62",
+    "lang": "idid"
+  },
+  {
+    "name": "Iran",
+    "nativeName": "ایران (Irān)",
+    "isoAlpha2": "IR",
+    "DDI": "+98",
+    "lang": "fair"
+  },
+  {
+    "name": "Iraq",
+    "nativeName": "العراق (al-‘Irāq)",
+    "isoAlpha2": "IQ",
+    "DDI": "+964",
+    "lang": "ariq"
+  },
+  {
+    "name": "Ireland",
+    "nativeName": "Éire/Irelanda",
+    "isoAlpha2": "IE",
+    "DDI": "+353",
+    "lang": "gaie"
+  },
+  {
+    "name": "Israel",
+    "nativeName": "ישראל (Yisra'el)",
+    "isoAlpha2": "IL",
+    "DDI": "+972",
+    "lang": "heil"
+  },
+  {
+    "name": "Ivory Coast",
+    "nativeName": "Côte d'Ivoire",
+    "isoAlpha2": "CI",
+    "DDI": "+225",
+    "lang": "frci"
+  },
+  {
+    "name": "Jamaica",
+    "nativeName": "Jamaica",
+    "isoAlpha2": "JM",
+    "DDI": "+1876",
+    "lang": "enjm"
+  },
+  {
+    "name": "Jordan",
+    "nativeName": "الأردن (al-Urdun)",
+    "isoAlpha2": "JO",
+    "DDI": "+962",
+    "lang": "arjo"
+  },
+  {
+    "name": "Kazakhstan",
+    "nativeName": "Қазақстан",
+    "isoAlpha2": "KZ",
+    "DDI": "+7",
+    "lang": "kkkz"
+  },
+  {
+    "name": "Kenya",
+    "nativeName": "Kenya",
+    "isoAlpha2": "KE",
+    "DDI": "+254",
+    "lang": "swke"
+  },
+  {
+    "name": "Kiribati",
+    "nativeName": "Kiribati",
+    "isoAlpha2": "KI",
+    "DDI": "+686",
+    "lang": "enki"
+  },
+  {
+    "name": "Kuwait",
+    "nativeName": "الكويت",
+    "isoAlpha2": "KW",
+    "DDI": "+965",
+    "lang": "arkw"
+  },
+  {
+    "name": "Kyrgyzstan",
+    "nativeName": "Кыргызстан (Kyrgyzstan)",
+    "isoAlpha2": "KG",
+    "DDI": "+996",
+    "lang": "kykg"
+  },
+  {
+    "name": "Laos",
+    "nativeName": "ລາວ (Lao)",
+    "isoAlpha2": "LA",
+    "DDI": "+856",
+    "lang": "lola"
+  },
+  {
+    "name": "Latvia",
+    "nativeName": "Latvija",
+    "isoAlpha2": "LV",
+    "DDI": "+371",
+    "lang": "lvlv"
+  },
+  {
+    "name": "Lebanon",
+    "nativeName": "لبنان (Lubnān)",
+    "isoAlpha2": "LB",
+    "DDI": "+961",
+    "lang": "arlb"
+  },
+  {
+    "name": "Lesotho",
+    "nativeName": "Lesotho",
+    "isoAlpha2": "LS",
+    "DDI": "+266",
+    "lang": "stls"
+  },
+  {
+    "name": "Liberia",
+    "nativeName": "Liberia",
+    "isoAlpha2": "LR",
+    "DDI": "+231",
+    "lang": "enlr"
+  },
+  {
+    "name": "Libya",
+    "nativeName": "ليبيا (Lībiyā)",
+    "isoAlpha2": "LY",
+    "DDI": "+218",
+    "lang": "arly"
+  },
+  {
+    "name": "Liechtenstein",
+    "nativeName": "Liechtenstein",
+    "isoAlpha2": "LI",
+    "DDI": "+423",
+    "lang": "deli"
+  },
+  {
+    "name": "Lithuania",
+    "nativeName": "Lietuva",
+    "isoAlpha2": "LT",
+    "DDI": "+370",
+    "lang": "ltlt"
+  },
+  {
+    "name": "Luxembourg",
+    "nativeName": "Luxembourg/Lëtzebuerg",
+    "isoAlpha2": "LU",
+    "DDI": "+352",
+    "lang": "lblu"
+  },
+  {
+    "name": "Macao SAR China",
+    "nativeName": "澳門特別行政區",
+    "isoAlpha2": "MO",
+    "DDI": "+853",
+    "lang": "zhmo"
+  },
+  {
+    "name": "Madagascar",
+    "nativeName": "Madagasikara",
+    "isoAlpha2": "MG",
+    "DDI": "+261",
+    "lang": "mgmg"
+  },
+  {
+    "name": "Malawi",
+    "nativeName": "Malawi",
+    "isoAlpha2": "MW",
+    "DDI": "+265",
+    "lang": "enmw"
+  },
+  {
+    "name": "Malaysia",
+    "nativeName": "Malaysia",
+    "isoAlpha2": "MY",
+    "DDI": "+60",
+    "lang": "msmy"
+  },
+  {
+    "name": "Maldives",
+    "nativeName": "Dhivehi Raajje",
+    "isoAlpha2": "MV",
+    "DDI": "+960",
+    "lang": "dvmv"
+  },
+  {
+    "name": "Mali",
+    "nativeName": "Mali",
+    "isoAlpha2": "ML",
+    "DDI": "+223",
+    "lang": "bmml"
+  },
+  {
+    "name": "Malta",
+    "nativeName": "Malta",
+    "isoAlpha2": "MT",
+    "DDI": "+356",
+    "lang": "mtmt"
+  },
+  {
+    "name": "Marshall Islands",
+    "nativeName": "Marshall Islands",
+    "isoAlpha2": "MH",
+    "DDI": "+692",
+    "lang": "mhmh"
+  },
+  {
+    "name": "Mauritania",
+    "nativeName": "Mauritanie",
+    "isoAlpha2": "MR",
+    "DDI": "+222",
+    "lang": "armr"
+  },
+  {
+    "name": "Mauritius",
+    "nativeName": "Maurice/Morisyen",
+    "isoAlpha2": "MU",
+    "DDI": "+230",
+    "lang": "enmu"
+  },
+  {
+    "name": "Mexico",
+    "nativeName": "México",
+    "isoAlpha2": "MX",
+    "DDI": "+52",
+    "lang": "esmx"
+  },
+  {
+    "name": "Moldova",
+    "nativeName": "Moldova",
+    "isoAlpha2": "MD",
+    "DDI": "+373",
+    "lang": "momd"
+  },
+  {
+    "name": "Monaco",
+    "nativeName": "Monaco",
+    "isoAlpha2": "MC",
+    "DDI": "+377",
+    "lang": "frmc"
+  },
+  {
+    "name": "Mongolia",
+    "nativeName": "Mongol Uls",
+    "isoAlpha2": "MN",
+    "DDI": "+976",
+    "lang": "mnmn"
+  },
+  {
+    "name": "Montserrat",
+    "nativeName": "Montserrat",
+    "isoAlpha2": "MS",
+    "DDI": "+1664",
+    "lang": "enms"
+  },
+  {
+    "name": "Morocco",
+    "nativeName": "المغرب (al-Maġrib)",
+    "isoAlpha2": "MA",
+    "DDI": "+212",
+    "lang": "arma"
+  },
+  {
+    "name": "Mozambique",
+    "nativeName": "Moçambique",
+    "isoAlpha2": "MZ",
+    "DDI": "+258",
+    "lang": "ptmz"
+  },
+  {
+    "name": "Myanmar",
+    "nativeName": "မြန်မာ (Myanmar)",
+    "isoAlpha2": "MM",
+    "DDI": "+95",
+    "lang": "mymm"
+  },
+  {
+    "name": "Namibia",
+    "nativeName": "Namibia",
+    "isoAlpha2": "NA",
+    "DDI": "+264",
+    "lang": "enna"
+  },
+  {
+    "name": "Nauru",
+    "nativeName": "Naoero",
+    "isoAlpha2": "NR",
+    "DDI": "+674",
+    "lang": "nanr"
+  },
+  {
+    "name": "Nepal",
+    "nativeName": "Nepal",
+    "isoAlpha2": "NP",
+    "DDI": "+977",
+    "lang": "nenp"
+  },
+  {
+    "name": "Netherlands",
+    "nativeName": "Nederland",
+    "isoAlpha2": "NL",
+    "DDI": "+31",
+    "lang": "nlnl"
+  },
+  {
+    "name": "New Caledonia",
+    "nativeName": "Nouvelle-Calédonie",
+    "isoAlpha2": "NC",
+    "DDI": "+687",
+    "lang": "frnc"
+  },
+  {
+    "name": "New Zealand",
+    "nativeName": "Aotearoa",
+    "isoAlpha2": "NZ",
+    "DDI": "+64",
+    "lang": "minz"
+  },
+  {
+    "name": "Nicaragua",
+    "nativeName": "Nicaragua",
+    "isoAlpha2": "NI",
+    "DDI": "+505",
+    "lang": "esni"
+  },
+  {
+    "name": "Niger",
+    "nativeName": "Nijar",
+    "isoAlpha2": "NE",
+    "DDI": "+227",
+    "lang": "frne"
+  },
+  {
+    "name": "Nigeria",
+    "nativeName": "Nijeriya",
+    "isoAlpha2": "NG",
+    "DDI": "+234",
+    "lang": "enng"
+  },
+  {
+    "name": "Niue",
+    "nativeName": "Niuē",
+    "isoAlpha2": "NU",
+    "DDI": "+683",
+    "lang": "ennu"
+  },
+  {
+    "name": "North Korea",
+    "nativeName": "조선민주주의인민공화국",
+    "isoAlpha2": "KP",
+    "DDI": "+850",
+    "lang": "kokp"
+  },
+  {
+    "name": "North Macedonia",
+    "nativeName": "Македонија (Makedonija)",
+    "isoAlpha2": "MK",
+    "DDI": "+389",
+    "lang": "mkmk"
+  },
+  {
+    "name": "Norway",
+    "nativeName": "Norge",
+    "isoAlpha2": "NO",
+    "DDI": "+47",
+    "lang": "nbno"
+  },
+  {
+    "name": "Oman",
+    "nativeName": "Umān",
+    "isoAlpha2": "OM",
+    "DDI": "+968",
+    "lang": "arom"
+  },
+  {
+    "name": "Pakistan",
+    "nativeName": "پاکستان‎ (Pākistān)",
+    "isoAlpha2": "PK",
+    "DDI": "+92",
+    "lang": "urpk"
+  },
+  {
+    "name": "Palau",
+    "nativeName": "Belau",
+    "isoAlpha2": "PW",
+    "DDI": "+680",
+    "lang": "enpw"
+  },
+  {
+    "name": "Panama",
+    "nativeName": "Panamá",
+    "isoAlpha2": "PA",
+    "DDI": "+507",
+    "lang": "espa"
+  },
+  {
+    "name": "Papua New Guinea",
+    "nativeName": "Papua Niugini",
+    "isoAlpha2": "PG",
+    "DDI": "+675",
+    "lang": "enpg"
+  },
+  {
+    "name": "Paraguay",
+    "nativeName": "Paraguái",
+    "isoAlpha2": "PY",
+    "DDI": "+595",
+    "lang": "espy"
+  },
+  {
+    "name": "Peru",
+    "nativeName": "Perú",
+    "isoAlpha2": "PE",
+    "DDI": "+51",
+    "lang": "espe"
+  },
+  {
+    "name": "Philippines",
+    "nativeName": "Pilipinas",
+    "isoAlpha2": "PH",
+    "DDI": "+63",
+    "lang": "enph"
+  },
+  {
+    "name": "Poland",
+    "nativeName": "Polska",
+    "isoAlpha2": "PL",
+    "DDI": "+48",
+    "lang": "plpl"
+  },
+  {
+    "name": "Qatar",
+    "nativeName": "قطر",
+    "isoAlpha2": "QA",
+    "DDI": "+974",
+    "lang": "arqa"
+  },
+  {
+    "name": "Romania",
+    "nativeName": "România",
+    "isoAlpha2": "RO",
+    "DDI": "+40",
+    "lang": "roro"
+  },
+  {
+    "name": "Russia",
+    "nativeName": "Россия (Rossiya)",
+    "isoAlpha2": "RU",
+    "DDI": "+7",
+    "lang": "ruru"
+  },
+  {
+    "name": "Rwanda",
+    "nativeName": "Rwanda",
+    "isoAlpha2": "RW",
+    "DDI": "+250",
+    "lang": "rwrw"
+  },
+  {
+    "name": "Saint Helena",
+    "nativeName": "Saint Helena",
+    "isoAlpha2": "SH",
+    "DDI": "+290",
+    "lang": "ensh"
+  },
+  {
+    "name": "Saint Kitts and Nevis",
+    "nativeName": "Saint Kitts and Nevis",
+    "isoAlpha2": "KN",
+    "DDI": "+1869",
+    "lang": "enkn"
+  },
+  {
+    "name": "Saint Lucia",
+    "nativeName": "Saint Lucia",
+    "isoAlpha2": "LC",
+    "DDI": "+1758",
+    "lang": "enlc"
+  },
+  {
+    "name": "Saint Vincent and the Grenadines",
+    "nativeName": "Saint Vincent and the Grenadines",
+    "isoAlpha2": "VC",
+    "DDI": "+1784",
+    "lang": "envc"
+  },
+  {
+    "name": "Samoa",
+    "nativeName": "Samoa",
+    "isoAlpha2": "WS",
+    "DDI": "+685",
+    "lang": "smws"
+  },
+  {
+    "name": "San Marino",
+    "nativeName": "San Marino",
+    "isoAlpha2": "SM",
+    "DDI": "+378",
+    "lang": "itsm"
+  },
+  {
+    "name": "São Tomé and Príncipe",
+    "nativeName": "São Tomé e Príncipe",
+    "isoAlpha2": "ST",
+    "DDI": "+239",
+    "lang": "ptst"
+  },
+  {
+    "name": "Saudi Arabia",
+    "nativeName": "السعودية‎ (Al-Su'ūdīyah)",
+    "isoAlpha2": "SA",
+    "DDI": "+966",
+    "lang": "arsa"
+  },
+  {
+    "name": "Senegal",
+    "nativeName": "Sénégal",
+    "isoAlpha2": "SN",
+    "DDI": "+221",
+    "lang": "frsn"
+  },
+  {
+    "name": "Serbia",
+    "nativeName": "Србија",
+    "isoAlpha2": "RS",
+    "DDI": "+381",
+    "lang": "srrs"
+  },
+  {
+    "name": "Sierra Leone",
+    "nativeName": "Sierra Leone",
+    "isoAlpha2": "SL",
+    "DDI": "+232",
+    "lang": "ensl"
+  },
+  {
+    "name": "Seychelles",
+    "nativeName": "Seychelles",
+    "isoAlpha2": "SC",
+    "DDI": "+248",
+    "lang": "ensc"
+  },
+  {
+    "name": "Sierra Leone",
+    "nativeName": "Sierra Leone",
+    "isoAlpha2": "SL",
+    "DDI": "+232",
+    "lang": "ensl"
+  },
+  {
+    "name": "Singapore",
+    "nativeName": "Singapura",
+    "isoAlpha2": "SG",
+    "DDI": "+65",
+    "lang": "ensg"
+  },
+  {
+    "name": "Slovakia",
+    "nativeName": "Slovensko",
+    "isoAlpha2": "SK",
+    "DDI": "+421",
+    "lang": "sksk"
+  },
+  {
+    "name": "Slovenia",
+    "nativeName": "Slovenija",
+    "isoAlpha2": "SI",
+    "DDI": "+386",
+    "lang": "slsi"
+  },
+  {
+    "name": "Solomon Islands",
+    "nativeName": "Solomon Islands",
+    "isoAlpha2": "SB",
+    "DDI": "+677",
+    "lang": "ensb"
+  },
+  {
+    "name": "Somalia",
+    "nativeName": "Soomaaliya",
+    "isoAlpha2": "SO",
+    "DDI": "+252",
+    "lang": "soso"
+  },
+  {
+    "name": "South Africa",
+    "nativeName": "South Africa",
+    "isoAlpha2": "ZA",
+    "DDI": "+27",
+    "lang": "afza"
+  },
+  {
+    "name": "South Georgia and the South Sandwich Islands",
+    "nativeName": "South Georgia and the South SandwiIslands",
+    "isoAlpha2": "GS",
+    "DDI": "+500",
+    "lang": "engs"
+  },
+  {
+    "name": "South Korea",
+    "nativeName": "대한민국",
+    "isoAlpha2": "KR",
+    "DDI": "+82",
+    "lang": "kokr"
+  },
+  {
+    "name": "Sri Lanka",
+    "nativeName": "ශ්‍රී ලංකාව",
+    "isoAlpha2": "LK",
+    "DDI": "+94",
+    "lang": "silk"
+  },
+  {
+    "name": "Sudan",
+    "nativeName": "السودان",
+    "isoAlpha2": "SD",
+    "DDI": "+249",
+    "lang": "arsd"
+  },
+  {
+    "name": "Suriname",
+    "nativeName": "Suriname",
+    "isoAlpha2": "SR",
+    "DDI": "+597",
+    "lang": "nlsr"
+  },
+  {
+    "name": "Sweden",
+    "nativeName": "Sverige",
+    "isoAlpha2": "SE",
+    "DDI": "+46",
+    "lang": "svse"
+  },
+  {
+    "name": "Switzerland",
+    "nativeName": "Schweiz",
+    "isoAlpha2": "CH",
+    "DDI": "+41",
+    "lang": "rmch"
+  },
+  {
+    "name": "Syria",
+    "nativeName": "الجمهورية العربية السورية",
+    "isoAlpha2": "SY",
+    "DDI": "+963",
+    "lang": "arsy"
+  },
+  {
+    "name": "Taiwan (Republic of China)",
+    "nativeName": "Táiwān",
+    "isoAlpha2": "TW",
+    "DDI": "+886",
+    "lang": "zhtw"
+  },
+  {
+    "name": "Tajikistan",
+    "nativeName": "Тоҷикистон",
+    "isoAlpha2": "TJ",
+    "DDI": "+992",
+    "lang": "tgtj"
+  },
+  {
+    "name": "Tanzania",
+    "nativeName": "Tanzania",
+    "isoAlpha2": "TZ",
+    "DDI": "+255",
+    "lang": "swtz"
+  },
+  {
+    "name": "Thailand",
+    "nativeName": "ประเทศไทย",
+    "isoAlpha2": "TH",
+    "DDI": "+66",
+    "lang": "thth"
+  },
+  {
+    "name": "Togo",
+    "nativeName": "Togo",
+    "isoAlpha2": "TG",
+    "DDI": "+228",
+    "lang": "frtg"
+  },
+  {
+    "name": "Tonga",
+    "nativeName": "Tonga",
+    "isoAlpha2": "TO",
+    "DDI": "+676",
+    "lang": "toto"
+  },
+  {
+    "name": "Trinidad and Tobago",
+    "nativeName": "Trinidad and Tobago",
+    "isoAlpha2": "TT",
+    "DDI": "+1868",
+    "lang": "entt"
+  },
+  {
+    "name": "Tunisia",
+    "nativeName": "تونس",
+    "isoAlpha2": "TN",
+    "DDI": "+216",
+    "lang": "artn"
+  },
+  {
+    "name": "Turkey",
+    "nativeName": "Türkiye",
+    "isoAlpha2": "TR",
+    "DDI": "+90",
+    "lang": "trtr"
+  },
+  {
+    "name": "Turkmenistan",
+    "nativeName": "Türkmenistan",
+    "isoAlpha2": "TM",
+    "DDI": "+993",
+    "lang": "tktm"
+  },
+  {
+    "name": "Turks and Caicos Islands",
+    "nativeName": "Turks and Caicos Islands",
+    "isoAlpha2": "TC",
+    "DDI": "+1649",
+    "lang": "entc"
+  },
+  {
+    "name": "Tuvalu",
+    "nativeName": "Tuvalu",
+    "isoAlpha2": "TV",
+    "DDI": "+688",
+    "lang": "entv"
+  },
+  {
+    "name": "Uganda",
+    "nativeName": "Uganda",
+    "isoAlpha2": "UG",
+    "DDI": "+256",
+    "lang": "swug"
+  },
+  {
+    "name": "Ukraine",
+    "nativeName": "Україна",
+    "isoAlpha2": "UA",
+    "DDI": "+380",
+    "lang": "ukua"
+  },
+  {
+    "name": "United Arab Emirates",
+    "nativeName": "الإمارات العربية المتحدة",
+    "isoAlpha2": "AE",
+    "DDI": "+971",
+    "lang": "arae"
+  },
+  {
+    "name": "Uruguay",
+    "nativeName": "Uruguay",
+    "isoAlpha2": "UY",
+    "DDI": "+598",
+    "lang": "esuy"
+  },
+  {
+    "name": "Uzbekistan",
+    "nativeName": "Oʻzbekiston",
+    "isoAlpha2": "UZ",
+    "DDI": "+998",
+    "lang": "uzuz"
+  },
+  {
+    "name": "Vanuatu",
+    "nativeName": "Vanuatu",
+    "isoAlpha2": "VU",
+    "DDI": "+678",
+    "lang": "envu"
+  },
+  {
+    "name": "Venezuela",
+    "nativeName": "Venezuela",
+    "isoAlpha2": "VE",
+    "DDI": "+58",
+    "lang": "esve"
+  },
+  {
+    "name": "Vietnam",
+    "nativeName": "Việt Nam",
+    "isoAlpha2": "VN",
+    "DDI": "+84",
+    "lang": "vivn"
+  },
+  {
+    "name": "Western Sahara",
+    "nativeName": "الجمهورية العربية الصحراوية الديمقراطية",
+    "isoAlpha2": "EH",
+    "DDI": "+212",
+    "lang": "areh"
+  },
+  {
+    "name": "Yemen",
+    "nativeName": "اليَمَن (Al-Yaman)",
+    "isoAlpha2": "YE",
+    "DDI": "+967",
+    "lang": "arye"
+  },
+  {
+    "name": "Zambia",
+    "nativeName": "Zambia",
+    "isoAlpha2": "ZM",
+    "DDI": "+260",
+    "lang": "enzw"
+  }
+]
