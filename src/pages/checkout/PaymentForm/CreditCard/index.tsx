@@ -13,7 +13,7 @@ function CreditCard() {
         mask="0000  0000  0000  0000"
       />
 
-      <Div display="flex" gap="1rem" align-items="end">
+      <Div __display="flex" __gap="1rem" __alignItems="end">
         <Form.Input
           id="holder-validity"
           name="holder-validity"
