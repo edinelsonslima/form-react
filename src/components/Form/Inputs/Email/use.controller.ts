@@ -1,4 +1,4 @@
-import isTruthy from '@/helpers/is.boolean';
+import isTruthy from '@/helpers/is.truthy';
 import {
   FocusEvent,
   ForwardedRef,
