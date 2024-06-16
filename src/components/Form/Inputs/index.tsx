@@ -1,6 +1,7 @@
+import masks from '@/helpers/masks';
 import { forwardRef, memo } from 'react';
-import Input, { IProps } from '../Base';
-import InputEmail from '../Email';
+import Input, { IProps } from './Base';
+import InputEmail from './Email';
 
 const Component = forwardRef<HTMLInputElement, IProps>(({ type, ...props }, ref) => {
   switch (type) {
@@ -75,5 +76,5 @@ const Component = forwardRef<HTMLInputElement, IProps>(({ type, ...props }, ref)
   }
 });
 
-const InputProxy = memo(Component);
+const InputProxy = Object.assign(memo(Component), { masks });
 export default InputProxy;
