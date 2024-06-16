@@ -1,7 +1,47 @@
 import Div from '@/components/Div';
 import Fieldset from '@/components/Fieldset';
 import Form from '@/components/Form';
+import countries from '@/data/countries.json';
 import SecurityLabel from './SecurityLabel';
+
+// https://cdn.eduzzcdn.com/sun/flags/br.png
+const phoneOptions = countries.map(({ DDI, isoAlpha2, name, nativeName }) => ({
+  key: crypto.randomUUID(),
+  value: DDI,
+  label: (
+    <Div
+      __display="flex"
+      __alignItems="center"
+      __width="100%"
+      title={`${isoAlpha2} - ${name} (${nativeName})`}
+    >
+      <Div __display="flex" __alignItems="center" __gap={5} __minWidth={90}>
+        <img
+          src={`https://cdn.eduzzcdn.com/sun/flags/${isoAlpha2.toLowerCase()}.png`}
+          alt={name}
+          loading="lazy"
+          width="30"
+          height="20"
+        />
+        <span>{DDI}</span>
+      </Div>
+      <Div __display="flex" __flexDirection="column" __width="100%" __flex={4} __overflow="hidden">
+        <span style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>{name}</span>
+        <small
+          style={{
+            color: 'gray',
+            fontSize: '.8rem',
+            opacity: 0.8,
+            textOverflow: 'ellipsis',
+            overflow: 'hidden',
+          }}
+        >
+          {nativeName}
+        </small>
+      </Div>
+    </Div>
+  ),
+}));
 
 function UserForm() {
   return (
@@ -35,15 +75,14 @@ function UserForm() {
         }}
       />
 
-      <Div display="flex" gap="1rem" flex-wrap="wrap">
-        <Form.Input
+      <Div __display="flex" __gap="1rem" __flexWrap="wrap">
+        <Form.Select
           required
-          type="tel"
           id="user-ddi"
           name="user-ddi"
           label="DDI"
-          mask="+00"
           props={{ container: { style: { flex: 1, minWidth: '4rem', maxWidth: '7rem' } } }}
+          options={phoneOptions}
         />
 
         <Form.Input
