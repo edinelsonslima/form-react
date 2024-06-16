@@ -1,3 +1,5 @@
+import memoize from './memoize';
+
 type IMajority = {
   qty: number;
   value: string;
@@ -23,4 +25,4 @@ function findMajority(array: string[], candidates: string[]) {
   return array.reduce(fn, { qty: 0, value: '', values: {} });
 }
 
-export default findMajority;
+export default memoize(findMajority);
