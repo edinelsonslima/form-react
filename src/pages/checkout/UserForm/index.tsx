@@ -1,10 +1,8 @@
 import Div from '@/components/Div';
-import Fieldset from '@/components/Fieldset';
 import Form from '@/components/Form';
 import countries from '@/data/countries.json';
 import SecurityLabel from './SecurityLabel';
 
-// https://cdn.eduzzcdn.com/sun/flags/br.png
 const phoneOptions = countries.map(({ DDI, isoAlpha2, name, nativeName }) => ({
   key: crypto.randomUUID(),
   value: DDI,
@@ -45,7 +43,7 @@ const phoneOptions = countries.map(({ DDI, isoAlpha2, name, nativeName }) => ({
 
 function UserForm() {
   return (
-    <Fieldset name="user">
+    <Form.Fieldset name="user">
       <Form.Input
         required
         id="user-name"
@@ -105,7 +103,7 @@ function UserForm() {
       />
 
       <SecurityLabel />
-    </Fieldset>
+    </Form.Fieldset>
   );
 }
 

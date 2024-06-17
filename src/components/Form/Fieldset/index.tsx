@@ -1,5 +1,5 @@
 import cn from '@/helpers/cn';
-import { ComponentProps, PropsWithChildren } from 'react';
+import { ComponentProps, PropsWithChildren, memo } from 'react';
 
 import s from './index.module.css';
 
@@ -7,7 +7,7 @@ type IProps = ComponentProps<'fieldset'> & {
   name: string;
 };
 
-function Fieldset({ children, ...props }: PropsWithChildren<IProps>) {
+function Component({ children, ...props }: PropsWithChildren<IProps>) {
   return (
     <fieldset className={cn(s, 'fieldset')} {...props}>
       {children}
@@ -15,4 +15,5 @@ function Fieldset({ children, ...props }: PropsWithChildren<IProps>) {
   );
 }
 
+const Fieldset = memo(Component);
 export default Fieldset;

@@ -1,11 +1,10 @@
 import Div from '@/components/Div';
-import Fieldset from '@/components/Fieldset';
 import Form from '@/components/Form';
 import Popover from '@/components/Popover';
 
 function CreditCard() {
   return (
-    <Fieldset name="credit">
+    <Form.Fieldset name="credit">
       <Form.Input
         id="holder-number"
         name="holder-number"
@@ -43,7 +42,7 @@ function CreditCard() {
       </Div>
 
       <Form.Input id="holder-name" name="holder-name" label="Nome impresso no cartão" />
-    </Fieldset>
+    </Form.Fieldset>
   );
 }
 
