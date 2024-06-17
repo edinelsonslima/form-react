@@ -45,6 +45,7 @@ function useController<T extends object>({
     return [data, dataMasked];
   };
 
+  // Não retorna inputs fora de grupo se tiver um grupo definido
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const target = e.currentTarget;
@@ -71,7 +72,10 @@ function useController<T extends object>({
         const inputs = Array.from(group.getElementsByTagName('input')) as ICustomInput[];
 
         inputs.forEach((input) => {
-          input.value = Object(values)[input.name];
+          const inputValue = Object(values)[input.name] as string | undefined;
+          if (!inputValue) return;
+
+          input.value = inputValue;
           input.dispatchEvent(new Event('input', { bubbles: true }));
         });
       }
