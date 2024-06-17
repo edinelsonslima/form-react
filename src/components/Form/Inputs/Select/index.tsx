@@ -41,6 +41,7 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
       />
 
       <ul
+        {...rest.props?.ul}
         ref={ulRef}
         hidden={!optionsInState.length}
         aria-labelledby={props.id}
@@ -50,6 +51,7 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
         {/* tentar melhorar essa parte com lista virtualizada */}
         {optionsInState.map(({ key, value, label }, i) => (
           <li
+            {...rest.props?.li}
             key={key}
             id={`option-${i}`}
             onMouseDown={handleMouseDownOptions}
