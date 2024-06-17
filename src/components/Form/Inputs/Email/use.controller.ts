@@ -16,9 +16,15 @@ function useController(props: IProps) {
 
     if (!input?.includes('@')) return [];
 
-    return providersOptions
+    const filtered = providersOptions
       .map(({ key, value }) => ({ key, value: `${email}@${value}` }))
       .filter((email) => email.value.includes(input));
+
+    if (filtered.length === 1 && filtered.at(0)!.value === input) {
+      return [];
+    }
+
+    return filtered;
   };
 
   return { providersOptions, customFilter, ...props };
