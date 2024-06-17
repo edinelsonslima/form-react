@@ -38,7 +38,10 @@ function extractText(el: ReactNode): string {
   return el?.toString() ?? '';
 }
 
-function useController({ options, ...props }: IProps, ref: ForwardedRef<HTMLInputElement>) {
+function useController(
+  { options, onCustomFilter, filterOptionsOnOpen, ...props }: IProps,
+  ref: ForwardedRef<HTMLInputElement>,
+) {
   const debounce = useDebounce();
 
   const selectRef = useRef<HTMLInputElement>(null);
@@ -58,7 +61,12 @@ function useController({ options, ...props }: IProps, ref: ForwardedRef<HTMLInpu
     debounce(() => _internal_use_only_(options), 300);
   };
 
-  const handleUpdateOptions = (input?: string, withDebounce = true) => {
+  const handleUpdateOptions = async (input?: string, withDebounce = true) => {
+    if (onCustomFilter) {
+      const customFiltered = await onCustomFilter(input);
+      return handleUpdateOptionsInState(customFiltered, withDebounce);
+    }
+
     if (!input) return handleUpdateOptionsInState(options, withDebounce);
     const sanitizedInput = sanitize(input);
 
@@ -89,6 +97,8 @@ function useController({ options, ...props }: IProps, ref: ForwardedRef<HTMLInpu
     if (shouldContinueFocusEvent(['options-container', 'option-'], evt)) return;
 
     setAttribute(ARIA.ACTIVEDESCENDANT, 'option-0', selectRef.current);
+
+    if (filterOptionsOnOpen) return handleUpdateOptions(selectRef.current?.value, false);
     handleUpdateOptionsInState(options, false);
   };
 
@@ -153,7 +163,7 @@ function useController({ options, ...props }: IProps, ref: ForwardedRef<HTMLInpu
     evt.preventDefault();
 
     const selected = getCurrentOptions().find((li) => isTruthy(li.getAttribute(ARIA.SELECTED)));
-    handleUpdateSelectValue(selected?.value ?? '');
+    handleUpdateSelectValue(selected?.getAttribute('aria-label') ?? '');
   };
 
   const handleMouseMoveOptions = (evt: MouseEvent<HTMLLIElement>) => {
@@ -167,7 +177,7 @@ function useController({ options, ...props }: IProps, ref: ForwardedRef<HTMLInpu
 
   const handleMouseDownOptions = (evt: MouseEvent<HTMLLIElement>) => {
     evt.preventDefault();
-    handleUpdateSelectValue(evt.currentTarget.value.toString() ?? '');
+    handleUpdateSelectValue(evt.currentTarget.getAttribute('aria-label') ?? '');
   };
 
   useImperativeHandle(ref, () => selectRef.current!, [selectRef]);
