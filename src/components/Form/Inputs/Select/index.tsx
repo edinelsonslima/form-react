@@ -51,11 +51,10 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
         {optionsInState.map(({ key, value, label }, i) => (
           <li
             key={key}
-            value={value}
             id={`option-${i}`}
             onMouseDown={handleMouseDownOptions}
             onMouseMove={handleMouseMoveOptions}
-            children={label}
+            children={label ?? value}
             aria-label={value}
             aria-selected={!i ? 'true' : 'false'}
             role="option"
