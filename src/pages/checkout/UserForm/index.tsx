@@ -79,7 +79,10 @@ function UserForm() {
           id="user-ddi"
           name="user-ddi"
           label="DDI"
-          props={{ container: { style: { flex: 1, minWidth: '4rem', maxWidth: '7rem' } } }}
+          props={{
+            container: { style: { flex: 1, minWidth: '4rem', maxWidth: '7rem' } },
+            ul: { style: { maxWidth: '18.75rem', width: 'max-content' } },
+          }}
           options={phoneOptions}
         />
 
