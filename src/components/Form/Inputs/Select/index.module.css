@@ -17,8 +17,7 @@
   overflow-x: hidden;
 
   max-height: 20rem;
-  max-width: 18.75rem;
-  width: max-content;
+  width: 100%;
 
   animation: show-input .3s ease-out;
   margin-top: var(--spacing-1)
