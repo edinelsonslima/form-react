@@ -13,9 +13,7 @@ function useController<T extends object>({
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const target = e.currentTarget;
     const keys = new Set();
-
     const initialReduce = [{}, {}] as IData<T>[];
 
     const reduce = ([unmasked, masked]: IData<T>[], el: Element) => {
@@ -45,7 +43,7 @@ function useController<T extends object>({
     const gatherData: IGetherDataFn<T> = (parent) =>
       Array.from(parent.elements).reduce(reduce, initialReduce);
 
-    const [unmasked, masked] = gatherData(target);
+    const [unmasked, masked] = gatherData(e.currentTarget);
     return handleSubmit(unmasked, masked, e);
   };
 
