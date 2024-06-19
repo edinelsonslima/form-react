@@ -61,8 +61,8 @@ function useController<T extends object>({
         Object.entries(Object(value)).forEach(handler);
       }
 
-      if (typeof value === 'string' && element instanceof HTMLInputElement) {
-        element.value = value;
+      if (element instanceof HTMLInputElement) {
+        element.value = value?.toString() ?? '';
         element.dispatchEvent(new Event('input', { bubbles: true }));
       }
     };
