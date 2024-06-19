@@ -16,4 +16,10 @@ type IProps<T extends object> = IControllerProps<T> & {
   layout?: 'horizontal' | 'vertical';
 };
 
-export type { IControllerProps, IProps };
+type IData<T extends object> = Record<keyof T, T[keyof T]>;
+
+type IGetherDataFn<T extends object> = (
+  parent: HTMLFieldSetElement | HTMLFormElement,
+) => IData<T>[];
+
+export type { IControllerProps, IData, IGetherDataFn, IProps };

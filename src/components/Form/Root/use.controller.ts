@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useRef } from 'react';
 import { ICustomInput } from '../Inputs/Base/types';
-import { IControllerProps } from './types';
+import { IControllerProps, IData, IGetherDataFn } from './types';
 
 function useController<T extends object>({
   onSubmit: handleSubmit,
@@ -16,35 +16,34 @@ function useController<T extends object>({
     const target = e.currentTarget;
     const keys = new Set();
 
-    const gatherData = (
-      parent: HTMLFieldSetElement | HTMLFormElement,
-    ): Record<keyof T, T[keyof T]>[] => {
-      const reduce = ([unmasked, masked]: Record<keyof T, T[keyof T]>[], el: Element) => {
-        if (!Object(el)?.name) return [unmasked, masked];
+    const initialReduce = [{}, {}] as IData<T>[];
 
-        if (el instanceof HTMLFieldSetElement && !keys.has(el.name)) {
-          keys.add(el.name);
-          const [valueUnmasked, valueMasked] = gatherData(el);
-          return [
-            { ...unmasked, [el.name]: valueUnmasked },
-            { ...masked, [el.name]: valueMasked },
-          ];
-        }
+    const reduce = ([unmasked, masked]: IData<T>[], el: Element) => {
+      if (!Object(el)?.name) return [unmasked, masked];
 
-        if (el instanceof HTMLInputElement && !keys.has(el.name) && el.type !== 'submit') {
-          const input = el as ICustomInput;
-          keys.add(input.name);
-          return [
-            { ...unmasked, [input.name]: input.valueUnmasked },
-            { ...masked, [input.name]: input.value },
-          ];
-        }
+      if (el instanceof HTMLFieldSetElement && !keys.has(el.name)) {
+        keys.add(el.name);
+        const [valueUnmasked, valueMasked] = gatherData(el);
+        return [
+          { ...unmasked, [el.name]: valueUnmasked },
+          { ...masked, [el.name]: valueMasked },
+        ];
+      }
 
-        return [unmasked, masked];
-      };
+      if (el instanceof HTMLInputElement && !keys.has(el.name) && el.type !== 'submit') {
+        const input = el as ICustomInput;
+        keys.add(input.name);
+        return [
+          { ...unmasked, [input.name]: input.valueUnmasked },
+          { ...masked, [input.name]: input.value },
+        ];
+      }
 
-      return Array.from(parent.elements).reduce(reduce, [{}, {}] as Record<keyof T, T[keyof T]>[]);
+      return [unmasked, masked];
     };
+
+    const gatherData: IGetherDataFn<T> = (parent) =>
+      Array.from(parent.elements).reduce(reduce, initialReduce);
 
     const [unmasked, masked] = gatherData(target);
     return handleSubmit(unmasked, masked, e);
