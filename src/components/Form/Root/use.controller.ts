@@ -54,30 +54,20 @@ function useController<T extends object>({
     if (!initialValues || !target || !firstRender.current) return;
     firstRender.current = false;
 
-    const children = Array.from(target.elements) as ICustomInput[] | HTMLFieldSetElement[];
+    const handler = ([name, value]: [string, unknown]) => {
+      const element = target.elements.namedItem(name);
 
-    Object.entries(initialValues).forEach(([name, values]) => {
-      const child = children.find((el) => el.name === name);
-
-      if (child instanceof HTMLFieldSetElement) {
-        const group = child as HTMLFieldSetElement;
-        const inputs = Array.from(group.getElementsByTagName('input')) as ICustomInput[];
-
-        inputs.forEach((input) => {
-          const inputValue = Object(values)[input.name] as string | undefined;
-          if (!inputValue) return;
-
-          input.value = inputValue;
-          input.dispatchEvent(new Event('input', { bubbles: true }));
-        });
+      if (typeof value === 'object' && element instanceof HTMLFieldSetElement) {
+        Object.entries(Object(value)).forEach(handler);
       }
 
-      if (child instanceof HTMLInputElement) {
-        const input = child as ICustomInput;
-        input.value = values as string;
-        input.dispatchEvent(new Event('input', { bubbles: true }));
+      if (typeof value === 'string' && element instanceof HTMLInputElement) {
+        element.value = value;
+        element.dispatchEvent(new Event('input', { bubbles: true }));
       }
-    });
+    };
+
+    Object.entries(initialValues).forEach(handler);
   }, [initialValues]);
 
   return { ...rest, ref: formRef, onSubmit };
