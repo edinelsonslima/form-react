@@ -10,50 +10,43 @@ function useController<T extends object>({
   const formRef = useRef<HTMLFormElement>(null);
   const firstRender = useRef(true);
 
-  const handleFormatGroupData = (groups: HTMLFieldSetElement[]) => {
-    const initialValues = [{} as T, {} as T];
-
-    const handleInputs = ([unmasked, masked]: T[], input: ICustomInput) => [
-      { ...unmasked, [input.name]: input.valueUnmasked },
-      { ...masked, [input.name]: input.value },
-    ];
-
-    const handleGroups = (
-      [unmaskedGroup, maskedGroup]: Record<keyof T, T[keyof T]>[],
-      group: HTMLFieldSetElement,
-    ) => {
-      const inputs = Array.from(group.getElementsByTagName('input')) as ICustomInput[];
-      const [values, masked] = inputs.reduce(handleInputs, initialValues);
-
-      return [
-        { ...unmaskedGroup, [group.name]: values },
-        { ...maskedGroup, [group.name]: masked },
-      ];
-    };
-
-    return groups.reduce(handleGroups, initialValues);
-  };
-
-  const handleFormatData = (target: HTMLFormElement) => {
-    const dataMasked = Object.fromEntries(new FormData(target).entries()) as T;
-
-    const data = Object.keys(dataMasked).reduce((acc, inputName) => {
-      const input = target.elements.namedItem(inputName) as ICustomInput;
-      return { ...acc, [inputName]: input.valueUnmasked };
-    }, {} as T);
-
-    return [data, dataMasked];
-  };
-
-  // Não retorna inputs fora de grupo se tiver um grupo definido
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const target = e.currentTarget;
-    const groups = Array.from(target.getElementsByTagName('fieldset'));
+    const keys = new Set();
 
-    const [unmasked, masked] =
-      groups.length > 0 ? handleFormatGroupData(groups) : handleFormatData(target);
+    const gatherData = (
+      parent: HTMLFieldSetElement | HTMLFormElement,
+    ): Record<keyof T, T[keyof T]>[] => {
+      const reduce = ([unmasked, masked]: Record<keyof T, T[keyof T]>[], el: Element) => {
+        if (!Object(el)?.name) return [unmasked, masked];
 
+        if (el instanceof HTMLFieldSetElement && !keys.has(el.name)) {
+          keys.add(el.name);
+          const [valueUnmasked, valueMasked] = gatherData(el);
+          return [
+            { ...unmasked, [el.name]: valueUnmasked },
+            { ...masked, [el.name]: valueMasked },
+          ];
+        }
+
+        if (el instanceof HTMLInputElement && !keys.has(el.name) && el.type !== 'submit') {
+          const input = el as ICustomInput;
+          keys.add(input.name);
+          return [
+            { ...unmasked, [input.name]: input.valueUnmasked },
+            { ...masked, [input.name]: input.value },
+          ];
+        }
+
+        return [unmasked, masked];
+      };
+
+      return Array.from(parent.elements).reduce(reduce, [{}, {}] as Record<keyof T, T[keyof T]>[]);
+    };
+
+    const [unmasked, masked] = gatherData(target);
     return handleSubmit(unmasked, masked, e);
   };
 
