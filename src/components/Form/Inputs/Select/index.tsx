@@ -33,16 +33,16 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
       onKeyDown={handleKeyDownContainer}
     >
       <Input
-        {...rest}
-        ref={selectRef}
-        onKeyDown={handleSelectEnterKeyPress}
-        onChange={(_, value) => handleUpdateOptions(value)}
-        autoComplete="off"
         suffix={
           <span className={cn(s, 'select-suffix')}>
             {optionsInState.length ? <IconSearch /> : <IconArrow />}
           </span>
         }
+        {...rest}
+        ref={selectRef}
+        onKeyDown={handleSelectEnterKeyPress}
+        onChange={(_, value) => handleUpdateOptions(value)}
+        autoComplete="off"
         aria-expanded={!!optionsInState.length}
         aria-autocomplete="list"
         aria-haspopup="listbox"

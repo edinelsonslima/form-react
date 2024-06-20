@@ -11,6 +11,7 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
     <Select
       {...rest}
       ref={ref}
+      suffix={undefined}
       filterOptionsOnOpen
       onCustomFilter={customFilter}
       options={providersOptions}
