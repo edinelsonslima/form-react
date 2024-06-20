@@ -33,11 +33,11 @@
   padding: var(--spacing-2) var(--spacing-3);
 }
 
-.input-content:has(.input-prefix) > .input {
+.input-content:has(.input-prefix)>.input {
   padding-left: 0;
 }
 
-.input-content:has(.input-suffix) > .input {
+.input-content:has(.input-suffix)>.input {
   padding-right: 0;
 }
 
@@ -71,27 +71,25 @@ input[type=number] {
 }
 
 /* Input Error */
-.input[aria-invalid="true"] {
+.input-content:has(.input[aria-invalid="true"]) {
   border-color: var(--error-color);
   box-shadow: none;
 }
 
-.input[aria-invalid="true"]:focus {
+.input-content:has(.input[aria-invalid="true"]):focus {
   box-shadow: 0 0 0 2px #f4433641;
 }
 
-.input[aria-invalid="true"]:active {
+.input-content:has(.input[aria-invalid="true"]):active {
   box-shadow: 0 0 0 4px #f4433641;
 }
 
 /* Input disabled */
-.input:disabled {
+.input-content:has(.input:disabled) {
   background-color: var(--inactive-color);
   color: var(--border-color-base);
-}
-
-.input:disabled:is(:hover, :focus, :active) {
-  border-color: var(--border-color-base);
   box-shadow: none;
+  pointer-events: none;
   cursor: not-allowed;
+  border-color: var(--border-color-base);
 }
