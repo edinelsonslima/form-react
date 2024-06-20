@@ -53,6 +53,10 @@
   height: 12px;
 }
 
+.select-input-open {
+  color: #bfbfbf;
+}
+
 @keyframes show-input {
   from {
     opacity: 0;

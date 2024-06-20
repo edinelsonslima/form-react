@@ -186,6 +186,7 @@ function useController(
     selectRef,
     ulRef,
     optionsInState,
+    isOptionsOpen: !!optionsInState.length,
     handleUpdateOptions,
     handleOpenOptions,
     handleCloseOptions,

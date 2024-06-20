@@ -20,6 +20,7 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
     handleSelectEnterKeyPress,
     handleUpdateOptions,
     optionsInState,
+    isOptionsOpen,
     selectRef,
     ulRef,
     ...rest
@@ -35,15 +36,16 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
       <Input
         suffix={
           <span className={cn(s, 'select-suffix')}>
-            {optionsInState.length ? <IconSearch /> : <IconArrow />}
+            {isOptionsOpen ? <IconSearch /> : <IconArrow />}
           </span>
         }
         {...rest}
+        className={cn(s, isOptionsOpen ? 'select-input-open' : '', rest.className)}
         ref={selectRef}
         onKeyDown={handleSelectEnterKeyPress}
         onChange={(_, value) => handleUpdateOptions(value)}
         autoComplete="off"
-        aria-expanded={!!optionsInState.length}
+        aria-expanded={!!isOptionsOpen}
         aria-autocomplete="list"
         aria-haspopup="listbox"
         aria-owns="options-container"
@@ -52,7 +54,7 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
       <ul
         {...rest.props?.ul}
         ref={ulRef}
-        hidden={!optionsInState.length}
+        hidden={!isOptionsOpen}
         aria-labelledby={props.id}
         role="listbox"
         id="options-container"
