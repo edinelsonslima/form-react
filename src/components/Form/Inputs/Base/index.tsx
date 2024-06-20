@@ -6,7 +6,7 @@ import useController from './use.controller';
 import s from './css/index.module.css';
 
 const Component = forwardRef<HTMLInputElement, IProps>(
-  ({ label, props: othersProps, ...rest }, ref) => {
+  ({ label, props: othersProps, suffix, prefix, ...rest }, ref) => {
     const { currentError, errorId, ...props } = useController(rest, ref);
 
     return (
@@ -30,14 +30,26 @@ const Component = forwardRef<HTMLInputElement, IProps>(
           </div>
         )}
 
-        <input
-          {...props}
-          className={cn(s, 'input', rest?.className)}
-          title={currentError || undefined}
-          aria-invalid={!!currentError}
-          aria-disabled={rest.disabled}
-          aria-errormessage={currentError ? errorId : undefined}
-        />
+        <div className={cn(s, 'input-content')}>
+          {prefix && (
+            <span onClick={() => props.ref?.current?.focus()} className={cn(s, 'input-prefix')}>
+              {prefix}
+            </span>
+          )}
+          <input
+            {...props}
+            className={cn(s, 'input', rest?.className)}
+            title={currentError || undefined}
+            aria-invalid={!!currentError}
+            aria-disabled={rest.disabled}
+            aria-errormessage={currentError ? errorId : undefined}
+          />
+          {suffix && (
+            <span onClick={() => props.ref?.current?.focus()} className={cn(s, 'input-suffix')}>
+              {suffix}
+            </span>
+          )}
+        </div>
 
         {currentError && (
           <small

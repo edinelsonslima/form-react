@@ -4,7 +4,7 @@ type ICustomInput = HTMLInputElement & { valueUnmasked: string };
 
 type IValidityError = Omit<Record<keyof ValidityState, string>, 'valid' | 'customError'>;
 
-type IBaseProps = Omit<ComponentProps<'input'>, 'pattern' | 'onChange'>;
+type IBaseProps = Omit<ComponentProps<'input'>, 'pattern' | 'onChange' | 'prefix'>;
 
 type IControllerProps = IBaseProps & {
   /**
@@ -44,6 +44,8 @@ type IProps = IControllerProps & {
   id: ComponentProps<'input'>['id'];
   name: ComponentProps<'input'>['name'];
   label?: ReactNode | { message: ReactNode; info: ReactNode };
+  suffix?: ReactNode;
+  prefix?: ReactNode;
   props?: {
     container?: ComponentProps<'div'>;
     error?: ComponentProps<'small'>;
