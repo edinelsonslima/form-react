@@ -20,9 +20,11 @@ function useDebounce() {
   }, []);
 
   useEffect(() => {
+    const currentTimeoutId = timeoutId.current;
+
     return () => {
-      if (!timeoutId.current) return;
-      clearTimeout(timeoutId.current);
+      if (!currentTimeoutId) return;
+      clearTimeout(currentTimeoutId);
     };
   }, []);
 
