@@ -44,6 +44,15 @@
   color: var(--primary-color);
 }
 
+.select-suffix {
+  color: rgba(0, 0, 0, .25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+}
+
 @keyframes show-input {
   from {
     opacity: 0;

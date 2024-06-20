@@ -1,6 +1,10 @@
 import { forwardRef, memo } from 'react';
-import Input from '../Base';
 
+import IconArrow from '@/assets/icons/arrow';
+import IconSearch from '@/assets/icons/search';
+import cn from '@/helpers/cn';
+
+import Input from '../Base';
 import { IProps } from './types';
 import useController from './use.controller';
 
@@ -23,7 +27,7 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
 
   return (
     <div
-      className={s['select-container']}
+      className={cn(s, 'select-container')}
       onBlur={handleCloseOptions}
       onFocus={handleOpenOptions}
       onKeyDown={handleKeyDownContainer}
@@ -34,6 +38,11 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
         onKeyDown={handleSelectEnterKeyPress}
         onChange={(_, value) => handleUpdateOptions(value)}
         autoComplete="off"
+        suffix={
+          <span className={cn(s, 'select-suffix')}>
+            {optionsInState.length ? <IconSearch /> : <IconArrow />}
+          </span>
+        }
         aria-expanded={!!optionsInState.length}
         aria-autocomplete="list"
         aria-haspopup="listbox"
