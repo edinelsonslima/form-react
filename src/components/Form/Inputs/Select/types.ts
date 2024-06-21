@@ -10,7 +10,7 @@ type IControllerProps = IBaseProps & {
 };
 
 type IProps = IControllerProps & {
-  props: IBaseProps['props'] & {
+  props?: IBaseProps['props'] & {
     ul?: ComponentProps<'ul'>;
     li?: ComponentProps<'li'>;
   };

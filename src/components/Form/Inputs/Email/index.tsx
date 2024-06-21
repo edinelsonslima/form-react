@@ -24,5 +24,7 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
   );
 });
 
+export type { IProps };
+
 const InputEmail = memo(Component);
 export default InputEmail;

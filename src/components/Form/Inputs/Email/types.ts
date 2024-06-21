@@ -4,7 +4,7 @@ import { IProps as ISelectProps } from '../Select/types';
 type IControllerProps = IBaseProps;
 
 type IProps = IControllerProps & {
-  props: ISelectProps['props'];
+  props?: ISelectProps['props'];
 };
 
 export type { IControllerProps, IProps };
