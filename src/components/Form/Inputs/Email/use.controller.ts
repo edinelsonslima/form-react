@@ -20,7 +20,7 @@ function useController(props: IProps) {
       .map(({ key, value }) => ({ key, value: `${email}@${value}` }))
       .filter((email) => email.value.includes(input));
 
-    if (filtered.length === 1 && filtered.at(0)!.value === input) {
+    if (filtered.length === 1 && filtered.at(0)?.value === input) {
       return [];
     }
 
