@@ -30,10 +30,12 @@ function useController<T extends object>({
 
       if (el instanceof HTMLInputElement && !keys.has(el.name) && el.type !== 'submit') {
         const input = el as ICustomInput;
+        const isCheckbox = ['checkbox', 'radio'].includes(input.type);
         keys.add(input.name);
+
         return [
-          { ...unmasked, [input.name]: input.valueUnmasked },
-          { ...masked, [input.name]: input.value },
+          { ...unmasked, [input.name]: isCheckbox ? input.checked : input.valueUnmasked },
+          { ...masked, [input.name]: isCheckbox ? input.checked : input.value },
         ];
       }
 

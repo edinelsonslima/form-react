@@ -55,8 +55,8 @@ function CreditCard() {
       <Form.Input
         defaultChecked
         type="checkbox"
-        id="terms"
-        name="terms"
+        id="holder-save-card"
+        name="holder-save-card"
         label="Usar esses dados nas próximas compras"
       />
     </Form.Fieldset>
