@@ -51,6 +51,14 @@ function CreditCard() {
       </Div>
 
       <Form.Input id="holder-name" name="holder-name" label="Nome impresso no cartão" />
+
+      <Form.Input
+        defaultChecked
+        type="checkbox"
+        id="terms"
+        name="terms"
+        label="Usar esses dados nas próximas compras"
+      />
     </Form.Fieldset>
   );
 }
