@@ -100,8 +100,8 @@ function useSafeElementPosition<
 
     const newStyles = Object.entries({ corners, horizontal, vertical }[positionPreference]());
 
-    ['top', 'right', 'left', 'bottom'].forEach((key) => content.attributeStyleMap.delete(key));
-    newStyles.forEach(([key, value]) => content.attributeStyleMap.set(key, value as string));
+    ['top', 'right', 'left', 'bottom'].forEach((key) => content.style.removeProperty(key));
+    newStyles.forEach(([key, value]) => content.style.setProperty(key, value as string));
   }, [padding, positionPreference]);
 
   return [containerRef, contentRef] as const;
