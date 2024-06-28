@@ -62,7 +62,8 @@ function useController<T extends object>({
       }
 
       if (element instanceof HTMLInputElement) {
-        element.value = value?.toString() ?? '';
+        const isCheckbox = ['checkbox', 'radio'].includes(element.type);
+        isCheckbox ? (element.checked = !!value) : (element.value = value?.toString() ?? '');
         element.dispatchEvent(new Event('input', { bubbles: true }));
       }
     };
