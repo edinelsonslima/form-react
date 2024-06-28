@@ -48,8 +48,16 @@ type IProps = IControllerProps & {
   prefix?: ReactNode;
   props?: {
     container?: ComponentProps<'div'>;
+    label?: {
+      container?: ComponentProps<'div'>;
+      label?: ComponentProps<'label'>;
+    };
+    input?: {
+      container: ComponentProps<'div'>;
+      prefix?: ComponentProps<'span'>;
+      suffix?: ComponentProps<'span'>;
+    };
     error?: ComponentProps<'small'>;
-    label?: { container?: ComponentProps<'div'>; label?: ComponentProps<'label'> };
   };
 };
 

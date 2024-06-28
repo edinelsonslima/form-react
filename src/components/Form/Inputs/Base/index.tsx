@@ -30,9 +30,16 @@ const Component = forwardRef<HTMLInputElement, IProps>(
           </div>
         )}
 
-        <div className={cn(s, 'input-content')}>
+        <div
+          {...othersProps?.input?.container}
+          className={cn(s, 'input-content', othersProps?.input?.container?.className)}
+        >
           {prefix && (
-            <span onClick={() => props.ref?.current?.focus()} className={cn(s, 'input-prefix')}>
+            <span
+              {...othersProps?.input?.prefix}
+              onClick={() => props.ref?.current?.focus()}
+              className={cn(s, 'input-prefix', othersProps?.input?.prefix?.className)}
+            >
               {prefix}
             </span>
           )}
