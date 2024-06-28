@@ -52,6 +52,7 @@ function useController(
     handleOnInput?.(evt);
 
     const target = evt.currentTarget;
+    const isCheckbox = ['checkbox', 'radio'].includes(target.type);
 
     target.valueUnmasked = target.value || '';
 
@@ -72,18 +73,17 @@ function useController(
       target.reportValidity();
     };
 
-    if (!target.valueUnmasked) {
+    if (!isCheckbox && !target.valueUnmasked) {
       return dispatch('');
     }
 
     if (pattern instanceof Function) {
-      return dispatch(pattern(target.valueUnmasked) ?? '');
+      return dispatch(pattern(isCheckbox ? String(target.checked) : target.valueUnmasked) ?? '');
     }
 
     if (pattern?.regexp) {
       const regexp = new RegExp(pattern.regexp);
-      const result = !regexp.test(target.valueUnmasked) ? pattern.message : '';
-      return dispatch(result);
+      return dispatch(!regexp.test(target.valueUnmasked) ? pattern.message : '');
     }
 
     dispatch('');
