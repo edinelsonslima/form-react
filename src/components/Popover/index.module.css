@@ -9,9 +9,9 @@
   border-radius: 50%;
 
   cursor: pointer;
-  width: 15px;
-  height: 15px;
-  font-size: small
+  width: .875rem;
+  height: .875rem;
+  font-size: 10px
 }
 
 .popover-container>span {
