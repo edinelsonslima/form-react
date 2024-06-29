@@ -30,7 +30,7 @@ function useController<T extends object>({
 
       if (el instanceof HTMLInputElement && !keys.has(el.name) && el.type !== 'submit') {
         const input = el as ICustomInput;
-        const isCheckbox = ['checkbox', 'radio'].includes(input.type);
+        const isCheckbox = input.type === 'checkbox';
         keys.add(input.name);
 
         return [
@@ -62,7 +62,7 @@ function useController<T extends object>({
       }
 
       if (element instanceof HTMLInputElement) {
-        const isCheckbox = ['checkbox', 'radio'].includes(element.type);
+        const isCheckbox = target.type === 'checkbox';
         isCheckbox ? (element.checked = !!value) : (element.value = value?.toString() ?? '');
         element.dispatchEvent(new Event('input', { bubbles: true }));
       }

@@ -52,7 +52,7 @@ function useController(
     handleOnInput?.(evt);
 
     const target = evt.currentTarget;
-    const isCheckbox = ['checkbox', 'radio'].includes(target.type);
+    const isCheckbox = target.type === 'checkbox';
 
     target.valueUnmasked = target.value || '';
 
