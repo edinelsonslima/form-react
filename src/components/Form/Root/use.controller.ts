@@ -18,8 +18,8 @@ function useController<T extends object>({
     const reduce = ([unmasked, masked]: IData<T>[], el: Element) => {
       if (!Object(el)?.name) return [unmasked, masked];
 
-      if (el instanceof HTMLFieldSetElement && !keys.has(el.id)) {
-        keys.add(el.id);
+      if (el instanceof HTMLFieldSetElement && !keys.has(el.name)) {
+        keys.add(el.name);
         const [valueUnmasked, valueMasked] = gatherData(el);
         return [
           { ...unmasked, [el.name]: valueUnmasked },
