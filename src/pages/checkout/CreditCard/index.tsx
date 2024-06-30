@@ -19,6 +19,7 @@ function CreditCard() {
         name="holder-number"
         label="Número do Cartão"
         mask="0000  0000  0000  0000"
+        autoComplete="cc-number"
       />
 
       <Div __display="flex" __gap="1rem" __alignItems="end">
@@ -28,6 +29,7 @@ function CreditCard() {
           label="Validade"
           mask="00/00"
           placeholder="MM/AA"
+          autoComplete="cc-exp"
           props={{ container: { style: { flex: 1, minWidth: '4rem', maxWidth: '7rem' } } }}
         />
 
@@ -35,6 +37,7 @@ function CreditCard() {
           id="holder-cvv"
           name="holder-cvv"
           mask="0000"
+          autoComplete="cc-csc"
           props={{ container: { style: { flex: 1 } } }}
           label={{
             message: 'Código de segurança',
@@ -50,7 +53,12 @@ function CreditCard() {
         />
       </Div>
 
-      <Form.Input id="holder-name" name="holder-name" label="Nome impresso no cartão" />
+      <Form.Input
+        id="holder-name"
+        name="holder-name"
+        label="Nome impresso no cartão"
+        autoComplete="cc-name"
+      />
 
       <Form.Input
         defaultChecked

@@ -45,11 +45,11 @@ function UserForm() {
   return (
     <Form.Fieldset name="user">
       <Form.Input
-        required
         id="user-name"
         name="user-name"
         label="Nome Completo"
         mask={Form.Input.masks.noSpecialCharacter}
+        autoComplete="name"
         pattern={(value) => {
           if (!(value.trim().split(' ').length < 2)) return;
           return 'Por favor, informe seu nome completo.';
@@ -57,11 +57,11 @@ function UserForm() {
       />
 
       <Form.Input
-        required
         type="email"
         id="user-email"
         name="user-email"
         label="E-mail"
+        autoComplete="email"
         defaultErrorMessages={(input) => {
           const error = { valueMissing: 'O e-mail é obrigatório.' };
 
@@ -75,19 +75,18 @@ function UserForm() {
 
       <Div __display="flex" __gap="1rem" __flexWrap="wrap">
         <Form.Select
-          required
+          type="tel"
           id="user-ddi"
           name="user-ddi"
           label="DDI"
+          options={phoneOptions}
           props={{
             container: { style: { flex: 1, minWidth: '4rem', maxWidth: '7rem' } },
             ul: { style: { maxWidth: '18.75rem', width: 'max-content' } },
           }}
-          options={phoneOptions}
         />
 
         <Form.Input
-          required
           type="tel"
           id="user-phone"
           name="user-phone"
@@ -98,7 +97,6 @@ function UserForm() {
       </Div>
 
       <Form.Input
-        required
         id="user-document"
         name="user-document"
         label="CPF ou CNPJ"
