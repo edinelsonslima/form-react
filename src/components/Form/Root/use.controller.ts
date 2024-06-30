@@ -1,5 +1,4 @@
 import { FormEvent, useEffect, useRef } from 'react';
-import { ICustomInput } from '../Inputs/Base/types';
 import { IControllerProps, IData, IGetherDataFn } from './types';
 
 function useController<T extends object>({
@@ -19,8 +18,8 @@ function useController<T extends object>({
     const reduce = ([unmasked, masked]: IData<T>[], el: Element) => {
       if (!Object(el)?.name) return [unmasked, masked];
 
-      if (el instanceof HTMLFieldSetElement && !keys.has(el.name)) {
-        keys.add(el.name);
+      if (el instanceof HTMLFieldSetElement && !keys.has(el.id)) {
+        keys.add(el.id);
         const [valueUnmasked, valueMasked] = gatherData(el);
         return [
           { ...unmasked, [el.name]: valueUnmasked },
@@ -28,14 +27,28 @@ function useController<T extends object>({
         ];
       }
 
-      if (el instanceof HTMLInputElement && !keys.has(el.name) && el.type !== 'submit') {
-        const input = el as ICustomInput;
-        const isCheckbox = input.type === 'checkbox';
-        keys.add(input.name);
+      if (el instanceof HTMLInputElement && !keys.has(el.id) && el.type !== 'submit') {
+        keys.add(el.id);
+
+        if (el.type === 'checkbox') {
+          return [
+            { ...unmasked, [el.name]: el.checked },
+            { ...masked, [el.name]: el.checked },
+          ];
+        }
+
+        if (el.type === 'radio') {
+          if (!el.checked) return [unmasked, masked];
+
+          return [
+            { ...unmasked, [el.name]: el.value },
+            { ...masked, [el.name]: el.value },
+          ];
+        }
 
         return [
-          { ...unmasked, [input.name]: isCheckbox ? input.checked : input.valueUnmasked },
-          { ...masked, [input.name]: isCheckbox ? input.checked : input.value },
+          { ...unmasked, [el.name]: Object(el)?.valueUnmasked },
+          { ...masked, [el.name]: el.value },
         ];
       }
 
@@ -59,6 +72,13 @@ function useController<T extends object>({
 
       if (typeof value === 'object' && element instanceof HTMLFieldSetElement) {
         Object.entries(Object(value)).forEach(handler);
+      }
+
+      if (element instanceof RadioNodeList) {
+        element.forEach((radio) => {
+          if (!(radio instanceof HTMLInputElement) || radio.value !== value?.toString()) return;
+          radio.checked = true;
+        });
       }
 
       if (element instanceof HTMLInputElement) {
