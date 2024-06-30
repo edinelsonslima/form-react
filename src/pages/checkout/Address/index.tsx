@@ -4,7 +4,13 @@ import Form from '@/components/Form';
 function Address() {
   return (
     <Form.Fieldset name="address" legend="ENDEREÇO">
-      <Form.Input type="text" id="address-cep" name="address-cep" label="CEP da Residência" />
+      <Form.Input
+        type="text"
+        id="address-cep"
+        name="address-cep"
+        label="CEP da Residência"
+        mask="00000-000"
+      />
       <Form.Input type="text" id="address-street" name="address-street" label="Endereço" />
 
       <Div __display="flex" __gap="1rem" __alignItems="start">
