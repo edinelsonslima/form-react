@@ -4,7 +4,7 @@ import Popover from '@/components/Popover';
 
 function CreditCard() {
   return (
-    <Form.Fieldset name="credit">
+    <Form.Fieldset name="credit" legend="FORMAS DE PAGAMENTO">
       <Form.Input
         prefix={
           <img
