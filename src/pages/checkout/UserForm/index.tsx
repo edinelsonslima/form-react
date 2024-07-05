@@ -74,26 +74,26 @@ function UserForm() {
       />
 
       <Div __display="flex" __gap="1rem" __flexWrap="wrap">
-        <Form.Select
-          type="tel"
-          id="user-ddi"
-          name="user-ddi"
-          label="DDI"
-          options={phoneOptions}
-          props={{
-            container: { style: { flex: 1, minWidth: '4rem', maxWidth: '7rem' } },
-            ul: { style: { maxWidth: '18.75rem', width: 'max-content' } },
-          }}
-        />
+        <Div __flex={1} __minWidth="4rem" __maxWidth="7rem">
+          <Form.Select
+            type="tel"
+            id="user-ddi"
+            name="user-ddi"
+            label="DDI"
+            options={phoneOptions}
+            props={{ ul: { style: { maxWidth: '18.75rem', width: 'max-content' } } }}
+          />
+        </Div>
 
-        <Form.Input
-          type="tel"
-          id="user-phone"
-          name="user-phone"
-          label="Celular"
-          mask="(00) 0000-0000, (00) 0 0000-0000"
-          props={{ container: { style: { flex: 3 } } }}
-        />
+        <Div __flex={3}>
+          <Form.Input
+            type="tel"
+            id="user-phone"
+            name="user-phone"
+            label="Celular"
+            mask="(00) 0000-0000, (00) 0 0000-0000"
+          />
+        </Div>
       </Div>
 
       <Form.Input
