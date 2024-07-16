@@ -22,6 +22,13 @@ function Address() {
       />
 
       <Div __display="flex" __gap="1rem" __alignItems="start">
+        <Form.Input
+          type="text"
+          id="address-neighborhood"
+          name="address-neighborhood"
+          label="Bairro"
+          autoComplete="shipping address-level2"
+        />
         <Div __display="flex" __gap="1rem" __flexDirection="column">
           <Form.Input
             type="text"
@@ -34,16 +41,13 @@ function Address() {
             type="checkbox"
             id="without-number"
             name="without-number"
-            label="Não tenho número"
+            label={
+              <small style={{ fontSize: '.875rem', color: '#00000072', fontWeight: 400 }}>
+                Não tenho número
+              </small>
+            }
           />
         </Div>
-        <Form.Input
-          type="text"
-          id="address-neighborhood"
-          name="address-neighborhood"
-          label="Bairro"
-          autoComplete="shipping address-level2"
-        />
       </Div>
 
       <Form.Input
