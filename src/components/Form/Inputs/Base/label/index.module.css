@@ -1,9 +1,9 @@
-.input-label-container {
+.container {
   display: flex;
   justify-content: space-between;
 }
 
-.input-label {
+.label {
   margin-bottom: var(--rb-input-label-margin-bottom);
   font-size: var(--rb-input-label-font-size);
   font-weight: var(--rb-input-label-font-weight);

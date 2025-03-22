@@ -1,7 +1,0 @@
-.input[type="submit"] {
-  background: var(--rb-input-submit-background);
-  color: var(--rb-input-submit-color);
-  font-weight: var(--rb-input-submit-font-weight);
-  font-size: var(--rb-input-submit-font-size);
-  cursor: pointer;
-}

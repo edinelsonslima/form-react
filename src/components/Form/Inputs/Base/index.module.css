@@ -1,3 +1,12 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+
+  position: relative;
+  width: 100%;
+}
+
 .input-content {
   display: flex;
   align-items: center;
@@ -25,23 +34,17 @@
   box-shadow: var(--rb-input-base-box-shadow-active);
 }
 
-.input-prefix,
-.input-suffix {
-  display: flex;
-  margin: var(--rb-input-base-fix-margin);
-}
-
 .input {
   height: 100%;
   width: 100%;
   padding: var(--rb-input-base-padding);
 }
 
-.input-content:has(.input-prefix)>.input {
+.input[data-prefix="true"] {
   padding-left: 0;
 }
 
-.input-content:has(.input-suffix)>.input {
+.input[data-suffix="true"] {
   padding-right: 0;
 }
 
@@ -61,13 +64,13 @@
   font-weight: var(--rb-input-base-placeholder-font-weight);
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input[type=number] {
+.input[type=number] {
   -moz-appearance: textfield;
 }
 
@@ -102,4 +105,13 @@ input[type=number] {
   box-shadow: none;
   pointer-events: none;
   cursor: not-allowed;
+}
+
+/* Input Submit */
+.input[type="submit"] {
+  background: var(--rb-input-submit-background);
+  color: var(--rb-input-submit-color);
+  font-weight: var(--rb-input-submit-font-weight);
+  font-size: var(--rb-input-submit-font-size);
+  cursor: pointer;
 }

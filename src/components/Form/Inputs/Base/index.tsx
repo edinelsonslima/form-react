@@ -1,78 +1,52 @@
-import cn from '@/helpers/cn';
-import { forwardRef, memo } from 'react';
+import { ForwardedRef, forwardRef, memo } from 'react';
 import { IProps } from './types';
 import useController from './use.controller';
 
-import s from './css/index.module.css';
+import { Label } from './label';
+import { Error } from './error';
+import { Adornment } from './Adornment';
 
-const Component = forwardRef<HTMLInputElement, IProps>(
-  ({ label, props: othersProps, suffix, prefix, ...rest }, ref) => {
-    const { currentError, errorId, ...props } = useController(rest, ref);
+import s from './index.module.css';
 
-    return (
-      <div
-        {...othersProps?.container}
-        className={cn(s, 'input-container', othersProps?.container?.className)}
-      >
-        {label && (
-          <div
-            {...othersProps?.label?.container}
-            className={cn(s, 'input-label-container', othersProps?.label?.container?.className)}
-          >
-            <label
-              {...othersProps?.label?.label}
-              htmlFor={rest.id}
-              children={typeof label === 'object' && 'message' in label ? label.message : label}
-              className={cn(s, 'input-label', othersProps?.label?.label?.className)}
-            />
+function InputComponent(
+  { label, suffix, prefix, ...rest }: IProps,
+  ref: ForwardedRef<HTMLInputElement>,
+) {
+  const { currentError, errorId, className, ...props } = useController(rest, ref);
 
-            {typeof label === 'object' && 'info' in label && label.info}
-          </div>
-        )}
+  return (
+    <div className={s['input-container']}>
+      <Label shouldRender={!!label} htmlFor={props.id} suffix={Object(label)?.suffix}>
+        {Object(label)?.message || label}
+      </Label>
 
-        <div
-          {...othersProps?.input?.container}
-          className={cn(s, 'input-content', othersProps?.input?.container?.className)}
-        >
-          {prefix && (
-            <span
-              {...othersProps?.input?.prefix}
-              onClick={() => props.ref?.current?.focus()}
-              className={cn(s, 'input-prefix', othersProps?.input?.prefix?.className)}
-            >
-              {prefix}
-            </span>
-          )}
-          <input
-            {...props}
-            className={cn(s, 'input', rest?.className)}
-            title={currentError || undefined}
-            aria-invalid={!!currentError}
-            aria-disabled={rest.disabled}
-            aria-errormessage={currentError ? errorId : undefined}
-          />
-          {suffix && (
-            <span onClick={() => props.ref?.current?.focus()} className={cn(s, 'input-suffix')}>
-              {suffix}
-            </span>
-          )}
-        </div>
+      <div className={s['input-content']}>
+        <Adornment shouldRender={!!prefix} onClick={() => props.ref?.current?.focus()}>
+          {prefix}
+        </Adornment>
 
-        {currentError && (
-          <small
-            {...othersProps?.error}
-            className={cn(s, 'input-error', othersProps?.error?.className)}
-            aria-errormessage={errorId}
-          >
-            {currentError}
-          </small>
-        )}
+        <input
+          {...props}
+          className={`${s.input} ${className}`}
+          title={currentError || undefined}
+          aria-invalid={!!currentError}
+          aria-errormessage={currentError ? errorId : undefined}
+          aria-disabled={props.disabled}
+          data-prefix={!!prefix}
+          data-suffix={!!suffix}
+        />
+
+        <Adornment shouldRender={!!suffix} onClick={() => props.ref?.current?.focus()}>
+          {suffix}
+        </Adornment>
       </div>
-    );
-  },
-);
 
+      <Error shouldRender={!!currentError} aria-errormessage={errorId} id={errorId}>
+        {currentError}
+      </Error>
+    </div>
+  );
+}
+
+export const Input = memo(forwardRef(InputComponent));
 export type { IProps };
-
-const Input = memo(Component);
-export default Input;
