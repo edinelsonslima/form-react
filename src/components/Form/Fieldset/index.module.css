@@ -13,8 +13,8 @@
 }
 
 .legend {
-  font-size: .875rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #37474f;
+  font-size: var(--rb-fieldset-legend-font-size);
+  font-weight: var(--rb-fieldset-legend-font-weight);
+  margin-bottom: var(--rb-fieldset-legend-margin-bottom);
+  color: var(--rb-fieldset-legend-color);
 }

@@ -3,34 +3,38 @@
   align-items: center;
 
   overflow: hidden;
-  border: 1px solid var(--border-color-base);
-  border-radius: var(--border-radius-base);
+  border: var(--rb-input-base-border);
+  border-radius: var(--rb-input-base-radius);
   transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
   width: 100%;
   height: 40px;
 }
 
+.input-content:hover {
+  box-shadow: var(--rb-input-base-box-shadow-hover);
+}
+
 .input-content:focus-within {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px #0d47a141;
+  border-color: var(--rb-color-primary);
+  box-shadow: var(--rb-input-base-box-shadow);
 }
 
 .input-content:active {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 4px #0d47a141;
+  border-color: var(--rb-color-primary);
+  box-shadow: var(--rb-input-base-box-shadow-active);
 }
 
 .input-prefix,
 .input-suffix {
   display: flex;
-  margin: 0 var(--spacing-2);
+  margin: var(--rb-input-base-fix-margin);
 }
 
 .input {
   height: 100%;
   width: 100%;
-  padding: var(--spacing-2) var(--spacing-3);
+  padding: var(--rb-input-base-padding);
 }
 
 .input-content:has(.input-prefix)>.input {
@@ -43,16 +47,18 @@
 
 .input:placeholder-shown {
   text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .input::-webkit-input-placeholder {
-  color: #b9b9b9;
-  font-weight: 500;
+  color: var(--rb-input-base-placeholder-color);
+  font-weight: var(--rb-input-base-placeholder-font-weight);
 }
 
 .input:-moz-placeholder {
-  color: #b9b9b9;
-  font-weight: 500;
+  color: var(--rb-input-base-placeholder-color);
+  font-weight: var(--rb-input-base-placeholder-font-weight);
 }
 
 input::-webkit-outer-spin-button,
@@ -66,30 +72,34 @@ input[type=number] {
 }
 
 .input:-ms-input-placeholder {
-  color: #b9b9b9;
-  font-weight: 500;
+  color: var(--rb-input-base-placeholder-color);
+  font-weight: var(--rb-input-base-placeholder-font-weight);
 }
 
 /* Input Error */
 .input-content:has(.input[aria-invalid="true"]) {
-  border-color: var(--error-color);
+  border-color: var(--rb-color-error);
   box-shadow: none;
 }
 
-.input-content:has(.input[aria-invalid="true"]):focus {
-  box-shadow: 0 0 0 2px #f4433641;
+.input-content:has(.input[aria-invalid="true"]):hover {
+  box-shadow: var(--rb-input-base-error-box-shadow-hover);
+}
+
+.input-content:has(.input[aria-invalid="true"]):focus-within {
+  box-shadow: var(--rb-input-base-error-box-shadow);
 }
 
 .input-content:has(.input[aria-invalid="true"]):active {
-  box-shadow: 0 0 0 4px #f4433641;
+  box-shadow: var(--rb-input-base-error-box-shadow-active);
 }
 
 /* Input disabled */
 .input-content:has(.input:disabled) {
-  background-color: var(--inactive-color);
-  color: var(--border-color-base);
+  background-color: var(--rb-input-base-disabled-background);
+  color: var(--rb-input-base-disabled-color);
+  border-color: var(--rb-input-base-disabled-color);
   box-shadow: none;
   pointer-events: none;
   cursor: not-allowed;
-  border-color: var(--border-color-base);
 }

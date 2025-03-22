@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -12,9 +16,8 @@
   font-size: 16px;
 }
 
-
 :root {
-  --background-color-light: #eceff1;
+  /* --background-color-light: #eceff1;
   --border-color-base: #b0bec5;
   --border-radius-base: 4px;
   --error-color: #f44336;
@@ -33,5 +36,96 @@
   --spacing-5: 1.25rem;
   --spacing-6: 1.5rem;
   --spacing-7: 1.75rem;
-  --spacing-8: 2rem;
+  --spacing-8: 2rem; */
+
+  /* New Theme */
+  --rb-color-primary: #0d47a1;
+  --rb-color-second: #546E7A;
+  --rb-color-success: #4caf50;
+  --rb-color-error: #f44336;
+  --rb-color-white: #FFFFFF;
+  --rb-color-black: #000000;
+
+  --rb-color-gray-100: #F9FAFB;
+  --rb-color-gray-200: #ECEFF1;
+  --rb-color-gray-300: #B0BEC5;
+  --rb-color-gray-500: #546E7A;
+  --rb-color-gray-600: #37474F;
+
+  --rb-radius-xs: .25rem;
+  --rb-radius-2xs: .5rem;
+  --rb-radius-sm: .75rem;
+  --rb-radius-base: 1rem;
+  --rb-radius-lg: 1.25rem;
+  --rb-radius-xl: 1.5rem;
+  --rb-radius-2xl: 1.75rem;
+  --rb-radius-3xl: 2rem;
+
+  --rb-font-xs: .75rem;
+  --rb-font-sm: .875rem;
+  --rb-font-md: 1rem;
+  --rb-font-lg: 1.25rem;
+  --rb-font-xl: 1.5rem;
+  --rb-font-xxl: 2rem;
+
+  --rb-font-light: 300;
+  --rb-font-normal: 400;
+  --rb-font-medium: 500;
+  --rb-font-bold: 700;
+  --rb-font-bolder: 900;
+
+  --rb-space-xs: .25rem;
+  --rb-space-2xs: .5rem;
+  --rb-space-sm: .75rem;
+  --rb-space-base: 1rem;
+  --rb-space-lg: 1.25rem;
+  --rb-space-xl: 1.5rem;
+  --rb-space-2xl: 1.75rem;
+  --rb-space-3xl: 2rem;
+
+  /* Fieldset */
+  --rb-fieldset-gap: var(--rb-space-xl);
+  --rb-fieldset-legend-font-size: var(--rb-font-sm);
+  --rb-fieldset-legend-font-weight: var(--rb-font-bold);
+  --rb-fieldset-legend-margin-bottom: var(--rb-space-base);
+  --rb-fieldset-legend-color: var(--rb-color-gray-600);
+
+  /* Input Base */
+  --rb-input-base-border: 1px solid var(--rb-color-gray-300);
+  --rb-input-base-radius: var(--rb-radius-xs);
+
+  --rb-input-base-padding: var(--rb-space-2xs) var(--rb-space-sm);
+
+  --rb-input-base-fix-margin: 0 var(--rb-space-2xs);
+
+  --rb-input-base-box-shadow: 0 0 0 2px rgb(from var(--rb-color-primary) r g b / .255);
+  --rb-input-base-box-shadow-hover: 0 0 0 1px rgb(from var(--rb-color-primary) r g b / .255);
+  --rb-input-base-box-shadow-active: 0 0 0 4px rgb(from var(--rb-color-primary) r g b / .255);
+
+  --rb-input-base-placeholder-color: var(--rb-color-gray-300);
+  --rb-input-base-placeholder-font-weight: var(--rb-font-normal);
+
+  --rb-input-base-error-box-shadow: 0 0 0 2px rgb(from var(--rb-color-error) r g b / .255);
+  --rb-input-base-error-box-shadow-hover: 0 0 0 1px rgb(from var(--rb-color-error) r g b / .255);
+  --rb-input-base-error-box-shadow-active: 0 0 0 4px rgb(from var(--rb-color-error) r g b / .255);
+
+  --rb-input-base-disabled-background: var(--rb-color-gray-200);
+  --rb-input-base-disabled-color: var(--rb-color-gray-300);
+
+  /* Input Label */
+  --rb-input-label-margin-bottom: var(--rb-space-2xs);
+  --rb-input-label-font-size: var(--rb-font-sm);
+  --rb-input-label-font-weight: var(--rb-font-normal);
+  --rb-input-label-color: var(--rb-color-gray-600);
+
+  /* Input Error Helper */
+  --rb-input-error-color: var(--rb-color-error);
+  --rb-input-error-font-size: var(--rb-font-sm);
+  --rb-input-error-font-weight: var(--rb-font-normal);
+
+  /* Input Submit */
+  --rb-input-submit-background: var(--rb-color-primary);
+  --rb-input-submit-color: var(--rb-color-white);
+  --rb-input-submit-font-weight: var(--rb-font-medium);
+  --rb-input-submit-font-size: var(--rb-font-md);
 }

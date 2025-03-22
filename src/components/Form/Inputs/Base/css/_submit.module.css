@@ -1,20 +1,7 @@
 .input[type="submit"] {
-  background-color: var(--primary-color);
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
-
+  background: var(--rb-input-submit-background);
+  color: var(--rb-input-submit-color);
+  font-weight: var(--rb-input-submit-font-weight);
+  font-size: var(--rb-input-submit-font-size);
   cursor: pointer;
-  border: none;
-
-  transition: all 0.2s ease-in-out;
-}
-
-.input[type="submit"]:hover {
-  opacity: 0.9;
-}
-
-.input[type="submit"]:active {
-  transform: scale(0.99);
-  box-shadow: none;
 }

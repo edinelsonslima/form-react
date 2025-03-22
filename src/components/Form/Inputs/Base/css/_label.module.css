@@ -4,8 +4,8 @@
 }
 
 .input-label {
-  margin-bottom: var(--spacing-2);
-  font-size: .875rem;
-  font-weight: 500;
-  color: var(--heading-color);
+  margin-bottom: var(--rb-input-label-margin-bottom);
+  font-size: var(--rb-input-label-font-size);
+  font-weight: var(--rb-input-label-font-weight);
+  color: var(--rb-input-label-color);
 }

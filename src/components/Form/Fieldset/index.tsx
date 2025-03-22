@@ -1,4 +1,3 @@
-import cn from '@/helpers/cn';
 import { ComponentProps, PropsWithChildren, ReactNode, memo } from 'react';
 
 import s from './index.module.css';
@@ -11,8 +10,8 @@ type IProps = ComponentProps<'fieldset'> & {
 
 function Component({ children, legend, layout = 'column', ...props }: PropsWithChildren<IProps>) {
   return (
-    <fieldset className={cn(s, 'fieldset')} {...props} data-layout={layout}>
-      {legend && <legend className={cn(s, 'legend')}>{legend}</legend>}
+    <fieldset className={s.fieldset} {...props} data-layout={layout}>
+      {legend && <legend className={s.legend}>{legend}</legend>}
       {children}
     </fieldset>
   );
