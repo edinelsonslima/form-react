@@ -13,7 +13,7 @@ type IControllerProps<T extends object> = IBaseProps & {
 
 type IProps<T extends object> = IControllerProps<T> & {
   id: ComponentProps<'form'>['id'];
-  layout?: 'horizontal' | 'vertical';
+  layout?: 'row' | 'column';
 };
 
 type IData<T extends object> = Record<keyof T, T[keyof T]>;

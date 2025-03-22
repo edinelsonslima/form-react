@@ -1,8 +1,7 @@
-import Div from '@/components/Div';
-import Form from '@/components/Form';
-import Popover from '@/components/Popover';
+import { Form } from '@/components/Form';
+import { Popover } from '@/components/Popover';
 
-function CreditCard() {
+export function CreditCard() {
   return (
     <Form.Fieldset name="credit" legend="FORMAS DE PAGAMENTO">
       <Form.Input
@@ -22,7 +21,7 @@ function CreditCard() {
         autoComplete="cc-number"
       />
 
-      <Div __display="flex" __gap="1rem" __alignItems="end">
+      <div className="flex gap-4 items-end">
         <Form.Input
           id="holder-validity"
           name="holder-validity"
@@ -41,7 +40,7 @@ function CreditCard() {
           props={{ container: { style: { flex: 1 } } }}
           label={{
             message: 'Código de segurança',
-            info: (
+            suffix: (
               <Popover positionPreference="corners">
                 <img
                   src="https://cdn.eduzzcdn.com/sun/assets/img/creditcard-cvv.png"
@@ -51,7 +50,7 @@ function CreditCard() {
             ),
           }}
         />
-      </Div>
+      </div>
 
       <Form.Input
         id="holder-name"
@@ -70,5 +69,3 @@ function CreditCard() {
     </Form.Fieldset>
   );
 }
-
-export default CreditCard;

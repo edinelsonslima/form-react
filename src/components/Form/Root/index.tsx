@@ -1,12 +1,12 @@
-import useController from './use.controller';
-
-import s from './index.module.css';
+import { useController } from './use.controller';
 import { IProps } from './types';
 
-function Root<T extends object>({ layout = 'vertical', ...props }: IProps<T>) {
+import s from './index.module.css';
+
+export function Root<T extends object>({ layout = 'column', className, ...props }: IProps<T>) {
   const { ...rest } = useController<T>(props);
-  return <form className={s.root} data-layout={layout} {...rest} />;
+
+  return <form data-layout={layout} className={`${s.form} ${className}`} {...rest} />;
 }
 
 export type { IProps };
-export default Root;

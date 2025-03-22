@@ -8,14 +8,13 @@ type IProps = ComponentProps<'fieldset'> & {
   layout?: 'column' | 'row';
 };
 
-function Component({ children, legend, layout = 'column', ...props }: PropsWithChildren<IProps>) {
+function FieldsetComponent({ children, legend, layout, ...props }: PropsWithChildren<IProps>) {
   return (
-    <fieldset className={s.fieldset} {...props} data-layout={layout}>
+    <fieldset className={s.fieldset} {...props} data-layout={layout ?? 'column'}>
       {legend && <legend className={s.legend}>{legend}</legend>}
       {children}
     </fieldset>
   );
 }
 
-const Fieldset = memo(Component);
-export default Fieldset;
+export const Fieldset = memo(FieldsetComponent);

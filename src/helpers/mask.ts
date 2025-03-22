@@ -1,4 +1,4 @@
-import findMajorityInCandidates from './find.majority';
+import { findMajority as findMajorityInCandidates } from './find.majority';
 
 type IMaskConfigValue = { clean: RegExp; match: RegExp };
 type IMaskConfig = { [char: string]: IMaskConfigValue };
@@ -60,4 +60,5 @@ function clearMask(masks: string, input: string) {
   }, '');
 }
 
-export default { set: setMask, clear: clearMask };
+export const set = setMask;
+export const clear = clearMask;

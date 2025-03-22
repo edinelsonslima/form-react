@@ -10,7 +10,7 @@ const providersOptions: ISelectOptions = [
   { key: 'bol.com.br', value: 'bol.com.br' },
 ];
 
-function useController(props: IProps) {
+export function useController(props: IProps) {
   const customFilter = (input?: string): ISelectOptions => {
     const [email] = input?.split('@') ?? [];
 
@@ -29,5 +29,3 @@ function useController(props: IProps) {
 
   return { providersOptions, customFilter, ...props };
 }
-
-export default useController;

@@ -1,4 +1,4 @@
-import memoize from './memoize';
+import { memoize } from './memoize';
 
 type IMajority = {
   qty: number;
@@ -6,7 +6,7 @@ type IMajority = {
   values: { [key: string]: number };
 };
 
-function findMajority(array: string[], candidates: string[]) {
+export const findMajority = memoize((array: string[], candidates: string[]) => {
   const fn = (acc: IMajority, char: string) => {
     if (!candidates.includes(char)) return acc;
 
@@ -23,6 +23,4 @@ function findMajority(array: string[], candidates: string[]) {
   };
 
   return array.reduce(fn, { qty: 0, value: '', values: {} });
-}
-
-export default memoize(findMajority);
+});

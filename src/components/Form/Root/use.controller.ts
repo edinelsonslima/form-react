@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useRef } from 'react';
 import { IControllerProps, IData, IGetherDataFn } from './types';
 
-function useController<T extends object>({
+export function useController<T extends object>({
   onSubmit: handleSubmit,
   initialValues,
   ...rest
@@ -95,4 +95,3 @@ function useController<T extends object>({
 }
 
 export type { IControllerProps };
-export default useController;

@@ -1,4 +1,4 @@
-function isTruthy(value: number | string | boolean | null | undefined) {
+export function isTruthy(value: number | string | boolean | null | undefined) {
   if (typeof value === 'boolean') return value;
   if (typeof value === 'number') return !!value;
 
@@ -9,5 +9,3 @@ function isTruthy(value: number | string | boolean | null | undefined) {
 
   return !!value;
 }
-
-export default isTruthy;

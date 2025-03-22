@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-function useDebounce() {
+export function useDebounce() {
   const timeoutId = useRef<NodeJS.Timeout | null>(null);
 
   const debounce = useCallback(<T extends (...args: unknown[]) => void>(fn: T, ms: number) => {
@@ -30,5 +30,3 @@ function useDebounce() {
 
   return debounce;
 }
-
-export default useDebounce;

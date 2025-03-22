@@ -1,7 +1,6 @@
-import Div from '@/components/Div';
-import Form from '@/components/Form';
+import { Form } from '@/components/Form';
 
-function Address() {
+export function Address() {
   return (
     <Form.Fieldset name="address" legend="ENDEREÇO">
       <Form.Input
@@ -21,7 +20,7 @@ function Address() {
         autoComplete="shipping address-line1"
       />
 
-      <Div __display="flex" __gap="1rem" __alignItems="start">
+      <div className="flex gap-4 items-start">
         <Form.Input
           type="text"
           id="address-neighborhood"
@@ -29,7 +28,7 @@ function Address() {
           label="Bairro"
           autoComplete="shipping address-level2"
         />
-        <Div __display="flex" __gap="1rem" __flexDirection="column">
+        <div className="flex gap-4 flex-col">
           <Form.Input
             type="text"
             id="address-number"
@@ -41,14 +40,10 @@ function Address() {
             type="checkbox"
             id="without-number"
             name="without-number"
-            label={
-              <small style={{ fontSize: '.875rem', color: '#00000072', fontWeight: 400 }}>
-                Não tenho número
-              </small>
-            }
+            label={<small className="text-sm text-black/40 font-normal">Não tenho número</small>}
           />
-        </Div>
-      </Div>
+        </div>
+      </div>
 
       <Form.Input
         type="text"
@@ -58,7 +53,7 @@ function Address() {
         autoComplete="shipping address-line3"
       />
 
-      <Div __display="flex" __gap="1rem" __alignItems="start">
+      <div className="flex gap-4 items-start">
         <Form.Select
           id="address-state"
           name="address-state"
@@ -73,9 +68,7 @@ function Address() {
           options={[]}
           autoComplete="shipping address-level3"
         />
-      </Div>
+      </div>
     </Form.Fieldset>
   );
 }
-
-export default Address;

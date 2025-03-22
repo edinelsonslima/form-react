@@ -1,6 +1,6 @@
 import { ComponentProps, memo, useEffect, useState } from 'react';
+import { useSafeElementPosition, IPositionPreference } from '@/hooks/use.safe.element.position';
 
-import useSafeElementPosition, { IPositionPreference } from '@/hooks/use.safe.element.position';
 import s from './index.module.css';
 
 type IPopoverProps = ComponentProps<'button'> & {
@@ -8,7 +8,12 @@ type IPopoverProps = ComponentProps<'button'> & {
   positionPreference?: IPositionPreference;
 };
 
-function Component({ timer = 2_000, positionPreference, children, ...props }: IPopoverProps) {
+function PopoverComponent({
+  timer = 2_000,
+  positionPreference,
+  children,
+  ...props
+}: IPopoverProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const [containerRef, contentRef] = useSafeElementPosition<HTMLButtonElement>({
@@ -58,5 +63,4 @@ function Component({ timer = 2_000, positionPreference, children, ...props }: IP
   );
 }
 
-const Popover = memo(Component);
-export default Popover;
+export const Popover = memo(PopoverComponent);

@@ -1,8 +1,0 @@
-.checkout {
-  margin: 3rem auto 1rem auto;
-  padding: 1.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: var(--border-radius-base);
-
-  max-width: 650px;
-}

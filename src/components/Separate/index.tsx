@@ -1,13 +1,13 @@
-import cn from '@/helpers/cn';
+import { ComponentProps } from 'react';
 
 import s from './index.module.css';
 
-type IProps = {
+type IProps = ComponentProps<'span'> & {
   transparent?: boolean;
 };
 
-function Separate({ transparent }: IProps) {
-  return <span data-transparent={transparent} className={cn(s, 'separate')} />;
+export function Separate({ transparent, className, ...props }: IProps) {
+  return (
+    <span data-transparent={!!transparent} className={`${s.separate} ${className}`} {...props} />
+  );
 }
-
-export default Separate;

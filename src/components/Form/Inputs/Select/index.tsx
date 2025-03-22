@@ -1,16 +1,15 @@
-import { forwardRef, memo } from 'react';
+import { memo } from 'react';
 
-import IconArrow from '@/assets/icons/arrow';
-import IconSearch from '@/assets/icons/search';
-import cn from '@/helpers/cn';
+import { IconArrow } from '@/assets/icons/arrow';
+import { IconSearch } from '@/assets/icons/search';
 
-import Input from '../Base';
+import { Input } from '../Base';
 import { IProps } from './types';
-import useController from './use.controller';
+import { useController } from './use.controller';
 
 import s from './index.module.css';
 
-const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
+function InputSelect(props: IProps) {
   const {
     handleKeyDownContainer,
     handleMouseDownOptions,
@@ -21,27 +20,25 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
     handleUpdateOptions,
     optionsInState,
     isOptionsOpen,
-    selectRef,
     ulRef,
     ...rest
-  } = useController(props, ref);
+  } = useController(props);
 
   return (
     <div
-      className={cn(s, 'select-container')}
+      className={s['select-container']}
       onBlur={handleCloseOptions}
       onFocus={handleOpenOptions}
       onKeyDown={handleKeyDownContainer}
     >
       <Input
         suffix={
-          <span className={cn(s, 'select-suffix')}>
+          <span className={s['select-suffix']}>
             {isOptionsOpen ? <IconSearch /> : <IconArrow />}
           </span>
         }
         {...rest}
-        className={cn(s, isOptionsOpen ? 'select-input-open' : '', rest.className)}
-        ref={selectRef}
+        className={`${isOptionsOpen ? s['select-input-open'] : ''} ${rest.className}`}
         onKeyDown={handleSelectEnterKeyPress}
         onChange={(_, value) => handleUpdateOptions(value)}
         autoComplete="off"
@@ -76,7 +73,6 @@ const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
       </ul>
     </div>
   );
-});
+}
 
-const InputSelect = memo(Component);
-export default InputSelect;
+export const Select = memo(InputSelect);

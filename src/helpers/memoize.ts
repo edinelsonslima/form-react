@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function memoize<T extends (...args: any[]) => any>(fn: T) {
+export function memoize<T extends (...args: any[]) => any>(fn: T) {
   const cache = new Map();
 
   return (...args: Parameters<T>): ReturnType<T> => {
@@ -13,5 +13,3 @@ function memoize<T extends (...args: any[]) => any>(fn: T) {
     return result;
   };
 }
-
-export default memoize;

@@ -1,10 +1,10 @@
-import { ChangeEvent, ComponentProps, ReactNode } from 'react';
+import { ChangeEvent, ComponentProps, ComponentPropsWithRef, ReactNode } from 'react';
 
 type ICustomInput = HTMLInputElement & { valueUnmasked: string };
 
 type IValidityError = Omit<Record<keyof ValidityState, string>, 'valid' | 'customError'>;
 
-type IBaseProps = Omit<ComponentProps<'input'>, 'pattern' | 'onChange' | 'prefix'>;
+type IBaseProps = Omit<ComponentPropsWithRef<'input'>, 'pattern' | 'onChange' | 'prefix'>;
 
 type IControllerProps = IBaseProps & {
   /**

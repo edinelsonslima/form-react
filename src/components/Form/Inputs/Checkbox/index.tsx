@@ -1,42 +1,34 @@
-import { forwardRef, memo } from 'react';
+import { memo } from 'react';
 
-import cn from '@/helpers/cn';
-
-import Input from '../Base';
+import { Input } from '../Base';
 import { IProps } from './types';
-import useController from './use.controller';
 
 import s from './index.module.css';
 
-const Component = forwardRef<HTMLInputElement, IProps>((props, ref) => {
-  const { ...rest } = useController(props);
-
+function InputCheckbox(props: IProps) {
   return (
     <Input
-      {...rest}
-      ref={ref}
+      {...props}
       suffix={undefined}
       prefix={undefined}
-      className={cn(s, 'checkbox', rest.className)}
-      props={{
-        container: { className: cn(s, 'container', rest.props?.container?.className) },
-        label: {
-          container: {
-            className: cn(s, 'container-label', rest.props?.label?.container?.className),
-          },
-          label: {
-            className: cn(s, 'label', rest.props?.label?.container?.className),
-          },
-        },
-        input: {
-          container: { className: cn(s, 'container-input', rest.props?.container?.className) },
-        },
-      }}
+      className={`${s.checkbox} ${props.className}`}
+      // props={{
+      //   container: { className: cn(s, 'container', rest.props?.container?.className) },
+      //   label: {
+      //     container: {
+      //       className: cn(s, 'container-label', rest.props?.label?.container?.className),
+      //     },
+      //     label: {
+      //       className: cn(s, 'label', rest.props?.label?.container?.className),
+      //     },
+      //   },
+      //   input: {
+      //     container: { className: cn(s, 'container-input', rest.props?.container?.className) },
+      //   },
+      // }}
     />
   );
-});
+}
 
+export const Checkbox = memo(InputCheckbox);
 export type { IProps };
-
-const InputCheckbox = memo(Component);
-export default InputCheckbox;

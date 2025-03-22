@@ -11,7 +11,10 @@
   cursor: pointer;
   width: .875rem;
   height: .875rem;
-  font-size: 10px
+  font-size: 10px;
+
+  min-width: .875rem;
+  min-height: .875rem;
 }
 
 .popover-container>span {

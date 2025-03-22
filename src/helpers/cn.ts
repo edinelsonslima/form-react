@@ -1,8 +1,6 @@
-function cn(style: CSSModuleClasses, ...cls: (string | undefined)[]) {
-  return cls
-    .map((c) => (c ? style[c] || c : ''))
-    .join(' ')
-    .trim();
-}
+import { ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
-export default cn;
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}

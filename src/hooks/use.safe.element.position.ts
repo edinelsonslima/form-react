@@ -9,7 +9,7 @@ type IProps = {
   positionPreference?: IPositionPreference;
 };
 
-function useSafeElementPosition<
+export function useSafeElementPosition<
   TContainer extends HTMLElement = HTMLElement,
   TContent extends HTMLElement = HTMLElement,
 >({ positionPreference = 'corners', padding }: IProps = {}) {
@@ -106,5 +106,3 @@ function useSafeElementPosition<
 
   return [containerRef, contentRef] as const;
 }
-
-export default useSafeElementPosition;

@@ -1,6 +1,6 @@
-import Form from '@/components/Form';
+import { Form } from '@/components/Form';
 
-function Shipping() {
+export function Shipping() {
   return (
     <Form.Fieldset name="shipping" legend="FORMAS DE ENVIO">
       <Form.Input
@@ -28,5 +28,3 @@ function Shipping() {
     </Form.Fieldset>
   );
 }
-
-export default Shipping;

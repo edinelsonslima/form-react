@@ -1,35 +1,40 @@
-import Form from '@/components/Form';
-import cn from '@/helpers/cn';
+import { Form } from '@/components/Form';
 
-import Separate from '@/components/Separate';
-import Address from './Address';
-import CreditCard from './CreditCard';
-import Shipping from './Shipping';
-import UserForm from './UserForm';
-import s from './index.module.css';
+import { Separate } from '@/components/Separate';
+import { Address } from './Address';
+import { CreditCard } from './CreditCard';
+import { Shipping } from './Shipping';
+import { UserForm } from './UserForm';
 
-function Checkout() {
+export function Checkout() {
   return (
-    <Form.Root id="main-form" onSubmit={(data) => console.log(data)} className={cn(s, 'checkout')}>
-      <UserForm />
+    <>
+      <Form.Root
+        id="main-form"
+        onSubmit={(data) => console.log(data)}
+        className="container mx-auto my-4 p-4"
+        initialValues={{
+          'user-name': 'John',
+        }}
+      >
+        <UserForm />
 
-      <Separate />
+        <Separate />
 
-      <Address />
+        <Address />
 
-      <Separate />
+        <Separate />
 
-      <Shipping />
+        <Shipping />
 
-      <Separate />
+        <Separate />
 
-      <CreditCard />
+        <CreditCard />
 
-      <Separate transparent />
+        <Separate transparent />
 
-      <Form.Input type="submit" form="main-form" id="submit" name="submit" />
-    </Form.Root>
+        <Form.Input type="submit" id="submit" name="submit" value="Pagar e Receber Agora" />
+      </Form.Root>
+    </>
   );
 }
-
-export default Checkout;

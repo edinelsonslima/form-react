@@ -1,15 +1,15 @@
-import IconLock from '@/assets/icons/lock';
-import cn from '@/helpers/cn';
+import { IconLock } from '@/assets/icons/lock';
 
-import s from './index.module.css';
-
-function SecurityLabel() {
+export function SecurityLabel() {
   return (
-    <div className={cn(s, 'security-label')}>
-      <IconLock />
-      <p title="Seus dados estão protegidos">Seus dados estão protegidos</p>
+    <div className="flex items-center flex-wrap justify-end gap-1 h-min w-ful text-font">
+      <IconLock color="#1ab25a" />
+      <p
+        title="Seus dados estão protegidos"
+        className="overflow-hidden text-ellipsis whitespace-nowrap text-sm"
+      >
+        Seus dados estão protegidos
+      </p>
     </div>
   );
 }
-
-export default SecurityLabel;

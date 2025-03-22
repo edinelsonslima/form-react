@@ -1,19 +1,13 @@
-import Div from '@/components/Div';
-import Form from '@/components/Form';
+import { Form } from '@/components/Form';
 import countries from '@/data/countries.json';
-import SecurityLabel from './SecurityLabel';
+import { SecurityLabel } from './SecurityLabel';
 
 const phoneOptions = countries.map(({ DDI, isoAlpha2, name, nativeName }) => ({
-  key: crypto.randomUUID(),
+  key: crypto?.randomUUID?.() ?? Math.random(),
   value: DDI,
   label: (
-    <Div
-      __display="flex"
-      __alignItems="center"
-      __width="100%"
-      title={`${isoAlpha2} - ${name} (${nativeName})`}
-    >
-      <Div __display="flex" __alignItems="center" __gap={5} __minWidth={90}>
+    <div className="flex items-center w-full" title={`${isoAlpha2} - ${name} (${nativeName})`}>
+      <div className="flex items-center gap-3 min-w-24">
         <img
           src={`https://cdn.eduzzcdn.com/sun/flags/${isoAlpha2.toLowerCase()}.png`}
           alt={name}
@@ -22,26 +16,16 @@ const phoneOptions = countries.map(({ DDI, isoAlpha2, name, nativeName }) => ({
           height="20"
         />
         <span>{DDI}</span>
-      </Div>
-      <Div __display="flex" __flexDirection="column" __width="100%" __flex={4} __overflow="hidden">
-        <span style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>{name}</span>
-        <small
-          style={{
-            color: 'gray',
-            fontSize: '.8rem',
-            opacity: 0.8,
-            textOverflow: 'ellipsis',
-            overflow: 'hidden',
-          }}
-        >
-          {nativeName}
-        </small>
-      </Div>
-    </Div>
+      </div>
+      <div className="flex flex-col w-full flex-1 overflow-hidden">
+        <span className="truncate">{name}</span>
+        <small className="truncate text-sm text-gray">{nativeName}</small>
+      </div>
+    </div>
   ),
 }));
 
-function UserForm() {
+export function UserForm() {
   return (
     <Form.Fieldset name="user">
       <Form.Input
@@ -73,33 +57,35 @@ function UserForm() {
         }}
       />
 
-      <Div __display="flex" __gap="1rem" __flexWrap="wrap">
-        <Div __flex={1} __minWidth="4rem" __maxWidth="7rem">
+      <div className="flex gap-4 flex-wrap">
+        <div className="flex-shrink min-w-16 max-w-28">
           <Form.Select
-            type="tel"
             id="user-ddi"
             name="user-ddi"
             label="DDI"
+            autoComplete="tel-country-code"
             options={phoneOptions}
-            props={{ ul: { style: { maxWidth: '18.75rem', width: 'max-content' } } }}
+            props={{
+              ul: { style: { maxWidth: '18.75rem', width: 'max-content' } },
+            }}
           />
-        </Div>
+        </div>
 
-        <Div __flex={3}>
-          <Form.Input
-            type="tel"
-            id="user-phone"
-            name="user-phone"
-            label="Celular"
-            mask="(00) 0000-0000, (00) 0 0000-0000"
-          />
-        </Div>
-      </Div>
+        <Form.Input
+          type="tel"
+          id="user-phone"
+          name="user-phone"
+          label="Celular"
+          mask="(00) 0000-0000, (00) 0 0000-0000"
+        />
+      </div>
 
       <Form.Input
         id="user-document"
         name="user-document"
         label="CPF ou CNPJ"
+        inputMode="numeric"
+        autoComplete="on"
         mask="000.000.000-00, 00.000.000/0000-00"
       />
 
@@ -107,5 +93,3 @@ function UserForm() {
     </Form.Fieldset>
   );
 }
-
-export default UserForm;

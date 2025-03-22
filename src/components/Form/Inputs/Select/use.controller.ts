@@ -1,10 +1,9 @@
-import isTruthy from '@/helpers/is.truthy';
-import sanitize from '@/helpers/sanitize.string';
-import useDebounce from '@/hooks/use.debounce';
+import { isTruthy } from '@/helpers/is.truthy';
+import { sanitize } from '@/helpers/sanitize.string';
+import { useDebounce } from '@/hooks/use.debounce';
 import {
   Children,
   FocusEvent,
-  ForwardedRef,
   KeyboardEvent,
   MouseEvent,
   ReactNode,
@@ -38,10 +37,7 @@ function extractText(el: ReactNode): string {
   return el?.toString() ?? '';
 }
 
-function useController(
-  { options, onCustomFilter, filterOptionsOnOpen, ...props }: IProps,
-  ref: ForwardedRef<HTMLInputElement>,
-) {
+export function useController({ options, onCustomFilter, filterOptionsOnOpen, ...props }: IProps) {
   const debounce = useDebounce();
 
   const selectRef = useRef<HTMLInputElement>(null);
@@ -180,11 +176,11 @@ function useController(
     handleUpdateSelectValue(evt.currentTarget.getAttribute('aria-label') ?? '');
   };
 
-  useImperativeHandle(ref, () => selectRef.current!, [selectRef]);
+  useImperativeHandle(props.ref, () => selectRef.current!, [selectRef]);
 
   return {
-    selectRef,
     ulRef,
+    ref: selectRef,
     optionsInState,
     isOptionsOpen: !!optionsInState.length,
     handleUpdateOptions,
@@ -197,5 +193,3 @@ function useController(
     ...props,
   };
 }
-
-export default useController;

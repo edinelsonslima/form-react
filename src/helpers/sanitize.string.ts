@@ -1,11 +1,9 @@
-import memoize from './memoize';
+import { memoize } from './memoize';
 
-function sanitize(string: string) {
+export const sanitize = memoize((string: string) => {
   return string
     .trim()
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '');
-}
-
-export default memoize(sanitize);
+});

@@ -1,6 +1,6 @@
-import { ForwardedRef, forwardRef, memo } from 'react';
+import { memo } from 'react';
 import { IProps } from './types';
-import useController from './use.controller';
+import { useController } from './use.controller';
 
 import { Label } from './label';
 import { Error } from './error';
@@ -8,11 +8,8 @@ import { Adornment } from './Adornment';
 
 import s from './index.module.css';
 
-function InputComponent(
-  { label, suffix, prefix, ...rest }: IProps,
-  ref: ForwardedRef<HTMLInputElement>,
-) {
-  const { currentError, errorId, className, ...props } = useController(rest, ref);
+function InputComponent({ label, suffix, prefix, ...rest }: IProps) {
+  const { currentError, errorId, className, ...props } = useController(rest);
 
   return (
     <div className={s['input-container']}>
@@ -21,7 +18,7 @@ function InputComponent(
       </Label>
 
       <div className={s['input-content']}>
-        <Adornment shouldRender={!!prefix} onClick={() => props.ref?.current?.focus()}>
+        <Adornment shouldRender={!!prefix} onClick={() => props.ref.current?.focus()}>
           {prefix}
         </Adornment>
 
@@ -36,7 +33,7 @@ function InputComponent(
           data-suffix={!!suffix}
         />
 
-        <Adornment shouldRender={!!suffix} onClick={() => props.ref?.current?.focus()}>
+        <Adornment shouldRender={!!suffix} onClick={() => props.ref.current?.focus()}>
           {suffix}
         </Adornment>
       </div>
@@ -48,5 +45,5 @@ function InputComponent(
   );
 }
 
-export const Input = memo(forwardRef(InputComponent));
+export const Input = memo(InputComponent);
 export type { IProps };

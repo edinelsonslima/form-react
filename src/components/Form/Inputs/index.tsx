@@ -1,9 +1,8 @@
-import masks from '@/helpers/masks';
-import { forwardRef, memo } from 'react';
-import Input, { IProps as IPropsBase } from './Base';
-import Checkbox, { IProps as IPropsCheckbox } from './Checkbox';
-import Email, { IProps as IPropsEmail } from './Email';
-import Radio, { IProps as IPropsRadio } from './Radio';
+import { masks } from '@/helpers/masks';
+import { Input, IProps as IPropsBase } from './Base';
+import { Checkbox, IProps as IPropsCheckbox } from './Checkbox';
+import { Email, IProps as IPropsEmail } from './Email';
+import { Radio, IProps as IPropsRadio } from './Radio';
 
 type IProps =
   | IPropsBase
@@ -11,21 +10,20 @@ type IProps =
   | ({ type: 'checkbox' } & IPropsCheckbox)
   | ({ type: 'radio' } & IPropsRadio);
 
-const Component = forwardRef<HTMLInputElement, IProps>(({ type, ...props }, ref) => {
+function InputContainer({ type, ...props }: IProps) {
   switch (type) {
     case 'email':
-      return <Email {...props} type={type} ref={ref} />;
+      return <Email {...props} type={type} />;
 
     case 'checkbox':
-      return <Checkbox {...props} type={type} ref={ref} />;
+      return <Checkbox {...props} type={type} />;
 
     case 'radio':
-      return <Radio {...props} type={type} ref={ref} />;
+      return <Radio {...props} type={type} />;
 
     default:
-      return <Input {...props} type={type} ref={ref} />;
+      return <Input {...props} type={type} />;
   }
-});
+}
 
-const InputProxy = Object.assign(memo(Component), { masks });
-export default InputProxy;
+export const InputProxy = Object.assign(InputContainer, { masks });

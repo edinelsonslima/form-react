@@ -1,4 +1,4 @@
-const masks = {
+export const masks = {
   currency: (options?: Intl.NumberFormatOptions & { locale?: string }) => {
     const intl = new Intl.NumberFormat(options?.locale ?? 'pt-br', {
       currency: 'BRL',
@@ -39,5 +39,3 @@ const masks = {
     clear: (input: string) => input.replace(/[^A-Za-zÀ-úÜüÖöäÄëï .-]/g, ''),
   },
 };
-
-export default masks;
