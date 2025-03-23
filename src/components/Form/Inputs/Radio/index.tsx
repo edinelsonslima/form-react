@@ -2,30 +2,21 @@ import { memo } from 'react';
 
 import { Input } from '../Base';
 import { IProps } from './types';
+import { mp } from '@/helpers/mp';
 
 import s from './index.module.css';
 
-function InputRadio(props: IProps) {
+function InputRadio({ components, ...props }: IProps) {
   return (
     <Input
-      {...props}
+      {...mp(props, s.radio)}
       suffix={undefined}
       prefix={undefined}
-      className={`${s.radio} ${props.className}`}
-      // props={{
-      //   container: { className: cn(s, 'container', rest.props?.container?.className) },
-      //   label: {
-      //     container: {
-      //       className: cn(s, 'container-label', rest.props?.label?.container?.className),
-      //     },
-      //     label: {
-      //       className: cn(s, 'label', rest.props?.label?.container?.className),
-      //     },
-      //   },
-      //   input: {
-      //     container: { className: cn(s, 'container-input', rest.props?.container?.className) },
-      //   },
-      // }}
+      components={mp(components, {
+        inputW: mp(components?.inputW, s.wrapper),
+        label: mp(components?.label, s.label),
+        inputC: mp(components?.inputC, s['input-content']),
+      })}
     />
   );
 }

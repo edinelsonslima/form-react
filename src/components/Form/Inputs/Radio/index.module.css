@@ -1,14 +1,8 @@
-.container {
+.wrapper {
   align-items: center;
   flex-direction: row-reverse;
+  justify-content: flex-end;
   gap: .5rem;
-}
-
-.container-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
 }
 
 .label {
@@ -16,7 +10,7 @@
   margin: 0;
 }
 
-.container-input {
+.input-content {
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
@@ -34,5 +28,5 @@
 }
 
 .radio:checked {
-  background: var(--primary-color);
+  background: var(--rb-color-primary);
 }
