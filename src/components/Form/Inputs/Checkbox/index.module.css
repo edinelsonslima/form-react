@@ -1,14 +1,8 @@
-.container {
+.wrapper {
   align-items: center;
   flex-direction: row-reverse;
+  justify-content: flex-end;
   gap: .5rem;
-}
-
-.container-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
 }
 
 .label {
@@ -16,7 +10,7 @@
   margin: 0;
 }
 
-.container-input {
+.content {
   flex: 0 0 auto;
   width: 17px;
   height: 17px;
@@ -35,10 +29,10 @@
   top: 47%;
   left: 30%;
   transform: translate(-50%, -50%);
-  color: #fff;
+  color: var(--rb-color-white);
   font-weight: 700;
 }
 
 .checkbox:checked {
-  background: var(--primary-color);
+  background: var(--rb-color-primary);
 }

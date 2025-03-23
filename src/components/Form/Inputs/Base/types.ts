@@ -46,6 +46,15 @@ type IProps = IControllerProps & {
   label?: ReactNode | { message: ReactNode; suffix: ReactNode };
   suffix?: ReactNode;
   prefix?: ReactNode;
+  components?: {
+    inputW?: Partial<ComponentProps<'div'>>;
+    label?: Partial<ComponentProps<'label'>>;
+    labelW?: Partial<ComponentProps<'div'>>;
+    inputC?: Partial<ComponentProps<'div'>>;
+    suffix?: Partial<ComponentProps<'span'>>;
+    prefix?: Partial<ComponentProps<'span'>>;
+    error?: Partial<ComponentProps<'small'>>;
+  };
 };
 
 export type { IControllerProps, ICustomInput, IProps };

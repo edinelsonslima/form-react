@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import { IProps } from './types';
 import { useController } from './use.controller';
+import { mp } from '@/helpers/mp';
 
 import { Label } from './label';
 import { Error } from './error';
@@ -8,23 +9,30 @@ import { Adornment } from './Adornment';
 
 import s from './index.module.css';
 
-function InputComponent({ label, suffix, prefix, ...rest }: IProps) {
-  const { currentError, errorId, className, ...props } = useController(rest);
+function InputComponent({ label, suffix, prefix, components, ...rest }: IProps) {
+  const { currentError, errorId, ...props } = useController(rest);
 
   return (
-    <div className={s['input-container']}>
-      <Label shouldRender={!!label} htmlFor={props.id} suffix={Object(label)?.suffix}>
+    <div {...mp(components?.inputW, s['input-wrapper'])}>
+      <Label
+        shouldRender={!!label}
+        htmlFor={props.id}
+        suffix={Object(label)?.suffix}
+        components={{ container: components?.labelW, label: components?.label }}
+      >
         {Object(label)?.message || label}
       </Label>
 
-      <div className={s['input-content']}>
-        <Adornment shouldRender={!!prefix} onClick={() => props.ref.current?.focus()}>
+      <div {...mp(components?.inputC, s['input-content'])}>
+        <Adornment
+          shouldRender={!!prefix}
+          {...mp(components?.prefix, { onClick: () => props.ref.current?.focus() })}
+        >
           {prefix}
         </Adornment>
 
         <input
-          {...props}
-          className={`${s.input} ${className}`}
+          {...mp(props, s.input)}
           title={currentError || undefined}
           aria-invalid={!!currentError}
           aria-errormessage={currentError ? errorId : undefined}
@@ -33,12 +41,20 @@ function InputComponent({ label, suffix, prefix, ...rest }: IProps) {
           data-suffix={!!suffix}
         />
 
-        <Adornment shouldRender={!!suffix} onClick={() => props.ref.current?.focus()}>
+        <Adornment
+          shouldRender={!!suffix}
+          {...mp(components?.suffix, { onClick: () => props.ref.current?.focus() })}
+        >
           {suffix}
         </Adornment>
       </div>
 
-      <Error shouldRender={!!currentError} aria-errormessage={errorId} id={errorId}>
+      <Error
+        shouldRender={!!currentError}
+        aria-errormessage={errorId}
+        id={errorId}
+        {...mp(components?.error)}
+      >
         {currentError}
       </Error>
     </div>
