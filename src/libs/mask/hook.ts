@@ -63,6 +63,7 @@ export function useMask(mask: Mask = '') {
 
     // Solução não muito elegante para remover máscara antes do submit
     // com risco de apresentar os campos sem máscara em tela caso tenha vários submit's ao mesmo tempo
+    // Melhor alternativa, encapsular o input adicionar a ref e pegando o valor sem mascara pela ref ex. inputRef.current!['rb-value']
     inputRef.current.form?.addEventListener(
       'submit',
       () => {
