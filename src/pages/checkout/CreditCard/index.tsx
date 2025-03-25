@@ -1,4 +1,4 @@
-import { Form } from '@/components/Form';
+import { Form } from '@/lib/components/Form';
 import { Popover } from '@/pages/components/Popover';
 
 export function CreditCard() {

@@ -1,5 +1,5 @@
-import { clear, set } from '@/helpers/mask';
-import { useDebounce } from '@/hooks/use.debounce';
+import { clear, set } from '@/lib/helpers/mask';
+import { useDebounce } from '@/lib/hooks/use.debounce';
 import { ChangeEvent, FormEvent, useImperativeHandle, useRef, useState } from 'react';
 import { IControllerProps, ICustomInput } from './types';
 

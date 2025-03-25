@@ -1,4 +1,4 @@
-import { Form } from '@/components/Form';
+import { Form } from '@/lib/components/Form';
 
 import { Separate } from '@/pages/components/Separate';
 import { Address } from './Address';

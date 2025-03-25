@@ -1,4 +1,4 @@
-import { Form } from '@/components/Form';
+import { Form } from '@/lib/components/Form';
 import { SecurityLabel } from './SecurityLabel';
 import { Name } from './Name';
 import { Email } from './Email';

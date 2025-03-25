@@ -1,6 +1,6 @@
-import { isTruthy } from '@/helpers/is.truthy';
-import { sanitize } from '@/helpers/sanitize.string';
-import { useDebounce } from '@/hooks/use.debounce';
+import { isTruthy } from '@/lib/helpers/is.truthy';
+import { sanitize } from '@/lib/helpers/sanitize.string';
+import { useDebounce } from '@/lib/hooks/use.debounce';
 import {
   Children,
   FocusEvent,

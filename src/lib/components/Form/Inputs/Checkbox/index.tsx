@@ -1,27 +1,28 @@
 import { memo } from 'react';
 
+import { cn, cp } from '@/lib/helpers/combine';
+
 import { Input } from '../Base';
 import { IProps } from './types';
-import { cp, cn } from '@/helpers/combine';
 
 import s from './index.module.css';
 
-function InputRadio({ components, className, ...props }: IProps) {
+function InputCheckbox({ components = {}, className = '', ...props }: IProps) {
   return (
     <Input
       {...props}
-      className={cn(className, s.radio)}
       suffix={undefined}
       prefix={undefined}
+      className={cn(className, s.checkbox)}
       components={{
         ...components,
         wrapper: cp(components?.wrapper, s.wrapper),
         label: cp(components?.label, s.label),
-        inputC: cp(components?.inputC, s['input-content']),
+        inputC: cp(components?.inputC, s.content),
       }}
     />
   );
 }
 
-export const Radio = memo(InputRadio);
+export const Checkbox = memo(InputCheckbox);
 export type { IProps };

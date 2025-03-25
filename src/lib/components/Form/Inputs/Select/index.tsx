@@ -1,8 +1,8 @@
 import { memo } from 'react';
 
-import { IconArrow } from '@/assets/icons/arrow';
-import { IconSearch } from '@/assets/icons/search';
-import { cn, cp } from '@/helpers/combine';
+import { IconArrow } from '@/lib/assets/icons/arrow';
+import { IconSearch } from '@/lib/assets/icons/search';
+import { cn, cp } from '@/lib/helpers/combine';
 
 import { Input } from '../Base';
 import { IProps } from './types';

@@ -1,5 +1,5 @@
-import { Form } from '@/components/Form';
-import countries from '@/data/countries.json';
+import { Form } from '@/lib/components/Form';
+import countries from '@/pages/data/countries.json';
 import { Label } from './label';
 
 const phoneOptions = countries.map(({ DDI, isoAlpha2, name, nativeName }) => ({

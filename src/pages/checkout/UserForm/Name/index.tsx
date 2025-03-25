@@ -1,4 +1,4 @@
-import { Form } from '@/components/Form';
+import { Form } from '@/lib/components/Form';
 import { validate } from '@/pages/helpers/validate';
 import { nameValidation } from './validate';
 

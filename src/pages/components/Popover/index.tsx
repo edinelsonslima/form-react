@@ -1,5 +1,5 @@
 import { ComponentProps, memo, useEffect, useState } from 'react';
-import { useSafeElementPosition, IPositionPreference } from '@/hooks/use.safe.element.position';
+import { useSafeElementPosition, IPositionPreference } from '@/lib/hooks/use.safe.element.position';
 
 import s from './index.module.css';
 

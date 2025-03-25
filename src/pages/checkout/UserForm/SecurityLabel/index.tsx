@@ -1,4 +1,4 @@
-import { IconLock } from '@/assets/icons/lock';
+import { IconLock } from '@/pages/assets/icons/lock';
 
 export function SecurityLabel() {
   return (

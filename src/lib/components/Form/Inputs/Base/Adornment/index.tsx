@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react';
-import { withShouldRender } from '@/helpers/should.render';
-import { cn } from '@/helpers/combine';
+import { withShouldRender } from '@/lib/helpers/should.render';
+import { cn } from '@/lib/helpers/combine';
 
 import s from './index.module.css';
 
