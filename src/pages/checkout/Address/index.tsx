@@ -1,4 +1,4 @@
-import { Form } from '@/lib/components/Form';
+import { Form } from '@/libs/form/components/Form';
 
 export function Address() {
   return (

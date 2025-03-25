@@ -3,7 +3,7 @@ import { memoize } from './memoize';
 type IMajority = {
   qty: number;
   value: string;
-  values: { [key: string]: number };
+  values: Record<string, number>;
 };
 
 export const findMajority = memoize((array: string[], candidates: string[]) => {

@@ -1,4 +1,4 @@
-import { masks } from '@/lib/helpers/masks';
+import { masks } from '@/libs/form/helpers/masks';
 import { Input, IProps as IPropsBase } from './Base';
 import { Checkbox, IProps as IPropsCheckbox } from './Checkbox';
 import { Email, IProps as IPropsEmail } from './Email';

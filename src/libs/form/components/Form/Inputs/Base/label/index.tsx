@@ -1,6 +1,6 @@
 import { ComponentProps, ReactNode } from 'react';
-import { withShouldRender } from '@/lib/helpers/should.render';
-import { cn } from '@/lib/helpers/combine';
+import { withShouldRender } from '@/libs/form/helpers/should.render';
+import { cn } from '@/libs/form/helpers/combine';
 
 import s from './index.module.css';
 

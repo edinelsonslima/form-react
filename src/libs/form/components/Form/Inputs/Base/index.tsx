@@ -6,7 +6,7 @@ import { Adornment } from './Adornment';
 import { IProps } from './types';
 import { useController } from './use.controller';
 
-import { cn, cp } from '@/lib/helpers/combine';
+import { cn, cp } from '@/libs/form/helpers/combine';
 
 import s from './index.module.css';
 

@@ -1,15 +1,17 @@
-import { ComponentProps, memo, useEffect, useState } from 'react';
-import { useSafeElementPosition, IPositionPreference } from '@/lib/hooks/use.safe.element.position';
+import { ComponentProps, memo, ReactNode, useEffect, useState } from 'react';
+import { useSafeElementPosition, IPositionPreference } from './use.safe.element.position';
 
 import s from './index.module.css';
 
 type IPopoverProps = ComponentProps<'button'> & {
   timer?: number;
   positionPreference?: IPositionPreference;
+  trigger?: ReactNode;
 };
 
 function PopoverComponent({
   timer = 2_000,
+  trigger = '?',
   positionPreference,
   children,
   ...props
@@ -49,7 +51,7 @@ function PopoverComponent({
       aria-controls={contentRef.current?.id}
       {...props}
     >
-      ?
+      {trigger}
       <span
         ref={contentRef}
         className={isOpen ? s['not-sr-only'] : s['sr-only']}

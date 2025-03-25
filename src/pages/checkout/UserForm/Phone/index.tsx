@@ -1,4 +1,4 @@
-import { Form } from '@/lib/components/Form';
+import { Form } from '@/libs/form/components/Form';
 import countries from '@/pages/data/countries.json';
 import { Label } from './label';
 
