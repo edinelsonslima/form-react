@@ -1,7 +1,9 @@
-import { useDebounce } from '@/libs/form/hooks/use.debounce';
 import { ChangeEvent, FormEvent, useImperativeHandle, useState } from 'react';
-import { IControllerProps, ICustomInput } from './types';
+import { useDebounce } from '@/libs/form/hooks/use.debounce';
 import { useMask } from '@/libs/mask';
+import { IControllerProps, ICustomInput } from './types';
+
+let isFocused = false;
 
 export function useController({
   onInvalid,
@@ -18,16 +20,29 @@ export function useController({
   const input = useMask(mask);
   const [currentError, _internal_error_] = useState('');
 
-  const handleSetCurrentError = (message: string, event: FormEvent<ICustomInput>) => {
-    debouce(() => _internal_error_(message), 300);
-    if (!message || !scrollIntoViewError) return;
+  const handleScrollIntoViewError = () => {
+    input.ref.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center',
+      ...(scrollIntoViewError instanceof Object ? scrollIntoViewError : {}),
+    });
 
-    event.currentTarget?.focus({ preventScroll: true });
-    event.currentTarget?.scrollIntoView(
-      typeof scrollIntoViewError === 'boolean'
-        ? { behavior: 'smooth', block: 'center', inline: 'center' }
-        : { ...scrollIntoViewError },
-    );
+    if (isFocused) return;
+
+    input.ref.current?.focus({ preventScroll: true });
+    isFocused = true;
+
+    const timeoutId = setTimeout(() => {
+      isFocused = false;
+      clearTimeout(timeoutId);
+    }, 300);
+  };
+
+  const handleSetCurrentError = (message: string) => {
+    debouce(() => _internal_error_(message), 300);
+    if (!message) return;
+    handleScrollIntoViewError();
   };
 
   const onHandleInvalid = (evt: FormEvent<ICustomInput>) => {
@@ -35,7 +50,7 @@ export function useController({
     onInvalid?.(evt);
     const target = evt.currentTarget;
 
-    if (target?.validity?.valid) return handleSetCurrentError('', evt);
+    if (target?.validity?.valid) return handleSetCurrentError('');
 
     const dictionary: Record<string, string> | undefined =
       defaultErrorMessages instanceof Function
@@ -43,11 +58,11 @@ export function useController({
         : defaultErrorMessages;
 
     if (target?.validity?.customError || !dictionary) {
-      return handleSetCurrentError(target?.validationMessage, evt);
+      return handleSetCurrentError(target?.validationMessage);
     }
 
     const error = Object.keys(dictionary).find((key) => Object(target?.validity)[key]);
-    handleSetCurrentError(error ? dictionary[error] : target?.validationMessage, evt);
+    handleSetCurrentError(error ? dictionary[error] : target?.validationMessage);
   };
 
   const onHandleInput = async (evt: FormEvent<ICustomInput>) => {
