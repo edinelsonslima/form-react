@@ -12,10 +12,8 @@ export function Checkout() {
       <Form.Root
         id="main-form"
         onSubmit={(data) => console.log(data)}
-        className="container mx-auto my-4 p-4"
-        initialValues={{
-          'user-name': 'John',
-        }}
+        style={{ margin: '1rem auto', padding: '1rem' }}
+        initialValues={{ 'user-name': 'Edinelson Lima' }}
       >
         <UserForm />
 

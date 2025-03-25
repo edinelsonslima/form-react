@@ -2,6 +2,7 @@ import { memo } from 'react';
 
 import { IconArrow } from '@/assets/icons/arrow';
 import { IconSearch } from '@/assets/icons/search';
+import { cn, cp } from '@/helpers/combine';
 
 import { Input } from '../Base';
 import { IProps } from './types';
@@ -26,7 +27,7 @@ function InputSelect(props: IProps) {
 
   return (
     <div
-      className={s['select-container']}
+      {...cp(rest.components?.select, s['select-container'])}
       onBlur={handleCloseOptions}
       onFocus={handleOpenOptions}
       onKeyDown={handleKeyDownContainer}
@@ -38,7 +39,7 @@ function InputSelect(props: IProps) {
           </span>
         }
         {...rest}
-        className={`${isOptionsOpen ? s['select-input-open'] : ''} ${rest.className}`}
+        className={cn(rest.className, isOptionsOpen ? s['select-input-open'] : '')}
         onKeyDown={handleSelectEnterKeyPress}
         onChange={(_, value) => handleUpdateOptions(value)}
         autoComplete="off"
@@ -49,7 +50,7 @@ function InputSelect(props: IProps) {
       />
 
       <ul
-        {...rest.props?.ul}
+        {...cp(rest.components?.ul)}
         ref={ulRef}
         hidden={!isOptionsOpen}
         aria-labelledby={props.id}
@@ -59,7 +60,7 @@ function InputSelect(props: IProps) {
         {/* tentar melhorar essa parte com lista virtualizada */}
         {optionsInState.map(({ key, value, label }, i) => (
           <li
-            {...rest.props?.li}
+            {...cp(rest.components?.li)}
             key={key}
             id={`option-${i}`}
             onMouseDown={handleMouseDownOptions}

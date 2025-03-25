@@ -29,7 +29,7 @@ export function CreditCard() {
           mask="00/00"
           placeholder="MM/AA"
           autoComplete="cc-exp"
-          props={{ container: { style: { flex: 1, minWidth: '4rem', maxWidth: '7rem' } } }}
+          components={{ wrapper: { flex: 1, minWidth: '4rem', maxWidth: '7rem' } }}
         />
 
         <Form.Input
@@ -37,7 +37,7 @@ export function CreditCard() {
           name="holder-cvv"
           mask="0000"
           autoComplete="cc-csc"
-          props={{ container: { style: { flex: 1 } } }}
+          components={{ wrapper: { flex: 1 } }}
           label={{
             message: 'Código de segurança',
             suffix: (

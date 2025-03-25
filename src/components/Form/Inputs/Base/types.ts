@@ -1,4 +1,10 @@
-import { ChangeEvent, ComponentProps, ComponentPropsWithRef, ReactNode } from 'react';
+import {
+  ChangeEvent,
+  ComponentProps,
+  ComponentPropsWithRef,
+  CSSProperties,
+  ReactNode,
+} from 'react';
 
 type ICustomInput = HTMLInputElement & { valueUnmasked: string };
 
@@ -31,7 +37,9 @@ type IControllerProps = IBaseProps & {
    * - - `regexp` - Regular expression to be applied to the input value
    * - - `message` - Message to be displayed if the value is invalid
    */
-  pattern?: ((input: string) => string | undefined) | { regexp: RegExp | string; message: string };
+  pattern?:
+    | ((input: string) => string | undefined | Promise<string | undefined>)
+    | { regexp: RegExp | string; message: string };
 
   onChange?: (event: ChangeEvent<HTMLInputElement>, input: string, inputMasked: string) => void;
 
@@ -47,13 +55,13 @@ type IProps = IControllerProps & {
   suffix?: ReactNode;
   prefix?: ReactNode;
   components?: {
-    inputW?: Partial<ComponentProps<'div'>>;
-    label?: Partial<ComponentProps<'label'>>;
-    labelW?: Partial<ComponentProps<'div'>>;
-    inputC?: Partial<ComponentProps<'div'>>;
-    suffix?: Partial<ComponentProps<'span'>>;
-    prefix?: Partial<ComponentProps<'span'>>;
-    error?: Partial<ComponentProps<'small'>>;
+    wrapper?: string | CSSProperties | (() => ComponentProps<'div'>);
+    label?: string | CSSProperties | (() => ComponentProps<'label'>);
+    labelW?: string | CSSProperties | (() => ComponentProps<'div'>);
+    inputC?: string | CSSProperties | (() => ComponentProps<'div'>);
+    suffix?: string | CSSProperties | (() => ComponentProps<'span'>);
+    prefix?: string | CSSProperties | (() => ComponentProps<'span'>);
+    error?: string | CSSProperties | (() => ComponentProps<'small'>);
   };
 };
 

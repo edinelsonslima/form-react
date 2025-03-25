@@ -1,11 +1,11 @@
 import { ComponentProps } from 'react';
 import { withShouldRender } from '@/helpers/should.render';
+import { cn } from '@/helpers/combine';
 
 import s from './index.module.css';
-import { mp } from '@/helpers/mp';
 
-function ErrorComponent({ ...props }: ComponentProps<'small'>) {
-  return <small {...mp(props, s.error)} />;
+function ErrorComponent({ className, ...props }: ComponentProps<'small'>) {
+  return <small {...props} className={cn(className, s.error)} />;
 }
 
 export const Error = withShouldRender(ErrorComponent);

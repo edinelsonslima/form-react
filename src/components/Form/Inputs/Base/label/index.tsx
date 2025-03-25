@@ -1,25 +1,22 @@
 import { ComponentProps, ReactNode } from 'react';
 import { withShouldRender } from '@/helpers/should.render';
+import { cn } from '@/helpers/combine';
 
 import s from './index.module.css';
-import { mp } from '@/helpers/mp';
 
 type Props = ComponentProps<'label'> & {
   suffix?: ReactNode;
-  components: {
-    container?: ComponentProps<'div'>;
-    label?: ComponentProps<'label'>;
-  };
+  container?: ComponentProps<'div'>;
 };
 
-function LabelComponent({ suffix, components, ...props }: Props) {
+function LabelComponent({ suffix, container, className, ...props }: Props) {
   if (!suffix) {
-    return <label {...mp(props, components.label, s.label)} />;
+    return <label {...props} className={cn(className, s.label)} />;
   }
 
   return (
-    <div {...mp(components.container, s.container)}>
-      <label {...mp(props, components.label, s.label)} />
+    <div {...container}>
+      <label {...props} className={cn(className, s.label)} />
       {suffix && suffix}
     </div>
   );

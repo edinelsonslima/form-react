@@ -1,11 +1,12 @@
 import { memo } from 'react';
-import { IProps } from './types';
-import { useController } from './use.controller';
-import { mp } from '@/helpers/mp';
 
 import { Label } from './label';
 import { Error } from './error';
 import { Adornment } from './Adornment';
+import { IProps } from './types';
+import { useController } from './use.controller';
+
+import { cn, cp } from '@/helpers/combine';
 
 import s from './index.module.css';
 
@@ -13,26 +14,25 @@ function InputComponent({ label, suffix, prefix, components, ...rest }: IProps) 
   const { currentError, errorId, ...props } = useController(rest);
 
   return (
-    <div {...mp(components?.inputW, s['input-wrapper'])}>
+    <div {...cp(components?.wrapper, s['input-wrapper'])}>
       <Label
+        {...cp(components?.label)}
+        container={cp(components?.labelW)}
         shouldRender={!!label}
         htmlFor={props.id}
         suffix={Object(label)?.suffix}
-        components={{ container: components?.labelW, label: components?.label }}
       >
         {Object(label)?.message || label}
       </Label>
 
-      <div {...mp(components?.inputC, s['input-content'])}>
-        <Adornment
-          shouldRender={!!prefix}
-          {...mp(components?.prefix, { onClick: () => props.ref.current?.focus() })}
-        >
+      <div {...cp(components?.inputC, s['input-content'])}>
+        <Adornment shouldRender={!!prefix} {...cp(components?.prefix)}>
           {prefix}
         </Adornment>
 
         <input
-          {...mp(props, s.input)}
+          {...props}
+          className={cn(props?.className, s.input)}
           title={currentError || undefined}
           aria-invalid={!!currentError}
           aria-errormessage={currentError ? errorId : undefined}
@@ -41,10 +41,7 @@ function InputComponent({ label, suffix, prefix, components, ...rest }: IProps) 
           data-suffix={!!suffix}
         />
 
-        <Adornment
-          shouldRender={!!suffix}
-          {...mp(components?.suffix, { onClick: () => props.ref.current?.focus() })}
-        >
+        <Adornment shouldRender={!!suffix} {...cp(components?.suffix)}>
           {suffix}
         </Adornment>
       </div>
@@ -53,7 +50,7 @@ function InputComponent({ label, suffix, prefix, components, ...rest }: IProps) 
         shouldRender={!!currentError}
         aria-errormessage={errorId}
         id={errorId}
-        {...mp(components?.error)}
+        {...cp(components?.error)}
       >
         {currentError}
       </Error>

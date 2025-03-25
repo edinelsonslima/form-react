@@ -3,7 +3,17 @@ import { Checkout } from './pages/checkout';
 export function App() {
   return (
     <>
-      <h1 className="text-center text-primary text-4xl font-bold mt-8">Checkout</h1>
+      <h1
+        style={{
+          textAlign: 'center',
+          color: 'var(--rb-color-primary)',
+          fontSize: 'var(--rb-font-xxl)',
+          fontWeight: 'var(--rb-font-bold)',
+          marginTop: 'var(--rb-space-3xl)',
+        }}
+      >
+        Checkout
+      </h1>
       <Checkout />
     </>
   );

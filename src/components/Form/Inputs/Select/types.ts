@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode } from 'react';
+import { ComponentProps, CSSProperties, ReactNode } from 'react';
 import { IProps as IBaseProps } from '../Base/types';
 
 type ISelectOptions = { key: string; value: string; label?: ReactNode }[];
@@ -10,9 +10,10 @@ type IControllerProps = IBaseProps & {
 };
 
 type IProps = IControllerProps & {
-  props?: IBaseProps['props'] & {
-    ul?: ComponentProps<'ul'>;
-    li?: ComponentProps<'li'>;
+  components?: IBaseProps['components'] & {
+    select?: string | CSSProperties | (() => ComponentProps<'div'>);
+    ul?: string | CSSProperties | (() => ComponentProps<'ul'>);
+    li?: string | CSSProperties | (() => ComponentProps<'li'>);
   };
 };
 

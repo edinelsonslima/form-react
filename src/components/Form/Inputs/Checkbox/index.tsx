@@ -1,22 +1,25 @@
 import { memo } from 'react';
 
+import { cn, cp } from '@/helpers/combine';
+
 import { Input } from '../Base';
 import { IProps } from './types';
-import { mp } from '@/helpers/mp';
 
 import s from './index.module.css';
 
-function InputCheckbox({ components, ...props }: IProps) {
+function InputCheckbox({ components = {}, className = '', ...props }: IProps) {
   return (
     <Input
-      {...mp(props, s.checkbox)}
+      {...props}
       suffix={undefined}
       prefix={undefined}
-      components={mp(components, {
-        inputW: mp(components?.inputW, s.wrapper),
-        label: mp(components?.label, s.label),
-        inputC: mp(components?.inputC, s.content),
-      })}
+      className={cn(className, s.checkbox)}
+      components={{
+        ...components,
+        wrapper: cp(components?.wrapper, s.wrapper),
+        label: cp(components?.label, s.label),
+        inputC: cp(components?.inputC, s.content),
+      }}
     />
   );
 }

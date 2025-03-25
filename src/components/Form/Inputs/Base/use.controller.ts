@@ -28,22 +28,22 @@ export function useController({
     onInvalid?.(evt);
     const target = evt.currentTarget;
 
-    if (target.validity.valid) return handleSetCurrentError('');
+    if (target?.validity?.valid) return handleSetCurrentError('');
 
     const dictionary: Record<string, string> | undefined =
       defaultErrorMessages instanceof Function
         ? defaultErrorMessages(target.value, target.valueUnmasked)
         : defaultErrorMessages;
 
-    if (target.validity.customError || !dictionary) {
-      return handleSetCurrentError(target.validationMessage);
+    if (target?.validity?.customError || !dictionary) {
+      return handleSetCurrentError(target?.validationMessage);
     }
 
-    const error = Object.keys(dictionary).find((key) => Object(target.validity)[key]);
-    handleSetCurrentError(error ? dictionary[error] : target.validationMessage);
+    const error = Object.keys(dictionary).find((key) => Object(target?.validity)[key]);
+    handleSetCurrentError(error ? dictionary[error] : target?.validationMessage);
   };
 
-  const onHandleInput = (evt: FormEvent<ICustomInput>) => {
+  const onHandleInput = async (evt: FormEvent<ICustomInput>) => {
     onInput?.(evt);
 
     const target = evt.currentTarget;
@@ -73,7 +73,9 @@ export function useController({
     }
 
     if (pattern instanceof Function) {
-      return dispatch(pattern(isCheckbox ? String(target.checked) : target.valueUnmasked) ?? '');
+      return dispatch(
+        (await pattern(isCheckbox ? String(target.checked) : target.valueUnmasked)) ?? '',
+      );
     }
 
     if (pattern?.regexp) {

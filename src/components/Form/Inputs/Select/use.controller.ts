@@ -30,8 +30,8 @@ const shouldContinueFocusEvent = (safeElementIds: string[], evt?: FocusEvent) =>
 };
 
 function extractText(el: ReactNode): string {
-  if (isValidElement(el)) {
-    return Children.toArray(el.props.children).map(extractText).join('');
+  if (isValidElement<{ children: ReactNode }>(el)) {
+    return Children.toArray(el.props?.children).map(extractText).join('');
   }
 
   return el?.toString() ?? '';
