@@ -22,9 +22,10 @@ export function useController({
     debouce(() => _internal_error_(message), 300);
     if (!message || !scrollIntoViewError) return;
 
+    event.currentTarget?.focus({ preventScroll: true });
     event.currentTarget?.scrollIntoView(
       typeof scrollIntoViewError === 'boolean'
-        ? { behavior: 'smooth', block: 'center' }
+        ? { behavior: 'smooth', block: 'center', inline: 'center' }
         : { ...scrollIntoViewError },
     );
   };
