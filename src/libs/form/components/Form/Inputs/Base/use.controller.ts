@@ -10,6 +10,7 @@ export function useController({
   mask,
   pattern,
   defaultErrorMessages,
+  scrollIntoViewError,
   ...rest
 }: IControllerProps) {
   const debouce = useDebounce();
@@ -17,8 +18,15 @@ export function useController({
   const input = useMask(mask);
   const [currentError, _internal_error_] = useState('');
 
-  const handleSetCurrentError = (message: string) => {
+  const handleSetCurrentError = (message: string, event: FormEvent<ICustomInput>) => {
     debouce(() => _internal_error_(message), 300);
+    if (!message || !scrollIntoViewError) return;
+
+    event.currentTarget?.scrollIntoView(
+      typeof scrollIntoViewError === 'boolean'
+        ? { behavior: 'smooth', block: 'center' }
+        : { ...scrollIntoViewError },
+    );
   };
 
   const onHandleInvalid = (evt: FormEvent<ICustomInput>) => {
@@ -26,7 +34,7 @@ export function useController({
     onInvalid?.(evt);
     const target = evt.currentTarget;
 
-    if (target?.validity?.valid) return handleSetCurrentError('');
+    if (target?.validity?.valid) return handleSetCurrentError('', evt);
 
     const dictionary: Record<string, string> | undefined =
       defaultErrorMessages instanceof Function
@@ -34,11 +42,11 @@ export function useController({
         : defaultErrorMessages;
 
     if (target?.validity?.customError || !dictionary) {
-      return handleSetCurrentError(target?.validationMessage);
+      return handleSetCurrentError(target?.validationMessage, evt);
     }
 
     const error = Object.keys(dictionary).find((key) => Object(target?.validity)[key]);
-    handleSetCurrentError(error ? dictionary[error] : target?.validationMessage);
+    handleSetCurrentError(error ? dictionary[error] : target?.validationMessage, evt);
   };
 
   const onHandleInput = async (evt: FormEvent<ICustomInput>) => {

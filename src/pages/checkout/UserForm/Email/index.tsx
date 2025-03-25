@@ -11,6 +11,7 @@ export function Email() {
       label="E-mail"
       autoComplete="email"
       required
+      scrollIntoViewError
       pattern={validate(emailValidation)}
       defaultErrorMessages={{ valueMissing: 'O e-mail é obrigatório.' }}
     />

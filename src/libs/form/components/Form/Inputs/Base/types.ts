@@ -30,6 +30,7 @@ type IControllerProps = IBaseProps & {
    * @example mask={{ set: (value) => value.toUpperCase(), clear: (value) => value.toLowerCase() }}
    */
   mask?: string | { set: (input: string) => string; clear: (input: string) => string };
+
   /**
    * Pattern to be applied to the input
    * - The pattern can be a function that receives the input value and returns a message if the value is invalid
@@ -41,8 +42,29 @@ type IControllerProps = IBaseProps & {
     | ((input: string) => string | undefined | Promise<string | undefined>)
     | { regexp: RegExp | string; message: string };
 
+  /**
+   * Custom onChange event
+   * @param event - The event object
+   * @param input - The unmasked input value
+   * @param inputMasked - The masked input value
+   */
   onChange?: (event: ChangeEvent<HTMLInputElement>, input: string, inputMasked: string) => void;
 
+  /**
+   * Enable the scrollIntoView function when the input is invalid
+   * - Receives the ScrollIntoViewOptions or Boolean as an argument
+   * @default false
+   */
+  scrollIntoViewError?: boolean | ScrollIntoViewOptions;
+
+  /**
+   * Define the default error messages for the input
+   * - Receives a Object with the error messages
+   * - Receives a Function that receives the input value and returns the error messages in Object format
+   * @param input - The unmasked input value
+   * @param inputMasked - The masked input value
+   * @returns ValidityState - The error messages in Object format
+   */
   defaultErrorMessages?:
     | ((input: string, inputMasked: string) => Partial<IValidityError>)
     | Partial<IValidityError>;
