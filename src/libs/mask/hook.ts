@@ -1,67 +1,71 @@
-import { useEffect, useRef } from 'react';
-import { clearMask, setMask } from './logic';
+import { createRef, FormEventHandler, RefObject, useEffect, useMemo, useRef } from 'react';
+import { masks } from './masks';
+import { Mask, HTMLInput } from '.';
+import { getMask, handleInput, handleValue } from './helpers';
 
-export type Mask = string | { set: (input: string) => string; clear: (input: string) => string };
-type HTMLInput = HTMLInputElement & { 'rb-value': string };
-
-export function useMask(mask: Mask = '') {
+export function useMask(prop?: Mask | ((mask: typeof masks) => Mask)) {
+  const mask = useMemo(() => getMask(prop), [prop]);
   const inputRef = useRef<HTMLInput>(null);
 
   useEffect(() => {
-    if (!inputRef.current) return;
+    if (inputRef.current?.value) {
+      inputRef.current.value = handleValue(mask, inputRef.current.value, inputRef);
+    }
 
-    const updateUnmasked = (value: string) => {
-      inputRef.current!['rb-value'] = value;
-    };
-
-    const handleValue = (key: 'value' | 'defaultValue') => {
-      const value = inputRef.current![key] ?? '';
-
-      if (typeof mask === 'object') {
-        const masked = mask.set(value);
-        updateUnmasked(mask.clear(masked));
-        return masked;
-      }
-
-      if (typeof mask === 'string') {
-        const masked = setMask(mask, value);
-        updateUnmasked(clearMask(mask, masked));
-        return masked;
-      }
-
-      updateUnmasked(value);
-      return value;
-    };
-
-    const controller = new AbortController();
-
-    inputRef.current.addEventListener(
-      'input',
-      (evt) => {
-        const target = evt.currentTarget as HTMLInput;
-        let unmasked = target.value;
-
-        if (typeof mask === 'object') {
-          unmasked = mask.clear(target.value);
-          target.value = mask.set(unmasked);
-        }
-
-        if (typeof mask === 'string') {
-          unmasked = clearMask(mask, target.value);
-          target.value = setMask(mask, unmasked);
-        }
-
-        updateUnmasked(unmasked);
-        return evt;
-      },
-      { signal: controller.signal },
-    );
-
-    inputRef.current.value = handleValue('value');
-    inputRef.current.defaultValue = handleValue('defaultValue');
-
-    return () => controller.abort();
+    if (inputRef.current?.defaultValue) {
+      inputRef.current.defaultValue = handleValue(mask, inputRef.current.defaultValue, inputRef);
+    }
   }, [mask]);
 
-  return inputRef;
+  return useMemo(
+    () => ({
+      ref: inputRef,
+      bindInputEvent: (oninput?: FormEventHandler<HTMLInputElement>) => {
+        return handleInput(mask, inputRef, oninput);
+      },
+      input: () => ({
+        unmasked: inputRef.current?.['rb-value'],
+        masked: inputRef.current?.value,
+      }),
+      props: {
+        ref: inputRef,
+        onInput: handleInput(mask, inputRef),
+      },
+    }),
+    [mask],
+  );
+}
+
+interface MasksProps {
+  mask?: Mask | ((mask: typeof masks) => Mask);
+  onInput?: FormEventHandler<HTMLInputElement>;
+  value?: string | number;
+  defaultValue?: string | number;
+}
+
+export function useMasks() {
+  const inputs = useMemo(() => new Map<string, RefObject<HTMLInput | null>>(), []);
+
+  return {
+    inputs: () => {
+      return new Map(
+        Array.from(inputs).map(([name, ref]) => {
+          const value = { unmasked: ref.current?.['rb-value'], masked: ref.current?.value };
+          return [name, value];
+        }),
+      );
+    },
+    mask: (name: string, { mask, value, defaultValue, onInput }: MasksProps) => {
+      mask = getMask(mask);
+      value = String(value ?? '');
+      defaultValue = String(defaultValue ?? '');
+
+      return {
+        onInput: handleInput(mask, inputs.get(name), onInput),
+        ref: inputs.get(name) ?? inputs.set(name, createRef<HTMLInput>()).get(name)!,
+        ...(value && { value: handleValue(mask, value, inputs.get(name)) }),
+        ...(defaultValue && { defaultValue: handleValue(mask, defaultValue, inputs.get(name)) }),
+      };
+    },
+  };
 }

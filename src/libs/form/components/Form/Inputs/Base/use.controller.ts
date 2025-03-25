@@ -14,7 +14,7 @@ export function useController({
 }: IControllerProps) {
   const debouce = useDebounce();
 
-  const inputRef = useMask(mask);
+  const input = useMask(mask);
   const [currentError, _internal_error_] = useState('');
 
   const handleSetCurrentError = (message: string) => {
@@ -71,19 +71,19 @@ export function useController({
     dispatch('');
   };
 
-  const onHandleChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    return onChange?.(evt, inputRef.current!['rb-value'], evt.currentTarget.value);
+  const onHandleChange = (evt: ChangeEvent<ICustomInput>) => {
+    return onChange?.(evt, evt.currentTarget['rb-value'], evt.currentTarget.value);
   };
 
-  useImperativeHandle(rest.ref, () => inputRef.current!);
+  useImperativeHandle(rest.ref, () => input.ref.current!);
 
   return {
     ...rest,
+    ref: input.ref,
     currentError,
-    ref: inputRef,
     errorId: `${rest.id}-error`,
     className: rest.className ?? '',
-    onInput: onHandleInput,
+    onInput: input.bindInputEvent(onHandleInput),
     onInvalid: onHandleInvalid,
     onChange: onHandleChange,
   };
