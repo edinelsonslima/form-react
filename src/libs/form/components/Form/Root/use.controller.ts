@@ -47,7 +47,7 @@ export function useController<T extends object>({
         }
 
         return [
-          { ...unmasked, [el.name]: Object(el)?.valueUnmasked },
+          { ...unmasked, [el.name]: Object(el)?.['rb-value'] },
           { ...masked, [el.name]: el.value },
         ];
       }
@@ -82,8 +82,12 @@ export function useController<T extends object>({
       }
 
       if (element instanceof HTMLInputElement) {
-        const isCheckbox = target.type === 'checkbox';
-        isCheckbox ? (element.checked = !!value) : (element.value = value?.toString() ?? '');
+        if (target.type === 'checkbox') {
+          element.checked = !!value;
+        }
+
+        element.value = value?.toString() ?? '';
+        element.defaultValue = value?.toString() ?? '';
         element.dispatchEvent(new Event('input', { bubbles: true }));
       }
     };

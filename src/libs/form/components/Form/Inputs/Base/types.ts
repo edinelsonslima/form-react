@@ -6,7 +6,7 @@ import {
   ReactNode,
 } from 'react';
 
-type ICustomInput = HTMLInputElement & { valueUnmasked: string };
+type ICustomInput = HTMLInputElement & { ['rb-value']: string };
 
 type IValidityError = Omit<Record<keyof ValidityState, string>, 'valid' | 'customError'>;
 

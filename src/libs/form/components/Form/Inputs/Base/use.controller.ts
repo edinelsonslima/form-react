@@ -1,14 +1,12 @@
-import { clear, set } from '@/libs/form/helpers/mask';
 import { useDebounce } from '@/libs/form/hooks/use.debounce';
-import { ChangeEvent, FormEvent, useImperativeHandle, useRef, useState } from 'react';
+import { ChangeEvent, FormEvent, useImperativeHandle, useState } from 'react';
 import { IControllerProps, ICustomInput } from './types';
+import { useMask } from '@/libs/mask';
 
 export function useController({
   onInvalid,
   onInput,
   onChange,
-  value,
-  defaultValue,
   mask,
   pattern,
   defaultErrorMessages,
@@ -16,7 +14,7 @@ export function useController({
 }: IControllerProps) {
   const debouce = useDebounce();
 
-  const inputRef = useRef<ICustomInput>(null);
+  const inputRef = useMask(mask);
   const [currentError, _internal_error_] = useState('');
 
   const handleSetCurrentError = (message: string) => {
@@ -32,7 +30,7 @@ export function useController({
 
     const dictionary: Record<string, string> | undefined =
       defaultErrorMessages instanceof Function
-        ? defaultErrorMessages(target.value, target.valueUnmasked)
+        ? defaultErrorMessages(target.value, target['rb-value'])
         : defaultErrorMessages;
 
     if (target?.validity?.customError || !dictionary) {
@@ -49,18 +47,6 @@ export function useController({
     const target = evt.currentTarget;
     const isCheckbox = target.type === 'checkbox';
 
-    target.valueUnmasked = target.value || '';
-
-    if (typeof mask === 'object') {
-      target.valueUnmasked = mask.clear(target.value);
-      target.value = mask.set(target.valueUnmasked);
-    }
-
-    if (typeof mask === 'string') {
-      target.valueUnmasked = clear(mask, target.value);
-      target.value = set(mask, target.valueUnmasked);
-    }
-
     const dispatch = (message: string) => {
       target.setCustomValidity(message);
       if (!message) return onHandleInvalid(evt);
@@ -68,64 +54,25 @@ export function useController({
       target.reportValidity();
     };
 
-    if (!isCheckbox && !target.valueUnmasked) {
+    if (!isCheckbox && !target['rb-value']) {
       return dispatch('');
     }
 
     if (pattern instanceof Function) {
-      return dispatch(
-        (await pattern(isCheckbox ? String(target.checked) : target.valueUnmasked)) ?? '',
-      );
+      const result = await pattern(isCheckbox ? String(target.checked) : target['rb-value']);
+      return dispatch(result ?? '');
     }
 
     if (pattern?.regexp) {
       const regexp = new RegExp(pattern.regexp);
-      return dispatch(!regexp.test(target.valueUnmasked) ? pattern.message : '');
+      return dispatch(!regexp.test(target['rb-value']) ? pattern.message : '');
     }
 
     dispatch('');
   };
 
   const onHandleChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    const value = evt.currentTarget.value;
-
-    if (typeof mask === 'object') {
-      return onChange?.(evt, mask.clear(value), value);
-    }
-
-    if (typeof mask === 'string') {
-      return onChange?.(evt, clear(mask, value), value);
-    }
-
-    return onChange?.(evt, value, value);
-  };
-
-  const onHandleValue = () => {
-    if (value === undefined) return value;
-
-    if (typeof mask === 'object') {
-      return mask.set(String(value));
-    }
-
-    if (typeof mask === 'string') {
-      return set(mask, String(value));
-    }
-
-    return value;
-  };
-
-  const onHandleDefaultValue = () => {
-    if (defaultValue === undefined) return defaultValue;
-
-    if (typeof mask === 'object') {
-      return mask.set(String(defaultValue));
-    }
-
-    if (typeof mask === 'string') {
-      return set(mask, String(defaultValue));
-    }
-
-    return defaultValue;
+    return onChange?.(evt, inputRef.current!['rb-value'], evt.currentTarget.value);
   };
 
   useImperativeHandle(rest.ref, () => inputRef.current!);
@@ -136,8 +83,6 @@ export function useController({
     ref: inputRef,
     errorId: `${rest.id}-error`,
     className: rest.className ?? '',
-    value: onHandleValue(),
-    defaultValue: onHandleDefaultValue(),
     onInput: onHandleInput,
     onInvalid: onHandleInvalid,
     onChange: onHandleChange,
