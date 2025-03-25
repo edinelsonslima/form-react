@@ -14,24 +14,6 @@ export function useMask(mask: Mask = '') {
       inputRef.current!['rb-value'] = value;
     };
 
-    const handleMask = (evt: Event) => {
-      const target = evt.currentTarget as HTMLInput;
-      let unmasked = target.value;
-
-      if (typeof mask === 'object') {
-        unmasked = mask.clear(target.value);
-        target.value = mask.set(unmasked);
-      }
-
-      if (typeof mask === 'string') {
-        unmasked = clearMask(mask, target.value);
-        target.value = setMask(mask, unmasked);
-      }
-
-      updateUnmasked(unmasked);
-      return evt;
-    };
-
     const handleValue = (key: 'value' | 'defaultValue') => {
       const value = inputRef.current![key] ?? '';
 
@@ -53,13 +35,27 @@ export function useMask(mask: Mask = '') {
 
     const controller = new AbortController();
 
-    inputRef.current.addEventListener('input', (evt) => handleMask(evt), {
-      signal: controller.signal,
-    });
+    inputRef.current.addEventListener(
+      'input',
+      (evt) => {
+        const target = evt.currentTarget as HTMLInput;
+        let unmasked = target.value;
 
-    inputRef.current.addEventListener('change', (evt) => handleMask(evt), {
-      signal: controller.signal,
-    });
+        if (typeof mask === 'object') {
+          unmasked = mask.clear(target.value);
+          target.value = mask.set(unmasked);
+        }
+
+        if (typeof mask === 'string') {
+          unmasked = clearMask(mask, target.value);
+          target.value = setMask(mask, unmasked);
+        }
+
+        updateUnmasked(unmasked);
+        return evt;
+      },
+      { signal: controller.signal },
+    );
 
     // Solução não muito elegante para remover máscara antes do submit
     // com risco de apresentar os campos sem máscara em tela caso tenha vários submit's ao mesmo tempo
