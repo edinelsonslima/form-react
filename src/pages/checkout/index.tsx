@@ -1,6 +1,6 @@
 import { Form } from '@/components/Form';
 
-import { Separate } from '@/components/Separate';
+import { Separate } from '@/pages/components/Separate';
 import { Address } from './Address';
 import { CreditCard } from './CreditCard';
 import { Shipping } from './Shipping';

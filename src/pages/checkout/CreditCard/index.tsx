@@ -1,5 +1,5 @@
 import { Form } from '@/components/Form';
-import { Popover } from '@/components/Popover';
+import { Popover } from '@/pages/components/Popover';
 
 export function CreditCard() {
   return (
