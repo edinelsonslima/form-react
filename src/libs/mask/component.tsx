@@ -5,10 +5,10 @@ interface Input extends ComponentPropsWithRef<'input'> {
   mask?: Mask;
 }
 
-export function Input({ mask, ref, ...props }: Input) {
-  const inputRef = useMask(mask ?? '');
+export function Input({ mask = '', ref, ...props }: Input) {
+  const inputRef = useMask(mask);
 
-  useImperativeHandle(ref, () => inputRef.current!, [inputRef]);
+  useImperativeHandle(ref, () => inputRef.ref.current!, [inputRef]);
 
-  return <input ref={inputRef} {...props} />;
+  return <input ref={inputRef.ref} {...props} />;
 }

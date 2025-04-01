@@ -1,7 +1,9 @@
 import { createRef, FormEventHandler, RefObject, useEffect, useMemo, useRef } from 'react';
 import { masks } from './masks';
-import { Mask, HTMLInput } from '.';
+import { Mask, HTMLInput } from './index';
 import { getMask, handleInput, handleValue } from './helpers';
+
+export type { Mask };
 
 export function useMask(prop?: Mask | ((mask: typeof masks) => Mask)) {
   const mask = useMemo(() => getMask(prop), [prop]);
