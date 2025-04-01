@@ -22,7 +22,7 @@ export function CreditCard() {
         }
       />
 
-      <div className="flex gap-4 items-end">
+      <div style={{ display: 'flex', gap: 16, alignItems: 'end' }}>
         <Form.Input
           id="holder-validity"
           name="holder-validity"
