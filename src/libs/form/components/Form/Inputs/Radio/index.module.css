@@ -19,6 +19,7 @@
 }
 
 .radio {
+  margin: auto;
   width: var(--rb-input-radio-size-content);
   height: var(--rb-input-radio-size-content);
   border-radius: var(--rb-input-radio-radius);
