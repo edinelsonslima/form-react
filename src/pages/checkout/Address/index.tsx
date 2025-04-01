@@ -41,7 +41,7 @@ export function Address() {
         autoComplete="shipping address-line1"
       />
 
-      <div className="flex gap-4 items-start">
+      <div style={{ display: 'flex', gap: 16 }}>
         <Form.Input
           type="text"
           id="address-neighborhood"
@@ -49,7 +49,8 @@ export function Address() {
           label="Bairro"
           autoComplete="shipping address-level2"
         />
-        <div className="flex gap-4 flex-col">
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           <Form.Input
             type="text"
             id="address-number"
@@ -57,11 +58,18 @@ export function Address() {
             label="Número"
             autoComplete="shipping address-line2"
           />
+
           <Form.Input
             type="checkbox"
             id="without-number"
             name="without-number"
-            label={<small className="text-sm text-black/40 font-normal">Não tenho número</small>}
+            label={
+              <small
+                style={{ fontSize: 'var(--rb-font-sm)', color: '#00000073', whiteSpace: 'nowrap' }}
+              >
+                Não tenho número
+              </small>
+            }
           />
         </div>
       </div>
@@ -74,7 +82,7 @@ export function Address() {
         autoComplete="shipping address-line3"
       />
 
-      <div className="flex gap-4 items-start">
+      <div style={{ display: 'flex', gap: 16 }}>
         <Form.Select
           id="address-state"
           name="address-state"
@@ -82,6 +90,7 @@ export function Address() {
           options={[]}
           autoComplete="shipping address-level1"
         />
+
         <Form.Select
           id="address-city"
           name="address-city"
