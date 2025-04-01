@@ -64,8 +64,6 @@
 
   --rb-input-base-padding: var(--rb-space-2xs) var(--rb-space-sm);
 
-  --rb-input-base-fix-margin: 0 var(--rb-space-2xs);
-
   --rb-input-base-box-shadow: 0 0 0 2px rgb(from var(--rb-color-primary) r g b / .255);
   --rb-input-base-box-shadow-hover: 0 0 0 1px rgb(from var(--rb-color-primary) r g b / .255);
   --rb-input-base-box-shadow-active: 0 0 0 4px rgb(from var(--rb-color-primary) r g b / .255);
