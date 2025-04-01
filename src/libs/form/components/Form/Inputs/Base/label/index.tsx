@@ -15,7 +15,7 @@ function LabelComponent({ suffix, container, className, ...props }: Props) {
   }
 
   return (
-    <div {...container}>
+    <div {...container} className={cn(s.container, container?.className)}>
       <label {...props} className={cn(className, s.label)} />
       {suffix && suffix}
     </div>
