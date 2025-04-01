@@ -3,8 +3,8 @@
 
   display: grid;
   place-items: center;
-  background: var(--primary-color);
-  color: var(--background-color-light);
+  background: var(--rb-color-primary);
+  color: var(--rb-color-white);
 
   border-radius: 50%;
 
@@ -23,8 +23,8 @@
   background-color: white;
   color: black;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  border-radius: var(--border-radius-base);
-  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--rb-radius-xs);
+  padding: var(--rb-space-xs);
   z-index: 1000;
 }
 
