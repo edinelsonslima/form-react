@@ -2,7 +2,6 @@ import { memo } from 'react';
 
 import { Label } from './label';
 import { Error } from './error';
-import { Adornment } from './Adornment';
 import { IProps } from './types';
 import { useController } from './use.controller';
 
@@ -26,9 +25,7 @@ function InputComponent({ label, suffix, prefix, components, ...rest }: IProps) 
       </Label>
 
       <div {...cp(components?.inputC, s['input-content'])}>
-        <Adornment shouldRender={!!prefix} {...cp(components?.prefix)}>
-          {prefix}
-        </Adornment>
+        {!!prefix && prefix}
 
         <input
           {...props}
@@ -41,9 +38,7 @@ function InputComponent({ label, suffix, prefix, components, ...rest }: IProps) 
           data-suffix={!!suffix}
         />
 
-        <Adornment shouldRender={!!suffix} {...cp(components?.suffix)}>
-          {suffix}
-        </Adornment>
+        {suffix && suffix}
       </div>
 
       <Error

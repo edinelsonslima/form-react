@@ -81,8 +81,6 @@ type IProps = IControllerProps & {
     label?: string | CSSProperties | (() => ComponentProps<'label'>);
     labelW?: string | CSSProperties | (() => ComponentProps<'div'>);
     inputC?: string | CSSProperties | (() => ComponentProps<'div'>);
-    suffix?: string | CSSProperties | (() => ComponentProps<'span'>);
-    prefix?: string | CSSProperties | (() => ComponentProps<'span'>);
     error?: string | CSSProperties | (() => ComponentProps<'small'>);
   };
 };
