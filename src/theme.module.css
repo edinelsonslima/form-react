@@ -116,6 +116,15 @@
   --rb-input-checkbox-label-font-size: var(--rb-font-md);
   --rb-input-checkbox-icon-size: var(--rb-font-xs);
   --rb-input-checkbox-icon-weight: var(--rb-font-bold);
+
+  /* Input Radio */
+  --rb-input-radio-size: var(--rb-font-md);
+  --rb-input-radio-size-content: calc(var(--rb-input-radio-size) * .875);
+  --rb-input-radio-label-gap: var(--rb-space-2xs);
+  --rb-input-radio-label-font-size: var(--rb-font-md);
+  --rb-input-radio-label-font-size: var(--rb-font-md);
+  --rb-input-radio-radius: 50%;
+  --rb-input-radio-border: 3px solid #fff;
 }
 
 * {
