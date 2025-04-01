@@ -29,8 +29,6 @@ export function Checkout() {
 
         <CreditCard />
 
-        <Separate transparent />
-
         <Form.Input type="submit" id="submit" name="submit" value="Pagar e Receber Agora" />
       </Form.Root>
     </>
