@@ -14,6 +14,7 @@ function InputCheckbox({ components = {}, className = '', ...props }: IProps) {
       suffix={undefined}
       prefix={undefined}
       className={cn(className, s.checkbox)}
+      data-check-icon="✓"
       components={{
         ...components,
         wrapper: cp(components?.wrapper, s.wrapper),

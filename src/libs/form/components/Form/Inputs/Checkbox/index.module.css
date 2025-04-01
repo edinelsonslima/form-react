@@ -2,18 +2,19 @@
   align-items: center;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  gap: .5rem;
+  gap: var(--rb-input-checkbox-label-gap);
 }
 
 .label {
   cursor: pointer;
   margin: 0;
+  font-size: var(--rb-input-checkbox-label-font-size);
 }
 
 .content {
   flex: 0 0 auto;
-  width: 17px;
-  height: 17px;
+  width: var(--rb-input-checkbox-size);
+  height: var(--rb-input-checkbox-size);
 }
 
 .checkbox {
@@ -23,14 +24,14 @@
 }
 
 .checkbox::before {
-  content: '✓';
-  font-size: .8rem;
+  content: attr(data-check-icon);
+  font-size: var(--rb-input-checkbox-icon-size);
   position: absolute;
   top: 47%;
   left: 30%;
   transform: translate(-50%, -50%);
   color: var(--rb-color-white);
-  font-weight: 700;
+  font-weight: var(--rb-input-checkbox-icon-weight);
 }
 
 .checkbox:checked {

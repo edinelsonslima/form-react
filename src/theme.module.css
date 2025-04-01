@@ -109,6 +109,13 @@
   --rb-input-submit-color: var(--rb-color-white);
   --rb-input-submit-font-weight: var(--rb-font-medium);
   --rb-input-submit-font-size: var(--rb-font-md);
+
+  /* Input Checkbox */
+  --rb-input-checkbox-size: var(--rb-font-md);
+  --rb-input-checkbox-label-gap: var(--rb-space-2xs);
+  --rb-input-checkbox-label-font-size: var(--rb-font-md);
+  --rb-input-checkbox-icon-size: var(--rb-font-xs);
+  --rb-input-checkbox-icon-weight: var(--rb-font-bold);
 }
 
 * {
