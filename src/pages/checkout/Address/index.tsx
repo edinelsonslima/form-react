@@ -10,6 +10,27 @@ export function Address() {
         name="address-postal-code"
         label="CEP da Residência"
         mask="00000-000"
+        suffix={
+          <a
+            id="discover-postalCode"
+            href="https://buscacepinter.correios.com.br/app/endereco/index.php"
+            target="blank"
+            style={{
+              background: '#eceff1',
+              height: '100%',
+              padding: '0 11px',
+              borderLeft: '1px solid #B0BEC5',
+              display: 'grid',
+              placeItems: 'center',
+              fontSize: 'var(--rb-font-sm)',
+              color: 'var(--rb-color-primary)',
+              textDecoration: 'none',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Não sei meu CEP
+          </a>
+        }
       />
 
       <Form.Input

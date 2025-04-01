@@ -5,6 +5,11 @@ export function CreditCard() {
   return (
     <Form.Fieldset name="credit" legend="FORMAS DE PAGAMENTO">
       <Form.Input
+        id="holder-number"
+        name="holder-number"
+        label="Número do Cartão"
+        mask="0000  0000  0000  0000"
+        autoComplete="cc-number"
         prefix={
           <img
             src="https://cdn.eduzzcdn.com/sun/assets/img/payment-method/brand/one_card.svg"
@@ -12,13 +17,9 @@ export function CreditCard() {
             width={20}
             height={20}
             loading="eager"
+            style={{ margin: '0 8px 0 11px' }}
           />
         }
-        id="holder-number"
-        name="holder-number"
-        label="Número do Cartão"
-        mask="0000  0000  0000  0000"
-        autoComplete="cc-number"
       />
 
       <div className="flex gap-4 items-end">
