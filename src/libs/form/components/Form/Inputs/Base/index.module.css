@@ -14,10 +14,10 @@
   overflow: hidden;
   border: var(--rb-input-base-border);
   border-radius: var(--rb-input-base-radius);
-  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, height 0.3s ease-in-out;
 
-  width: 100%;
-  height: 40px;
+  width: var(--rb-input-base-width);
+  height: var(--rb-input-base-height);
 }
 
 .input-content:hover {

@@ -1,25 +1,10 @@
-/* --background-color-light: #eceff1;
---border-color-base: #b0bec5;
---border-radius-base: 4px;
---error-color: #f44336;
---heading-color: #37474f;
---layout-footer-background: #ffffff;
---link-color: #0d47a1;
---primary-color: #0d47a1;
---success-color: #4caf50;
---inactive-color: #f5f5f5;
---text-color: #37474f;
-
---spacing-1: .25rem;
---spacing-2: .5rem;
---spacing-3: .75rem;
---spacing-4: 1rem;
---spacing-5: 1.25rem;
---spacing-6: 1.5rem;
---spacing-7: 1.75rem;
---spacing-8: 2rem; */
-
 :root {
+  --rb-breakpoint-sm: 40rem;
+  --rb-breakpoint-md: 48rem;
+  --rb-breakpoint-lg: 64rem;
+  --rb-breakpoint-xl: 80rem;
+  --rb-breakpoint-2xl: 96rem;
+
   --rb-color-primary: #0d47a1;
   --rb-color-second: #546E7A;
   --rb-color-success: #4caf50;
@@ -72,6 +57,8 @@
   --rb-fieldset-legend-color: var(--rb-color-gray-600);
 
   /* Input Base */
+  --rb-input-base-height: 3rem;
+  --rb-input-base-width: 100%;
   --rb-input-base-border: 1px solid var(--rb-color-gray-300);
   --rb-input-base-radius: var(--rb-radius-xs);
 
@@ -124,6 +111,17 @@
   --rb-input-radio-label-font-size: var(--rb-font-md);
   --rb-input-radio-radius: 50%;
   --rb-input-radio-border: 3px solid #fff;
+}
+
+/* sm	 40rem (640px)  */
+/* md	 48rem (768px)  */
+/* lg	 64rem (1024px) */
+/* xl	 80rem (1280px) */
+/* 2xl 96rem (1536px) */
+@media only screen and (width>=40rem) {
+  :root {
+    --rb-input-base-height: 2.5rem;
+  }
 }
 
 * {
