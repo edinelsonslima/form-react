@@ -57,7 +57,7 @@ function InputSelect(props: IProps) {
         role="listbox"
         id="options-container"
       >
-        {/* tentar melhorar essa parte com lista virtualizada */}
+        {/* TODO - tentar melhorar essa parte com lista virtualizada */}
         {optionsInState.map(({ key, value, label }, i) => (
           <li
             {...cp(rest.components?.li)}
