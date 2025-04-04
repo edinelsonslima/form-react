@@ -15,6 +15,7 @@ function InputEmail(props: IProps) {
       {...rest}
       suffix={undefined}
       filterOptionsOnOpen
+      openByOptionsLength
       className={cn(s.email, rest.className)}
       onCustomFilter={customFilter}
       options={providersOptions}
