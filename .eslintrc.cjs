@@ -10,6 +10,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', 'prettier'],
   rules: {
+    'no-case-declarations': 'off',
     'prettier/prettier': [
       'error',
       {
