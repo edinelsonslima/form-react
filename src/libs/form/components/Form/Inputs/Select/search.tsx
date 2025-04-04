@@ -1,12 +1,14 @@
 import { withShouldRender } from '@/libs/form/helpers/should.render';
 import { Input, IProps } from '../Base';
 
-function InputSelectSearchComponent({ components, ...props }: IProps) {
+function InputSelectSearchComponent({ components, ...props }: Omit<IProps, 'name' | 'id'>) {
   return (
     <Input
       autoFocus
       type="search"
       label="Selecionar"
+      name="option-search"
+      id="option-search-input"
       components={{
         ...components,
         inputC: { height: 40 },

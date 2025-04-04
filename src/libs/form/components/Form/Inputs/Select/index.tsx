@@ -60,8 +60,6 @@ function InputSelect(props: IProps) {
           }}
         >
           <InputSelectSearch
-            name="option-search"
-            id="option-search-input"
             shouldRender={!!builtinSearch}
             onChange={(_, value) => handleUpdateOptions(value)}
           />
