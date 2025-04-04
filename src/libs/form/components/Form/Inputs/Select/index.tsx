@@ -6,6 +6,7 @@ import { cn, cp } from '@/libs/form/helpers/combine';
 
 import { Input } from '../Base';
 import { IProps } from './types';
+import { InputSelectSearch } from './search';
 import { useController } from './use.controller';
 
 import s from './index.module.css';
@@ -15,63 +16,75 @@ function InputSelect(props: IProps) {
     handleKeyDownContainer,
     handleMouseDownOptions,
     handleMouseMoveOptions,
-    handleCloseOptions,
-    handleOpenOptions,
-    handleSelectEnterKeyPress,
+    handleDisplayOptions,
     handleUpdateOptions,
+    handleBlurContainer,
     optionsInState,
-    isOptionsOpen,
     ulRef,
+    open,
+    builtinSearch,
     ...rest
   } = useController(props);
 
+  const Suffix = open ? IconSearch : IconArrow;
+
   return (
     <div
-      {...cp(rest.components?.select, s['select-container'])}
-      onBlur={handleCloseOptions}
-      onFocus={handleOpenOptions}
+      {...cp(rest.components?.select, s.container)}
+      onClick={(evt) => handleDisplayOptions('toggle', evt)}
       onKeyDown={handleKeyDownContainer}
+      onBlur={handleBlurContainer}
     >
       <Input
-        suffix={
-          <span className={s['select-suffix']}>
-            {isOptionsOpen ? <IconSearch /> : <IconArrow />}
-          </span>
-        }
-        {...rest}
-        className={cn(rest.className, isOptionsOpen ? s['select-input-open'] : '')}
-        onKeyDown={handleSelectEnterKeyPress}
-        onChange={(_, value) => handleUpdateOptions(value)}
+        suffix={<Suffix className={s.suffix} />}
+        className={cn(rest.className, open ? s.open : '')}
         autoComplete="off"
-        aria-expanded={!!isOptionsOpen}
+        onChange={(_, value) => handleUpdateOptions(value)}
+        aria-expanded={open}
         aria-autocomplete="list"
         aria-haspopup="listbox"
         aria-owns="options-container"
+        readOnly={rest.readOnly || builtinSearch}
+        {...rest}
       />
 
-      <ul
-        {...cp(rest.components?.ul)}
-        ref={ulRef}
-        hidden={!isOptionsOpen}
-        aria-labelledby={props.id}
-        role="listbox"
-        id="options-container"
-      >
-        {/* TODO - tentar melhorar essa parte com lista virtualizada */}
-        {optionsInState.map(({ key, value, label }, i) => (
-          <li
-            {...cp(rest.components?.li)}
-            key={key}
-            id={`option-${i}`}
-            onMouseDown={handleMouseDownOptions}
-            onMouseMove={handleMouseMoveOptions}
-            children={label ?? value}
-            aria-label={value}
-            aria-selected={!i ? 'true' : 'false'}
-            role="option"
+      {open && (
+        <ul
+          {...cp(rest.components?.ul)}
+          role="listbox"
+          id="options-container"
+          aria-labelledby={props.id}
+          hidden={builtinSearch ? undefined : !optionsInState.length}
+          ref={(ref) => {
+            ref?.scrollTo({ top: 0, behavior: 'smooth' });
+            ulRef.current = ref;
+          }}
+        >
+          <InputSelectSearch
+            name="option-search"
+            id="option-search-input"
+            shouldRender={!!builtinSearch}
+            onChange={(_, value) => handleUpdateOptions(value)}
           />
-        ))}
-      </ul>
+
+          {optionsInState.map(({ key, value, label }, i) => (
+            <li
+              {...cp(rest.components?.li)}
+              key={key}
+              id={`option-${i}`}
+              onMouseDown={handleMouseDownOptions}
+              onMouseMove={handleMouseMoveOptions}
+              children={label ?? value}
+              aria-label={value}
+              role="option"
+            />
+          ))}
+
+          {!optionsInState.length && (
+            <li {...cp(rest.components?.li)} children="Nenhum item encontrado :(" />
+          )}
+        </ul>
+      )}
     </div>
   );
 }

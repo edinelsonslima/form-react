@@ -23,38 +23,55 @@ const setAttribute = (key: string, value: string, element?: HTMLElement | null) 
   element?.setAttribute(key, value);
 };
 
-const shouldContinueFocusEvent = (safeElementIds: string[], evt?: FocusEvent) => {
-  if (!evt) return false;
-  const relatedTargetId = evt.relatedTarget?.id ?? '';
-  return safeElementIds.some((id) => relatedTargetId.startsWith(id));
-};
-
 function extractText(el: ReactNode): string {
-  if (isValidElement<{ children: ReactNode }>(el)) {
-    return Children.toArray(el.props?.children).map(extractText).join('');
+  if (isValidElement<{ children: ReactNode }>(el) && el.props.children) {
+    return Children.toArray(el.props.children).map(extractText).join('');
+  }
+
+  if (isValidElement<{ children: ReactNode }>(el) && !el.props.children) {
+    return Object.values(el.props).map(extractText).join('');
   }
 
   return el?.toString() ?? '';
 }
 
-export function useController({ options, onCustomFilter, filterOptionsOnOpen, ...props }: IProps) {
+export function useController({
+  options,
+  onCustomFilter,
+  filterOptionsOnOpen,
+  openByOptionsLength,
+  ...props
+}: IProps) {
   const debounce = useDebounce();
 
   const selectRef = useRef<HTMLInputElement>(null);
   const ulRef = useRef<HTMLUListElement>(null);
 
-  const [optionsInState, _internal_use_only_] = useState<IProps['options']>([]);
+  const [open, setOpen] = useState(openByOptionsLength ? !!options.length : false);
+  const [optionsInState, setOptionInState] = useState<IProps['options']>([]);
 
   const getCurrentOptions = () => {
-    return Array.from(ulRef.current?.children ?? []) as HTMLOptionElement[];
+    const currentOptions = Array.from(ulRef.current?.children ?? []) as HTMLLIElement[];
+    const searchInput = currentOptions.findIndex((option) => !(option instanceof HTMLLIElement));
+    return searchInput === -1 ? currentOptions : currentOptions.slice(searchInput + 1);
   };
 
   const handleUpdateOptionsInState = (options: IProps['options'], withDebounce = true) => {
     const isEmpty = !options.length && !optionsInState.length;
     const isSingle = options.length === 1 && optionsInState.length === 1;
+
     if (isEmpty || isSingle) return;
-    if (!withDebounce) return _internal_use_only_(options);
-    debounce(() => _internal_use_only_(options), 300);
+
+    if (!withDebounce) {
+      setOptionInState(options);
+      if (openByOptionsLength) setOpen(!!options.length);
+      return;
+    }
+
+    debounce(() => {
+      setOptionInState(options);
+      if (openByOptionsLength) setOpen(!!options.length);
+    }, 300);
   };
 
   const handleUpdateOptions = async (input?: string, withDebounce = true) => {
@@ -64,46 +81,67 @@ export function useController({ options, onCustomFilter, filterOptionsOnOpen, ..
     }
 
     if (!input) return handleUpdateOptionsInState(options, withDebounce);
+
     const sanitizedInput = sanitize(input);
 
-    const filtered = options
-      .filter((option) =>
-        sanitize(extractText(option.label) || option.value).includes(sanitizedInput),
-      )
-      .sort((a, b) => {
-        const aValue = sanitize(a.value);
-        const bValue = sanitize(b.value);
+    const filtered = options.reduce<IProps['options']>((acc, option) => {
+      const sanitizedValue = sanitize(extractText(option.label) || option.value);
 
-        if (aValue === input && bValue === input) return 0;
-        if (aValue === input) return -1;
-        if (bValue === input) return 1;
-        return aValue.localeCompare(bValue, undefined, { sensitivity: 'base' });
+      if (!sanitizedValue.includes(sanitizedInput)) {
+        return acc;
+      }
+
+      const index = acc.findIndex((item) => {
+        const aValue = sanitize(item.value);
+        const bValue = sanitize(option.value);
+
+        if (bValue === sanitizedInput) return true;
+        if (aValue === sanitizedInput) return false;
+
+        return aValue.localeCompare(bValue, undefined, { sensitivity: 'base' }) >= 0;
       });
 
+      index === -1 ? acc.push(option) : acc.splice(index, 0, option);
+
+      return acc;
+    }, []);
+
     handleUpdateOptionsInState(filtered, withDebounce);
+  };
+
+  const handleDisplayOptions = (action: 'open' | 'close' | 'toggle', evt?: MouseEvent) => {
+    if (evt && ulRef.current?.contains(evt.target as Node)) return;
+
+    return setOpen((prev) => {
+      const toggle = action === 'toggle';
+      const next = !prev;
+
+      if (action === 'open' || (toggle && next)) {
+        if (filterOptionsOnOpen) {
+          handleUpdateOptions(selectRef.current?.value, false);
+        }
+
+        if (!filterOptionsOnOpen) {
+          handleUpdateOptionsInState(options, false);
+          setAttribute(ARIA.ACTIVEDESCENDANT, 'option-0', selectRef.current);
+        }
+
+        return toggle ? next : true;
+      }
+
+      if (action === 'close' || (toggle && !next)) {
+        selectRef.current?.removeAttribute(ARIA.ACTIVEDESCENDANT);
+        return toggle ? next : false;
+      }
+
+      return next;
+    });
   };
 
   const handleUpdateSelectValue = (value: string) => {
     selectRef.current!.value = value;
     selectRef.current?.dispatchEvent(new Event('input', { bubbles: true }));
-    handleCloseOptions();
-  };
-
-  const handleOpenOptions = (evt?: FocusEvent) => {
-    if (shouldContinueFocusEvent(['options-container', 'option-'], evt)) return;
-
-    setAttribute(ARIA.ACTIVEDESCENDANT, 'option-0', selectRef.current);
-
-    if (filterOptionsOnOpen) return handleUpdateOptions(selectRef.current?.value, false);
-    handleUpdateOptionsInState(options, false);
-  };
-
-  const handleCloseOptions = (evt?: FocusEvent) => {
-    if (shouldContinueFocusEvent(['options-container', 'option-'], evt)) return;
-
-    !evt && selectRef.current?.focus();
-    selectRef.current?.removeAttribute(ARIA.ACTIVEDESCENDANT);
-    handleUpdateOptionsInState([], false);
+    handleDisplayOptions('close');
   };
 
   const handleNavigateOptions = (moveTo: number) => {
@@ -122,14 +160,14 @@ export function useController({ options, onCustomFilter, filterOptionsOnOpen, ..
       setAttribute(ARIA.SELECTED, 'false', options.at(-1));
       setAttribute(ARIA.SELECTED, 'true', options.at(0));
       setAttribute(ARIA.ACTIVEDESCENDANT, 'option-0', selectRef.current);
-      ulRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+      ulRef.current?.scrollTo({ top: 0, behavior: 'instant' });
     };
 
     const last = () => {
       setAttribute(ARIA.SELECTED, 'false', options.at(0));
       setAttribute(ARIA.SELECTED, 'true', options.at(-1));
       setAttribute(ARIA.ACTIVEDESCENDANT, `option-${options.length - 1}`, selectRef.current);
-      ulRef.current?.scrollTo({ top: ulRef.current.scrollHeight, behavior: 'smooth' });
+      ulRef.current?.scrollTo({ top: ulRef.current.scrollHeight, behavior: 'instant' });
     };
 
     if (nextIndex < 0) return last();
@@ -137,35 +175,40 @@ export function useController({ options, onCustomFilter, filterOptionsOnOpen, ..
     return next();
   };
 
-  const handleKeyDownContainer = (evt: KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDownContainer = (evt: KeyboardEvent) => {
     switch (evt.key) {
       case 'Escape':
         evt.preventDefault();
-        return handleCloseOptions();
+        return handleDisplayOptions('close');
 
       case 'ArrowDown':
         evt.preventDefault();
-        if (!getCurrentOptions().length) handleOpenOptions();
+        if (!open) handleDisplayOptions('open');
         return handleNavigateOptions(1);
 
       case 'ArrowUp':
         evt.preventDefault();
         return handleNavigateOptions(-1);
+
+      case 'Enter':
+        evt.preventDefault();
+        const currentOptions = getCurrentOptions();
+        const selected = currentOptions.find((li) => isTruthy(li.getAttribute(ARIA.SELECTED)));
+        if (!currentOptions.length || !selected) return;
+        handleUpdateSelectValue(selected.getAttribute('aria-label') ?? '');
+        selectRef.current?.focus();
     }
   };
 
-  const handleSelectEnterKeyPress = (evt: KeyboardEvent<HTMLInputElement>) => {
-    if (evt.key !== 'Enter' || !getCurrentOptions().length) return;
-    evt.preventDefault();
-
-    const selected = getCurrentOptions().find((li) => isTruthy(li.getAttribute(ARIA.SELECTED)));
-    handleUpdateSelectValue(selected?.getAttribute('aria-label') ?? '');
+  const handleBlurContainer = (evt: FocusEvent) => {
+    if (!ulRef.current?.contains(evt.target)) return;
+    handleDisplayOptions('close');
   };
 
   const handleMouseMoveOptions = (evt: MouseEvent<HTMLLIElement>) => {
     if (isTruthy(evt.currentTarget.getAttribute(ARIA.SELECTED))) return;
-
-    getCurrentOptions().forEach((li) => li.setAttribute(ARIA.SELECTED, 'false'));
+    const selected = getCurrentOptions().find((li) => isTruthy(li.ariaSelected));
+    selected?.setAttribute(ARIA.SELECTED, 'false');
 
     evt.currentTarget.setAttribute(ARIA.SELECTED, 'true');
     selectRef.current?.setAttribute(ARIA.ACTIVEDESCENDANT, evt.currentTarget.id);
@@ -174,6 +217,7 @@ export function useController({ options, onCustomFilter, filterOptionsOnOpen, ..
   const handleMouseDownOptions = (evt: MouseEvent<HTMLLIElement>) => {
     evt.preventDefault();
     handleUpdateSelectValue(evt.currentTarget.getAttribute('aria-label') ?? '');
+    selectRef.current?.focus();
   };
 
   useImperativeHandle(props.ref, () => selectRef.current!, [selectRef]);
@@ -182,12 +226,11 @@ export function useController({ options, onCustomFilter, filterOptionsOnOpen, ..
     ulRef,
     ref: selectRef,
     optionsInState,
-    isOptionsOpen: !!optionsInState.length,
+    open,
     handleUpdateOptions,
-    handleOpenOptions,
-    handleCloseOptions,
+    handleDisplayOptions,
     handleKeyDownContainer,
-    handleSelectEnterKeyPress,
+    handleBlurContainer,
     handleMouseMoveOptions,
     handleMouseDownOptions,
     ...props,
