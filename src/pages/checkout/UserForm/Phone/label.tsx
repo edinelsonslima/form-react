@@ -1,9 +1,29 @@
+import { ComponentProps } from 'react';
+
 type Props = {
   isoAlpha2: string;
   name: string;
   nativeName: string;
   DDI: string;
 };
+
+export function Flag({
+  iso,
+  name,
+  ...props
+}: ComponentProps<'img'> & { iso: string; name: string }) {
+  return (
+    <img
+      src={`https://cdn.eduzzcdn.com/sun/flags/${iso.toLowerCase()}.png`}
+      style={{ borderRadius: 'var(--rb-radius-xs)' }}
+      alt={name}
+      loading="lazy"
+      width="30"
+      height="20"
+      {...props}
+    />
+  );
+}
 
 export function Label({ isoAlpha2, name, nativeName, DDI }: Props) {
   return (
@@ -12,14 +32,7 @@ export function Label({ isoAlpha2, name, nativeName, DDI }: Props) {
       title={`${isoAlpha2} - ${name} (${nativeName})`}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: '6rem' }}>
-        <img
-          src={`https://cdn.eduzzcdn.com/sun/flags/${isoAlpha2.toLowerCase()}.png`}
-          style={{ borderRadius: 'var(--rb-radius-xs)' }}
-          alt={name}
-          loading="lazy"
-          width="30"
-          height="20"
-        />
+        <Flag iso={isoAlpha2} name={name} />
         <span>{DDI}</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
