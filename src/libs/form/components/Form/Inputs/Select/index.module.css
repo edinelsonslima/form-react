@@ -14,14 +14,15 @@
   z-index: 1;
   list-style: none;
 
-  overflow-y: auto;
   overflow-x: hidden;
+  overflow-y: auto;
+  scroll-padding: 30% 0;
 
   max-height: 20rem;
   width: 100%;
 
   animation: show-input .3s ease-out;
-  margin-top: var(--rb-space-xs)
+  margin-top: var(--rb-space-xs);
 }
 
 .container li {
