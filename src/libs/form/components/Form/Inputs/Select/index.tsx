@@ -48,13 +48,12 @@ function InputSelect(props: IProps) {
         {...rest}
       />
 
-      {open && (
+      {open && (builtinSearch || !!optionsInState.length) && (
         <ul
           {...cp(rest.components?.ul)}
           role="listbox"
           id="options-container"
           aria-labelledby={props.id}
-          hidden={builtinSearch ? undefined : !optionsInState.length}
           ref={(ref) => {
             ref?.scrollTo({ top: 0, behavior: 'smooth' });
             ulRef.current = ref;
