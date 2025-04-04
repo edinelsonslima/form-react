@@ -201,7 +201,7 @@ export function useController({
   };
 
   const handleBlurContainer = (evt: FocusEvent) => {
-    if (!ulRef.current?.contains(evt.target)) return;
+    if (props.builtinSearch && !ulRef.current?.contains(evt.target)) return;
     handleDisplayOptions('close');
   };
 
