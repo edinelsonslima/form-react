@@ -8,12 +8,13 @@ type Props = {
 export function Label({ isoAlpha2, name, nativeName, DDI }: Props) {
   return (
     <div
-      style={{ display: 'flex', alignItems: 'center', width: '100%' }}
+      style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}
       title={`${isoAlpha2} - ${name} (${nativeName})`}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: '4rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', minWidth: '6rem' }}>
         <img
           src={`https://cdn.eduzzcdn.com/sun/flags/${isoAlpha2.toLowerCase()}.png`}
+          style={{ borderRadius: 'var(--rb-radius-xs)' }}
           alt={name}
           loading="lazy"
           width="30"

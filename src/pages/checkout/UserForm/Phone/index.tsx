@@ -12,14 +12,16 @@ export function Phone() {
   return (
     <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
       <Form.Select
+        builtinSearch
         id="user-ddi"
         name="user-ddi"
         label="DDI"
         autoComplete="tel-country-code"
+        defaultValue="+55"
         options={phoneOptions}
         components={{
           select: { flex: 1, minWidth: '4rem', maxWidth: '6rem', width: 'auto' },
-          ul: { maxWidth: '18.75rem', width: 'max-content' },
+          ul: { minWidth: '18.75rem', maxWidth: '18.75rem', width: 'max-content' },
         }}
       />
 
