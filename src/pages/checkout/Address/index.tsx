@@ -15,6 +15,7 @@ export function Address() {
             id="discover-postalCode"
             href="https://buscacepinter.correios.com.br/app/endereco/index.php"
             target="blank"
+            tabIndex={-1}
             style={{
               background: '#eceff1',
               height: '100%',
