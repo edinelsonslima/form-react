@@ -1,0 +1,37 @@
+.select {
+  border: 1px solid #ccc;
+  background: #fff;
+
+  z-index: 1
+}
+
+.input {
+  background: #ccc;
+  width: 100%;
+}
+
+.container {
+  margin-top: 8px;
+  width: 100%;
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: auto;
+  height: 200px;
+}
+
+.content {
+  width: 100%;
+  border: 1px solid #ccc;
+}
+
+.item {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+  height: 30px;
+}
+
+.item:hover {
+  background: #f0f0f0;
+}
