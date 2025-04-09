@@ -35,7 +35,7 @@ export function Phone() {
           setPrefix({ iso: flag?.label.props.isoAlpha2, name: flag?.label.props.name });
         }}
         components={{
-          select: { flex: 1, minWidth: '4rem', maxWidth: '6rem', width: 'auto' },
+          select: { flex: 1, minWidth: '4rem', maxWidth: '6.5rem', width: 'auto' },
           ul: { minWidth: '18.75rem', maxWidth: '18.75rem', width: 'max-content' },
         }}
       />
