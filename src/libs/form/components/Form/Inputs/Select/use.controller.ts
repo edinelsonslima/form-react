@@ -39,15 +39,19 @@ export function useController({
   options,
   onCustomFilter,
   filterOptionsOnOpen,
-  openByOptionsLength,
+  openBy = 'click',
   ...props
 }: IProps) {
   const debounce = useDebounce();
 
+  const searchAccReadOnly = useRef('');
   const selectRef = useRef<HTMLInputElement>(null);
   const ulRef = useRef<HTMLUListElement>(null);
 
-  const [open, setOpen] = useState(openByOptionsLength ? !!options.length : false);
+  const [open, setOpen] = useState(() => {
+    return openBy === 'options-length' ? !!options.length : false;
+  });
+
   const [optionsInState, setOptionInState] = useState<IProps['options']>([]);
 
   const getCurrentOptions = () => {
@@ -64,13 +68,13 @@ export function useController({
 
     if (!withDebounce) {
       setOptionInState(options);
-      if (openByOptionsLength) setOpen(!!options.length);
+      if (openBy === 'options-length') setOpen(!!options.length);
       return;
     }
 
     debounce(() => {
       setOptionInState(options);
-      if (openByOptionsLength) setOpen(!!options.length);
+      if (openBy === 'options-length') setOpen(!!options.length);
     }, 300);
   };
 
@@ -109,8 +113,8 @@ export function useController({
     handleUpdateOptionsInState(filtered, withDebounce);
   };
 
-  const handleDisplayOptions = (action: 'open' | 'close' | 'toggle', evt?: MouseEvent) => {
-    if (evt && ulRef.current?.contains(evt.target as Node)) return;
+  const handleDisplayOptions = (action: 'open' | 'close' | 'toggle', target?: EventTarget) => {
+    if (target && ulRef.current?.contains(target as Node)) return;
 
     return setOpen((prev) => {
       const toggle = action === 'toggle';
@@ -175,6 +179,34 @@ export function useController({
     return next();
   };
 
+  const handleKeyDownEnter = () => {
+    const currentOptions = getCurrentOptions();
+    const selected = currentOptions.find((li) => isTruthy(li.getAttribute(ARIA.SELECTED)));
+    if (!currentOptions.length || !selected) return;
+    handleUpdateSelectValue(selected.getAttribute('aria-label') ?? '');
+    selectRef.current?.focus();
+  };
+
+  const handleSearchOptionInReadOnly = (evt: KeyboardEvent) => {
+    if (!props.readOnly) return;
+    searchAccReadOnly.current += evt.key;
+
+    debounce(() => {
+      const acc = searchAccReadOnly.current;
+      const currentOptions = getCurrentOptions();
+      const selected = currentOptions.find((li) => isTruthy(li.getAttribute(ARIA.SELECTED)));
+      const match = currentOptions.find((opt) => opt.textContent?.toLowerCase().startsWith(acc));
+
+      if (!match) return (searchAccReadOnly.current = '');
+
+      selected?.removeAttribute(ARIA.SELECTED);
+      match?.setAttribute(ARIA.SELECTED, 'true');
+      match?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+
+      searchAccReadOnly.current = '';
+    }, 300);
+  };
+
   const handleKeyDownContainer = (evt: KeyboardEvent) => {
     switch (evt.key) {
       case 'Escape':
@@ -192,17 +224,42 @@ export function useController({
 
       case 'Enter':
         evt.preventDefault();
-        const currentOptions = getCurrentOptions();
-        const selected = currentOptions.find((li) => isTruthy(li.getAttribute(ARIA.SELECTED)));
-        if (!currentOptions.length || !selected) return;
-        handleUpdateSelectValue(selected.getAttribute('aria-label') ?? '');
-        selectRef.current?.focus();
+        return handleKeyDownEnter();
+
+      default:
+        handleSearchOptionInReadOnly(evt);
+    }
+  };
+
+  const handleClickContainer = (evt: MouseEvent) => {
+    if (openBy === 'focus') {
+      handleDisplayOptions('open');
+      return;
+    }
+
+    if (openBy === 'click') {
+      handleDisplayOptions('toggle', evt.target);
+      return;
     }
   };
 
   const handleBlurContainer = (evt: FocusEvent) => {
-    if (props.builtinSearch && !ulRef.current?.contains(evt.target)) return;
-    handleDisplayOptions('close');
+    if (openBy === 'click') {
+      if (ulRef.current?.contains(evt.target)) handleDisplayOptions('close');
+      return;
+    }
+
+    if (openBy === 'focus') {
+      handleDisplayOptions('close');
+      return;
+    }
+  };
+
+  const handleFocusContainer = () => {
+    if (openBy === 'focus') {
+      handleDisplayOptions('open');
+      return;
+    }
   };
 
   const handleMouseMoveOptions = (evt: MouseEvent<HTMLLIElement>) => {
@@ -228,9 +285,10 @@ export function useController({
     optionsInState,
     open,
     handleUpdateOptions,
-    handleDisplayOptions,
     handleKeyDownContainer,
     handleBlurContainer,
+    handleFocusContainer,
+    handleClickContainer,
     handleMouseMoveOptions,
     handleMouseDownOptions,
     ...props,
