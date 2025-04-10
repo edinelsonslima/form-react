@@ -16,9 +16,10 @@ function InputSelect(props: IProps) {
     handleKeyDownContainer,
     handleMouseDownOptions,
     handleMouseMoveOptions,
-    handleDisplayOptions,
     handleUpdateOptions,
     handleBlurContainer,
+    handleFocusContainer,
+    handleClickContainer,
     optionsInState,
     ulRef,
     open,
@@ -31,9 +32,10 @@ function InputSelect(props: IProps) {
   return (
     <div
       {...cp(rest.components?.select, s.container)}
-      onClick={(evt) => handleDisplayOptions('toggle', evt)}
+      onClick={handleClickContainer}
       onKeyDown={handleKeyDownContainer}
       onBlur={handleBlurContainer}
+      onFocus={handleFocusContainer}
     >
       <Input
         suffix={<Suffix className={s.suffix} />}
@@ -52,6 +54,7 @@ function InputSelect(props: IProps) {
         <ul
           {...cp(rest.components?.ul)}
           role="listbox"
+          tabIndex={-1}
           id="options-container"
           aria-labelledby={props.id}
           ref={(ref) => {
