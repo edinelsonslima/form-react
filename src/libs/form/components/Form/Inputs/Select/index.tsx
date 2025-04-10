@@ -68,6 +68,7 @@ function InputSelect(props: IProps) {
             <li
               {...cp(rest.components?.li)}
               key={key}
+              aria-selected={!i}
               id={`option-${i}`}
               onMouseDown={handleMouseDownOptions}
               onMouseMove={handleMouseMoveOptions}
