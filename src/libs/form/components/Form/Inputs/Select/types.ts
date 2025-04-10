@@ -6,8 +6,8 @@ type ISelectOptions = { key: string; value: string; label?: ReactNode }[];
 type IControllerProps = IBaseProps & {
   options: ISelectOptions;
   filterOptionsOnOpen?: boolean;
-  openByOptionsLength?: boolean;
   builtinSearch?: boolean;
+  openBy?: 'focus' | 'click' | 'options-length';
   onCustomFilter?: (input?: string) => ISelectOptions | Promise<ISelectOptions>;
 };
 

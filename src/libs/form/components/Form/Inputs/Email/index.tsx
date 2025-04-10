@@ -12,7 +12,7 @@ function InputEmail(props: IProps) {
       {...rest}
       suffix={undefined}
       filterOptionsOnOpen
-      openByOptionsLength
+      openBy="options-length"
       onCustomFilter={customFilter}
       options={providersOptions}
       style={{ color: 'var(--rb-color-gray-600)' }}
