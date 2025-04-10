@@ -90,6 +90,8 @@ export function Address() {
           name="address-state"
           label="Estado"
           color="#000"
+          openBy="focus"
+          readOnly
           options={STATES}
           autoComplete="shipping address-level1"
         />
