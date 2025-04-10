@@ -5,7 +5,6 @@
 
 .container ul {
   position: absolute;
-  width: 100%;
   padding: 0;
   background-color: #fff;
   border-top: none;
@@ -20,6 +19,7 @@
 
   max-height: 20rem;
   width: 100%;
+  height: auto;
 
   animation: show-input .3s ease-out;
   margin-top: var(--rb-space-xs);
