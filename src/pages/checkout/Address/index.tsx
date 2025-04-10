@@ -1,4 +1,5 @@
 import { Form } from '@/libs/form/components/Form';
+import { STATES } from './states';
 
 export function Address() {
   return (
@@ -88,7 +89,8 @@ export function Address() {
           id="address-state"
           name="address-state"
           label="Estado"
-          options={[]}
+          color="#000"
+          options={STATES}
           autoComplete="shipping address-level1"
         />
 
