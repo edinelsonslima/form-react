@@ -153,7 +153,7 @@ export function useController({
       setAttribute(ARIA.SELECTED, 'false', options.at(currentIndex));
       setAttribute(ARIA.SELECTED, 'true', options.at(nextIndex));
       setAttribute(ARIA.ACTIVEDESCENDANT, `option-${nextIndex}`, selectRef.current);
-      options.at(nextIndex)?.scrollIntoView({ block: 'end', behavior: 'smooth' });
+      options.at(nextIndex)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
     };
 
     const first = () => {
