@@ -12,7 +12,7 @@ export function Checkout() {
       <Form.Root
         id="main-form"
         onSubmit={(data) => console.log(data)}
-        style={{ margin: '1rem auto', padding: '1rem' }}
+        style={{ margin: '1rem auto', maxWidth: '35rem', padding: '1rem' }}
         initialValues={{ 'user-name': 'Edinelson Lima' }}
       >
         <UserForm />
