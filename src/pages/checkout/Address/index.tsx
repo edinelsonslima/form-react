@@ -1,7 +1,22 @@
 import { Form } from '@/libs/form/components/Form';
 import { STATES } from './states';
+import { useState } from 'react';
 
 export function Address() {
+  const [state, setState] = useState<string | null>(null);
+
+  const handleCities = async () => {
+    if (!state) return [{ key: '', value: '' }];
+
+    try {
+      const response = await fetch(`https://cdn.eduzzcdn.com/sun/cities/${state}.json`);
+      const res: { id: number; name: string }[] = await response.json();
+      return res.map(({ id, name }) => ({ key: String(id), value: name }));
+    } catch {
+      return [{ key: '', value: '' }];
+    }
+  };
+
   return (
     <Form.Fieldset name="address" legend="ENDEREÇO">
       <Form.Input
@@ -92,6 +107,7 @@ export function Address() {
           color="#000"
           openBy="focus"
           readOnly
+          onInput={(evt) => setState(evt.currentTarget.value)}
           options={STATES}
           autoComplete="shipping address-level1"
         />
@@ -101,6 +117,8 @@ export function Address() {
           name="address-city"
           label="Cidade"
           options={[]}
+          promise={{ options: handleCities() }}
+          fallback={<h1>Carregando...</h1>}
           autoComplete="shipping address-level3"
         />
       </div>

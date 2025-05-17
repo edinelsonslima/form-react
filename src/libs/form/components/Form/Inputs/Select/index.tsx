@@ -3,6 +3,7 @@ import { memo } from 'react';
 import { IconArrow } from '@/libs/form/assets/icons/arrow';
 import { IconSearch } from '@/libs/form/assets/icons/search';
 import { cn, cp } from '@/libs/form/helpers/combine';
+import { withSuspense } from '@/libs/form/helpers/with-suspense';
 
 import { Input } from '../Base';
 import { IProps } from './types';
@@ -90,4 +91,4 @@ function InputSelect(props: IProps) {
   );
 }
 
-export const Select = memo(InputSelect);
+export const Select = memo(withSuspense(InputSelect));
